@@ -6,11 +6,52 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.furry_octo_waddle.MainActivity" >
+    tools:context="com.example.furry_octo_waddle.MainActivity"
+    android:gravity="center" >
 
-    <TextView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:gravity="center"  >
+
+        <Button
+            android:id="@+id/buttonLearn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:height= "100dp"
+            android:text="@string/button_learn"
+            android:width="250dp" />
+
+        <Button
+            android:id="@+id/buttonTest"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:height="75dp"
+            android:text="@string/button_test"
+            android:width="200dp" />
+
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:height="75dp"
+            android:text="@string/button_add_words"
+            android:width="200dp" />
+
+        <Button
+            android:id="@+id/buttonTranslate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:height="75dp"
+            android:text="@string/button_translate"
+            android:width="200dp" />
+    </LinearLayout>
 
 </RelativeLayout>
