@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:height= "100dp"
-            android:text="@string/button_learn"
+            android:text="@string/string_learn"
             android:width="250dp" />
 
         <Button
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:height="75dp"
-            android:text="@string/button_test"
+            android:text="@string/string_test"
             android:width="200dp" />
 
         <Button
@@ -41,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:height="75dp"
-            android:text="@string/button_add_words"
+            android:text="@string/string_add_words"
             android:width="200dp" />
 
         <Button
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:height="75dp"
-            android:text="@string/button_translate"
+            android:text="@string/string_translate"
             android:width="200dp" />
     </LinearLayout>
 

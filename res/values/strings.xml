@@ -4,9 +4,9 @@
     <string name="app_name">furry_octo_waddle</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="button_learn">Learn !</string>
-    <string name="button_test">Test</string>
-    <string name="button_add_words">Add new words</string>
-    <string name="button_translate">Translate</string>
+    <string name="string_learn">Learn !</string>
+    <string name="string_test">Test</string>
+    <string name="string_add_words">Add new words</string>
+    <string name="string_translate">Translate</string>
 
 </resources>
