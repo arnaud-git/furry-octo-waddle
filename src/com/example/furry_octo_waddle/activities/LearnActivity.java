@@ -21,6 +21,6 @@ public class LearnActivity extends Activity {
         newWordTrad = (TextView) findViewById(R.id.newWordTrad);
         
         newWord.setText("ingrained");
-        newWord.setText("enraciné");
+        newWordTrad.setText("enraciné");
     }
 }
