@@ -26,7 +26,7 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.activity_main);
 		
 		buttonLearn = (Button)findViewById(R.id.buttonLearn);
-		final Controleur_bd cbd = new Controleur_bd(this);
+		final BD_rw cbd = new Controleur_bd(this);
 		buttonLearn.setOnClickListener(new View.OnClickListener() {
 	
 			
