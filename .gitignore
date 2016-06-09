@@ -1,2 +1,4 @@
 # Ignorer tous les fichiers dans bin
 /bin/*
+# Ignorer les fichiers generes
+/gen/*
