@@ -65,7 +65,7 @@ public class Controleur_bd implements BD_rw{
 	
 	@Override
 	public List<Word_Translation> getWordFromTable(Word_Translation word,boolean random,int nombre){
-		List<Word_Translation> list = null;
+		List<Word_Translation> list = new ArrayList<Word_Translation>();
 		try{
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -139,7 +139,6 @@ public class Controleur_bd implements BD_rw{
 			);
 		//MainActivity.printDebug(1, "S'arrete la");
 		if(c.getCount()>0){
-			list = new ArrayList<Word_Translation>();
 			//MainActivity.printDebug(1,"Recuperation de  " +c.getCount() +" trad.");
 			while(c.moveToNext()){
 				list.add(new Word_Translation(c.getString(1), c.getString(2)
