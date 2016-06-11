@@ -361,6 +361,7 @@ public class Controleur_bd implements BD_rw{
 	
 	@Override
 	public void writeWord(Word_Translation word) {
-		ecrireDansLaBase(word);
+		if (word.getWord().length()!=0)
+			ecrireDansLaBase(word);
 	}
 }

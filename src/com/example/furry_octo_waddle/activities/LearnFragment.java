@@ -8,16 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnFragment extends Fragment {
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-	
-	public static final LearnFragment newInstance(String[] words)
+		
+	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
 		LearnFragment f = new LearnFragment();
 		Bundle bdl = new Bundle(1);
-		bdl.putStringArray(EXTRA_MESSAGE, words);
+		String[] str_array = {word_obj.getWord(),word_obj.getTraduction_of_word()};
+		bdl.putStringArray(EXTRA_MESSAGE, str_array);
 	    f.setArguments(bdl);
 	    return f;
 	}

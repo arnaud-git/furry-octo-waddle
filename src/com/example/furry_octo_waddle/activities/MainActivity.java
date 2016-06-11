@@ -20,6 +20,7 @@ public class MainActivity extends ActionBarActivity {
 	public static final int DEBUG_LEVEL = 2;
 	private static final boolean DEBUG_LEVEL_ACTIVATE = true;
 	Button buttonLearn, buttonTest;
+	public static BD_rw cbd  = null;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
 		
 		
 		buttonLearn = (Button)findViewById(R.id.buttonLearn);
-		final BD_rw cbd = new Controleur_bd(this);
+		cbd = new Controleur_bd(this);
 		buttonLearn.setOnClickListener(new View.OnClickListener() {
 	
 			

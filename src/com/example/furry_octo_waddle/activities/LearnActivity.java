@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnActivity extends FragmentActivity {
 	MyPageAdapter pageAdapter;
@@ -31,14 +32,17 @@ public class LearnActivity extends FragmentActivity {
 
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
-
-		String word1[] = {"ingrained","enraciné"};
-		String word2[] = {"to enthrall","captiver"};
-		String word3[] = {"a ribbon","un ruban"};
-
-		fList.add(LearnFragment.newInstance(word1));
-		fList.add(LearnFragment.newInstance(word2));
-		fList.add(LearnFragment.newInstance(word3));
+		
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("*", "*"),true, -1);
+		if(words.isEmpty()){
+			//Database is empty
+			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
+		}
+		else{
+			for( Word_Translation word_obj : words){
+				fList.add(LearnFragment.newInstance(word_obj));
+			}
+		}
 
 		return fList;
 	}

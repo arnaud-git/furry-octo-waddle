@@ -8,12 +8,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class AddActivity extends Activity{
 	
 	Button addButton;
 	EditText editWord, editWordTrad;
 	String word, wordTrad;
+	Word_Translation word_obj;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,9 +32,13 @@ public class AddActivity extends Activity{
 			public void onClick(View arg0) {
 				word = editWord.getText().toString();
 				wordTrad = editWordTrad.getText().toString();
-				
+								
 				//create the new object with the typed words
 				//save the new object in the database
+				// Will be better to put the languages in the inputs
+				word_obj = new Word_Translation(word, wordTrad);
+				
+				MainActivity.cbd.writeWord(word_obj);
 				
 				Toast.makeText(AddActivity.this, "\"" + word + "\""+ " saved", Toast.LENGTH_SHORT).show();
 				
