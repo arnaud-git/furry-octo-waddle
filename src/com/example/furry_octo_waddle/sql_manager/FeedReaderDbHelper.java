@@ -40,22 +40,22 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     
     public FeedReaderDbHelper(Context context) {   	
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-        Log.d(MainActivity.APPLICATION_TAG_NAME,"Tentative construction FeedReader");
+        MainActivity.printDebug(1, "Tentative construction FeedReader");
     }
     
     public void onCreate(SQLiteDatabase db) {
-    	Log.d(MainActivity.APPLICATION_TAG_NAME,"Tentative creation table");
+    	MainActivity.printDebug(1, "Tentative creation table");
         db.execSQL(SQL_CREATE_ENTRIES);
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
-    	Log.d(MainActivity.APPLICATION_TAG_NAME,"Tentative suppresion table");
+    	MainActivity.printDebug(1, "Tentative suppresion table");
     	//try{
         db.execSQL(SQL_DELETE_ENTRIES);
         //}
     	//catch(SQLException e){
-    	//	Log.d(MainActivity.APPLICATION_TAG_NAME,e.getMessage());
+    	//	MainActivity.printDebug(1, e.getMessage());
     	//}
     	
         onCreate(db);
