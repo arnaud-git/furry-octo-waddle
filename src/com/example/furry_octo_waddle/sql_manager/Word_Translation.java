@@ -1,0 +1,127 @@
+package com.example.furry_octo_waddle.sql_manager;
+
+import com.example.furry_octo_waddle.activities.MainActivity;
+
+import android.util.Log;
+
+public class Word_Translation {
+	private int id = 0 ;
+	private String word;
+	private String traduction_of_word;
+	private String language;
+	private String targeted_language;
+	
+	//Peut-etre les changer en int
+	public static final String ENGLISH = "@en";
+	public static final String FRENCH = "@fr";
+	
+	private String last_modification_time;
+	
+	public Word_Translation(String w,String t,String l, String t_l){
+		setWord(w);
+		setTraduction(t);
+		setLanguage(l);
+		setTargeted_Language(t_l);
+		checkfornull();
+	}
+	
+	public Word_Translation(String w,String t,String l, String t_l,String index,String time){
+		setWord(w);
+		setTraduction(t);
+		setLanguage(l);
+		setTargeted_Language(t_l);
+		setId(Integer.parseInt(index));
+		setTime(time);
+		checkfornull();
+	}
+
+
+	public Word_Translation(String w,String t,String l, String t_l,String index){
+		setWord(w);
+		setTraduction(t);
+		setLanguage(l);
+		setTargeted_Language(t_l);
+		setId(Integer.parseInt(index));
+		checkfornull();
+		
+	}
+	public Word_Translation(String frenchWord,String englishWord){
+		setWord(frenchWord);
+		setTraduction(englishWord);
+		setLanguage(FRENCH);
+		setTargeted_Language(ENGLISH);
+		checkfornull();
+	}
+	
+	private void setTargeted_Language(String t_l) {
+		if(t_l!=null)
+			this.targeted_language =t_l;
+		else
+			this.targeted_language = "";
+	}
+
+	private void setLanguage(String l) {
+		if(l!=null)
+			this.language =l;
+		else
+			this.language="";
+	}
+
+	private void setTraduction(String t) {
+		if (t!=null)
+			this.traduction_of_word = t;
+		else 
+			this.traduction_of_word = "";
+		
+	}
+
+	private void setWord(String w) {
+		if(w!=null)
+			this.word =w;
+		else 
+			this.word = "";
+		
+	}
+
+	public final String getWord() {
+		return word;
+	}
+
+	public final String getTraduction_of_word() {
+		return traduction_of_word;
+	}
+
+	public final String getLanguage() {
+		return language;
+	}
+
+	public final String getTargeted_language() {
+		return targeted_language;
+	}
+
+	
+	public void setId(int id){
+		this.id=id;
+	}
+	public void setTime(String time){
+		this.last_modification_time=time;
+	}
+	public int getId(){
+		return id;
+	}
+	
+	public void printWord(){
+		Log.d(MainActivity.APPLICATION_TAG_NAME, "ID : "+id+" Word "+language+" : " +
+					word+" -> "+targeted_language+ " : " + traduction_of_word+"\t"+last_modification_time);
+	}
+	
+	private void checkfornull(){
+		if(word.length()==0 && traduction_of_word.length()>0){
+			word = traduction_of_word;
+			traduction_of_word = "";
+			String tempo_lang = language;
+			language = targeted_language;
+			targeted_language = tempo_lang;
+		}
+	}
+}

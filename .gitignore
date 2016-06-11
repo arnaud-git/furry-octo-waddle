@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Built application files
 *.apk
 *.ap_
@@ -38,3 +39,9 @@ captures/
 
 # Keystore files
 *.jks
+=======
+# Ignorer tous les fichiers dans bin
+/bin/*
+# Ignorer les fichiers generes
+/gen/*
+>>>>>>> b4ba9ce6e0ff84a50487ab4d85d51082f97860a7
