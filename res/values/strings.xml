@@ -8,5 +8,6 @@
     <string name="string_test">Test</string>
     <string name="string_add_words">Add new words</string>
     <string name="string_translate">Translate</string>
+    <string name="add_button">Add !</string>
 
 </resources>

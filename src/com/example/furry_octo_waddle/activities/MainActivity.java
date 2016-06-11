@@ -43,12 +43,16 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		
-		buttonTest = (Button)findViewById(R.id.buttonTest);
+		buttonTest = (Button)findViewById(R.id.buttonAdd);
 		buttonTest.setOnClickListener(new View.OnClickListener() {
 			
 			@Override
 			public void onClick(View arg0) {
-				Log.d("Test","Click bouton Test");
+				// TODO Auto-generated method stub
+				Intent i = new Intent(MainActivity.this,AddActivity.class);
+                startActivity(i);
+                //printDebug(1,"Lancement activite : "+i);
+                //cbd.test();
 			}
 		});
 	}
