@@ -17,7 +17,7 @@ public class MainActivity extends ActionBarActivity {
 	
 	public static final String APPLICATION_TAG_NAME ="furry_octo_waddle"; 
 	public static final boolean DEBUG = true;
-	public static final int DEBUG_LEVEL = 1;
+	public static final int DEBUG_LEVEL = 2;
 	private static final boolean DEBUG_LEVEL_ACTIVATE = true;
 	Button buttonLearn, buttonTest;
 
@@ -48,11 +48,8 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Intent i = new Intent(MainActivity.this,AddActivity.class);
                 startActivity(i);
-                //printDebug(1,"Lancement activite : "+i);
-                //cbd.test();
 			}
 		});
 	}
