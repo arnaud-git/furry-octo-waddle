@@ -9,5 +9,7 @@
     <string name="string_add_words">Add new words</string>
     <string name="string_translate">Translate</string>
     <string name="add_button">Add !</string>
+    <string name="string_delete">Delete</string>
+    <string name="string_modify">Modify</string>
 
 </resources>
