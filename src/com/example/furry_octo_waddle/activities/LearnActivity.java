@@ -40,7 +40,7 @@ public class LearnActivity extends FragmentActivity {
 			public void onClick(View arg0) {
 				int currentPosition = pager.getCurrentItem();
 				//get the current word in the PageViewer
-				Log.d("-->", ((LearnFragment)fragments.get(currentPosition)).actualId());
+				Log.d("-->", ((LearnFragment)fragments.get(currentPosition)).currentId());
 			}
 		});
 
