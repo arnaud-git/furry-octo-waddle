@@ -17,7 +17,7 @@ public class Word_Translation {
 	/**Language of traduction of the word*/
 	private String targeted_language;
 	
-	//Peut-etre les changer en int ou avec un enum
+	//TODO Peut-etre les changer en int ou avec un enum
 	//The different languages 
 	public static final String ENGLISH = "@en";
 	public static final String FRENCH = "@fr";

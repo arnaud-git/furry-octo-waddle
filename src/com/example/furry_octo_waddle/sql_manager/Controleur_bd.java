@@ -23,6 +23,7 @@ public class Controleur_bd implements BD_rw{
 		MainActivity.printDebug(1,"controleur cree");
 	}
 
+	/**@see writeWord(Word_Translation word)*/
 	public void ecrireDansLaBase(Word_Translation word){
 		// Gets the data repository in write mode
 		SQLiteDatabase db = null;
@@ -147,6 +148,7 @@ public class Controleur_bd implements BD_rw{
 		return list;
 	}
 	
+	/** @see modifyWordbyId(Word_Translation word) */
 	public void modifierDansLaBase(Word_Translation word){
 		//mDbHelper = new FeedReaderDbHelper(ma.getApplicationContext());
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -172,6 +174,7 @@ public class Controleur_bd implements BD_rw{
 		}
 	}
 	
+	/** @see deleteWord(Word_Translation word)*/
 	public void supprimerDeLaBase(Word_Translation word){
 		
 		//mDbHelper = new FeedReaderDbHelper(ma.getApplicationContext());
