@@ -9,24 +9,40 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnActivity extends FragmentActivity {
 	MyPageAdapter pageAdapter;
+	ViewPager pager;
+	List<Fragment> fragments;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.learn_layout);
 
-		List<Fragment> fragments = getFragments();
+		fragments = getFragments();
 
 		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
 
-		ViewPager pager = (ViewPager)findViewById(R.id.viewpager);
+		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
+		
+		Button buttonModify = (Button) findViewById(R.id.buttonModify);
+		buttonModify.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View arg0) {
+				int currentPosition = pager.getCurrentItem();
+				//get the current word in the PageViewer
+				Log.d("-->", ((LearnFragment)fragments.get(currentPosition)).actualId());
+			}
+		});
 
 	}
 
