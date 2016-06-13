@@ -12,7 +12,7 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnFragment extends Fragment {
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-	String actualWord, actualWordTrad;
+	String currentWord, currentWordTrad;
 		
 	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
@@ -35,16 +35,16 @@ public class LearnFragment extends Fragment {
 		TextView wordTrad = (TextView)v.findViewById(R.id.wordTrad);
 
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
-		actualWord = words[0];
-		actualWordTrad = words[1];
-		word.setText(actualWord);
-		wordTrad.setText(actualWordTrad);		
+		currentWord = words[0];
+		currentWordTrad = words[1];
+		word.setText(currentWord);
+		wordTrad.setText(currentWordTrad);		
 		
 		return v;
     }
 	
-	public String actualId() {
-		return actualWord;
+	public String currentId() {
+		return currentWord;
 	}
 	
 }
