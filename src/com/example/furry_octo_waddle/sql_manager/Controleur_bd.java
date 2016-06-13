@@ -10,39 +10,29 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.*;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import com.example.furry_octo_waddle.sql_manager.FeedReaderContract.FeedEntry;
 
-//src  : https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
+/** Parts of code were found on https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
+	*/
 
 public class Controleur_bd implements BD_rw{
-	private MainActivity ma;
-	private FeedReaderDbHelper mDbHelper;
-	
-
-	
-
+	private FeedReaderDbHelper mDbHelper;	
 
 	public Controleur_bd(ActionBarActivity ba) {
-		// TODO Auto-generated constructor stub
 		mDbHelper = new FeedReaderDbHelper(ba);
 		MainActivity.printDebug(1,"controleur cree");
 	}
 
-
-
 	public void ecrireDansLaBase(Word_Translation word){
-		//Changement de getContext
-		//mDbHelper = new FeedReaderDbHelper(ma.getApplicationContext());
 		// Gets the data repository in write mode
-		//MainActivity.printDebug(1,"Tentative ecrire base ");
 		SQLiteDatabase db = null;
 		try{
 		 db = mDbHelper.getWritableDatabase();}
 		catch (Exception e){
 			MainActivity.printDebug(1, e.getMessage());
 		}
-		//MainActivity.printDebug(1, "S'arrete la");
+		MainActivity.printDebug(1, "S'arrete la");
+		
 		// Create a new map of values, where column names are the keys
 		ContentValues values = new ContentValues();
 		values.put(language_to_column_Correspondance(word.getLanguage()), word.getWord());
@@ -50,8 +40,9 @@ public class Controleur_bd implements BD_rw{
 
 		// Insert the new row, returning the primary key value of the new row
 		try{
-			//MainActivity.printDebug(1, "S'arrete la");
-		long newRowId = db.insertOrThrow(
+			
+			//TODO check the return of db.insert, must be an useful information
+			long newRowId = db.insertOrThrow(
 		         FeedEntry.TABLE_NAME,
 		         null,
 		         values);
@@ -80,7 +71,6 @@ public class Controleur_bd implements BD_rw{
 		    };
 
 		// Define 'where' part of query.
-		//MainActivity.printDebug(1, "S'arrete la");
 		String selection = null;
 		String sel =null;
 		if(word.getId()==0){
@@ -90,7 +80,6 @@ public class Controleur_bd implements BD_rw{
 			}if (word.getTraduction_of_word().compareToIgnoreCase("*")!=0){
 				if(selection != null){
 					selection = selection + " AND "+ language_to_column_Correspondance(word.getTargeted_language()) + " LIKE ? "  ;
-					//MainActivity.printDebug(1, "PAsse");
 					sel = sel +"\\"+word.getTraduction_of_word();
 				}
 				else{
@@ -102,21 +91,20 @@ public class Controleur_bd implements BD_rw{
 			selection = FeedEntry._ID + " LIKE ? "  ;
 			sel = String.valueOf(word.getId());
 		}
-		//MainActivity.printDebug(1, "S'arrete la");
 				
 		// How you want the results sorted in the resulting Cursor
-		String sortOrder =
-		    //FeedEntry.COLUMN_NAME_UPDATED + " DESC";
+		String sortOrder = // language_to_column_Correspondance(word.getLanguage())+ " DESC";
+							// Mettre l'ordre alphabetique
 				null;
 		if(random)
 			sortOrder = " RANDOM() ";
 		
+		//
 		String nb = null;
 		if(nombre >=0)
 			nb =String.valueOf(nombre);	
 		
 		// Specify arguments in placeholder order.
-		//MainActivity.printDebug(1, "Avant Split : "+ sel +" / "+selection); 
 		String[] selectionArgs;
 		if(sel!=null){
 			selectionArgs = sel.split("\\\\");
@@ -137,7 +125,7 @@ public class Controleur_bd implements BD_rw{
 		    sortOrder,                                 // The sort order
 		    nb
 			);
-		//MainActivity.printDebug(1, "S'arrete la");
+		
 		if(c.getCount()>0){
 			//MainActivity.printDebug(1,"Recuperation de  " +c.getCount() +" trad.");
 			while(c.moveToNext()){
@@ -173,6 +161,7 @@ public class Controleur_bd implements BD_rw{
 		String selection = FeedEntry._ID + " LIKE ?";
 		String[] selectionArgs = { String.valueOf(word.getId()) };
 		try{
+			//TODO check the return of db.update, must be an useful information
 		int count = db.update(
 			FeedEntry.TABLE_NAME,
 		    values,
@@ -244,21 +233,18 @@ public class Controleur_bd implements BD_rw{
 
 	@Override
 	public void writeEnglishWordWOTranslation(String englishWord) {
-		// TODO Auto-generated method stub
 		Word_Translation var = new Word_Translation(null,englishWord);
 		ecrireDansLaBase(var);
 	}
 
 	@Override
 	public void writeFrenchWordWOTranslation(String frenchWord) {
-		// TODO Auto-generated method stub
 		Word_Translation var = new Word_Translation(frenchWord,null);
 		ecrireDansLaBase(var);
 	}
 
 	@Override
 	public void writePairOfWords(String frenchWord, String englishWord) {
-		// TODO Auto-generated method stub
 		Word_Translation var = new Word_Translation(frenchWord,englishWord);
 		ecrireDansLaBase(var);
 		
@@ -293,7 +279,7 @@ public class Controleur_bd implements BD_rw{
 		modifierDansLaBase(word);
 	}
 	
-	public void test(){
+	/*public void test(){
 		ecrireDansLaBase(new Word_Translation("salut", ""));
 		ecrireDansLaBase(new Word_Translation("Bojour", "Hello"));
 		ecrireDansLaBase(new Word_Translation("Hush", "Frite"));
@@ -323,7 +309,7 @@ public class Controleur_bd implements BD_rw{
 		}
 		//resetTable();
 		//dropTable();
-	}
+	}*/
 	
 	public void resetTable(){
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
@@ -331,6 +317,8 @@ public class Controleur_bd implements BD_rw{
 		db.delete(FeedEntry.TABLE_NAME, null, null);
 	}
 	
+	/** Deletes the table from the database*/
+	@SuppressWarnings("unused")
 	private void dropTable(){
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 		MainActivity.printDebug(1,"Table droped"); 
@@ -341,6 +329,7 @@ public class Controleur_bd implements BD_rw{
 			}
 	}
 	
+	/**@return the language related to the name of the column in the the table  */
 	public final static String column_to_language_Correspondance(String columnName){
 		if(columnName.equalsIgnoreCase(FeedEntry.COLUMN_NAME_ENGLISH_WORD))
 				return Word_Translation.ENGLISH;
@@ -349,6 +338,7 @@ public class Controleur_bd implements BD_rw{
 		else return null;
 	}
 	
+	/**@return the name of the column in the the table related to the language */
 	public final static String language_to_column_Correspondance(String LanguageName){
 		if(LanguageName.equalsIgnoreCase( Word_Translation.ENGLISH))
 				return FeedEntry.COLUMN_NAME_ENGLISH_WORD;

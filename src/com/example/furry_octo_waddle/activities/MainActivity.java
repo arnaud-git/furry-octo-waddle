@@ -1,8 +1,6 @@
 package com.example.furry_octo_waddle.activities;
 
 import com.example.furry_octo_waddle.R;
-import com.example.furry_octo_waddle.R.id;
-import com.example.furry_octo_waddle.R.layout;
 import com.example.furry_octo_waddle.sql_manager.BD_rw;
 import com.example.furry_octo_waddle.sql_manager.Controleur_bd;
 
@@ -35,11 +33,8 @@ public class MainActivity extends ActionBarActivity {
 			
 			@Override
 			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
 				Intent i = new Intent(MainActivity.this,LearnActivity.class);
                 startActivity(i);
-                //printDebug(1,"Lancement activite : "+i);
-                //cbd.test();
 			}
 		});
 		
@@ -54,6 +49,10 @@ public class MainActivity extends ActionBarActivity {
 		});
 	}
 	
+	/** In debug mode print the message within msg 
+	 *  @param level if  MainActivity.DEBUG_LEVEL_ACTIVATE, the message will be be printed id the level equals to MainActivity.DEBUG_LEVEL
+	 *  @param msg message printed
+	 *  */
 	public final static void printDebug(int level,String msg){
 		if(DEBUG){
 			if(DEBUG_LEVEL_ACTIVATE){

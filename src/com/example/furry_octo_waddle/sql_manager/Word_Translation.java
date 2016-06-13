@@ -5,16 +5,24 @@ import com.example.furry_octo_waddle.activities.MainActivity;
 import android.util.Log;
 
 public class Word_Translation {
+	/** identifiant in the database*/
 	private int id = 0 ;
+	
 	private String word;
 	private String traduction_of_word;
+	
+	/**Language of word*/
 	private String language;
+	
+	/**Language of traduction of the word*/
 	private String targeted_language;
 	
-	//Peut-etre les changer en int
+	//Peut-etre les changer en int ou avec un enum
+	//The different languages 
 	public static final String ENGLISH = "@en";
 	public static final String FRENCH = "@fr";
 	
+	/**Last modification of the word*/
 	private String last_modification_time;
 	
 	public Word_Translation(String w,String t,String l, String t_l){

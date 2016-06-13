@@ -1,20 +1,13 @@
 package com.example.furry_octo_waddle.sql_manager;
 
-//src  : https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
-
+/** Parts of code were found on https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
+*/
 import android.content.Context;
-import android.database.SQLException;
 import android.database.sqlite.*;
-import android.util.Log;
-
 import com.example.furry_octo_waddle.activities.MainActivity;
 import com.example.furry_octo_waddle.sql_manager.FeedReaderContract.FeedEntry;
 
-
-
 public class FeedReaderDbHelper extends SQLiteOpenHelper {
-    
-	
 	private static final String TEXT_TYPE = " TEXT";
 	private static final String INSENSITIVE_CASE = " COLLATE NOCASE";
 	private static final String COMMA_SEP = ",";
@@ -31,7 +24,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 	private static final String SQL_DELETE_ENTRIES =
 	    "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 	
-	// If you change the database schema, you must increment the database version.
+	/** If you change the database schema, you must increment the database version.*/
     public static final int DATABASE_VERSION = 8;
     public static final String DATABASE_NAME = "FeedReader.db";
     
@@ -51,13 +44,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         // This database is only a cache for online data, so its upgrade policy is
         // to simply to discard the data and start over
     	MainActivity.printDebug(1, "Tentative suppresion table");
-    	//try{
         db.execSQL(SQL_DELETE_ENTRIES);
-        //}
-    	//catch(SQLException e){
-    	//	MainActivity.printDebug(1, e.getMessage());
-    	//}
-    	
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
