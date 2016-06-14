@@ -11,8 +11,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
@@ -21,6 +22,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	MyPageAdapter pageAdapter;
 	ViewPager pager;
 	List<Fragment> fragments;
+	int visibleTv = 1;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,40 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
 		pager.setOnPageChangeListener(this);
+		
+		Button buttonModify = (Button) findViewById(R.id.buttonModify);
+		buttonModify.setOnClickListener(new View.OnClickListener() {	
+			
+			@Override
+			public void onClick(View arg0) {
+
+				FragmentPagerAdapter adapter = (FragmentPagerAdapter)pager.getAdapter();
+				LearnFragment currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
+				
+				TextView tv = (TextView) currentLF.getView().findViewById(R.id.word);
+				TextView tvTrad = (TextView) currentLF.getView().findViewById(R.id.wordTrad);
+				EditText et = (EditText) currentLF.getView().findViewById(R.id.hidden_edit_word);
+				EditText etTrad = (EditText) currentLF.getView().findViewById(R.id.hidden_edit_word_trad);
+				
+				visibleTv = 1 - visibleTv;
+				
+				if(visibleTv == 1) {
+					tv.setVisibility(TextView.INVISIBLE);
+					et.setText(tv.getText().toString());
+					et.setVisibility(EditText.VISIBLE);
+					tvTrad.setVisibility(TextView.INVISIBLE);
+					etTrad.setText(tvTrad.getText().toString());
+					etTrad.setVisibility(EditText.VISIBLE);
+				}
+				else {
+					tv.setVisibility(TextView.VISIBLE);
+					et.setVisibility(EditText.INVISIBLE);
+					tvTrad.setVisibility(TextView.VISIBLE);
+					etTrad.setVisibility(EditText.INVISIBLE);
+				}
+			}
+		});
+		
 	}
     
 	private class MyPageAdapter extends FragmentPagerAdapter {
