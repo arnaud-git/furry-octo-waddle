@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
+
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
@@ -35,6 +37,7 @@ public class LearnFragment extends Fragment {
 		TextView wordTrad = (TextView)v.findViewById(R.id.wordTrad);
 
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
+		
 		currentWord = words[0];
 		currentWordTrad = words[1];
 		word.setText(currentWord);
@@ -43,8 +46,8 @@ public class LearnFragment extends Fragment {
 		return v;
     }
 	
-	public String currentId() {
-		return currentWord;
+	public String[] getCurrentWords() {
+		String[] words = {currentWord,currentWordTrad};
+		return words;
 	}
-	
 }

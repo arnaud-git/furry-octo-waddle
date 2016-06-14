@@ -11,12 +11,13 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnActivity extends FragmentActivity {
+public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 	MyPageAdapter pageAdapter;
 	ViewPager pager;
 	List<Fragment> fragments;
@@ -32,37 +33,9 @@ public class LearnActivity extends FragmentActivity {
 
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
-		
-		Button buttonModify = (Button) findViewById(R.id.buttonModify);
-		buttonModify.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				int currentPosition = pager.getCurrentItem();
-				//get the current word in the PageViewer
-				Log.d("-->", ((LearnFragment)fragments.get(currentPosition)).currentId());
-			}
-		});
-
+		pager.setOnPageChangeListener(this);
 	}
-
-	private List<Fragment> getFragments(){
-		List<Fragment> fList = new ArrayList<Fragment>();
-		
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("*", "*"),true, -1);
-		if(words.isEmpty()){
-			//Database is empty
-			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
-		}
-		else{
-			for( Word_Translation word_obj : words){
-				fList.add(LearnFragment.newInstance(word_obj));
-			}
-		}
-
-		return fList;
-	}
-
+    
 	private class MyPageAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragments;
 
@@ -79,5 +52,39 @@ public class LearnActivity extends FragmentActivity {
 		public int getCount() {
 			return this.fragments.size();
 		}
+	}
+
+	@Override
+	public void onPageScrollStateChanged(int arg0) {
+		// TODO Auto-generated method stub
+		//called when the user changes the view
+		
+	}
+
+	@Override
+	public void onPageScrolled(int arg0, float arg1, int arg2) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onPageSelected(int arg0) {
+		// TODO Auto-generated method stub
+	}
+	
+	private List<Fragment> getFragments(){
+		List<Fragment> fList = new ArrayList<Fragment>();
+		
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("*", "*"),true, -1);
+		if(words.isEmpty()){
+			//Database is empty
+			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
+		}
+		else{
+			for( Word_Translation word_obj : words){
+				fList.add(LearnFragment.newInstance(word_obj));
+			}
+		}
+
+		return fList;
 	}
 }

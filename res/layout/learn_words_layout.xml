@@ -5,23 +5,51 @@
     android:background="@drawable/back"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/word"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="aaaaaa"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/wordTrad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="60dp"
-        android:text="bbbbbb"
-        android:textSize="30sp" />
+    
+        <ViewSwitcher
+	        android:id="@+id/switcher_word"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true" >
+	
+		    <TextView
+		        android:id="@+id/word"
+		        android:text="aaaaaa"
+				android:layout_width="wrap_content"
+	        	android:layout_height="wrap_content"
+		        android:clickable="true"
+		        android:textSize="30sp" />
+		    
+	        <EditText
+	            android:id="@+id/hidden_edit_word"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="test" />
+	        
+	    </ViewSwitcher>
+	    
+        <ViewSwitcher
+	        android:id="@+id/switcher_word_trad"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentBottom="true"
+		    android:layout_centerHorizontal="true" >
+			
+		    <TextView
+		        android:id="@+id/wordTrad"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:clickable="true"
+		        android:text="bbbbbb"
+		        android:textSize="30sp" />
+		    
+	        <EditText
+	            android:id="@+id/hidden_edit_word_trad"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:hint="test" />
+       
+	    </ViewSwitcher>
 
 </RelativeLayout>
