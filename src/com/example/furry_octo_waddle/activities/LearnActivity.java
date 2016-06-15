@@ -18,14 +18,18 @@ import android.widget.TextView;
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
+
+
 public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
+	
 	MyPageAdapter pageAdapter;
 	ViewPager pager;
 	List<Fragment> fragments;
-	int visibleTv = 1;
+	int visibleTv;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.learn_layout);
 
@@ -51,25 +55,21 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 				EditText et = (EditText) currentLF.getView().findViewById(R.id.hidden_edit_word);
 				EditText etTrad = (EditText) currentLF.getView().findViewById(R.id.hidden_edit_word_trad);
 				
-				visibleTv = 1 - visibleTv;
-				
-				if(visibleTv == 1) {
-					tv.setVisibility(TextView.INVISIBLE);
-					et.setText(tv.getText().toString());
-					et.setVisibility(EditText.VISIBLE);
-					tvTrad.setVisibility(TextView.INVISIBLE);
-					etTrad.setText(tvTrad.getText().toString());
-					etTrad.setVisibility(EditText.VISIBLE);
-				}
-				else {
-					tv.setVisibility(TextView.VISIBLE);
-					et.setVisibility(EditText.INVISIBLE);
-					tvTrad.setVisibility(TextView.VISIBLE);
-					etTrad.setVisibility(EditText.INVISIBLE);
-				}
+				convert(tv, tvTrad, et, etTrad, et.getVisibility());
 			}
 		});
 		
+	}
+	
+	protected static void convert(TextView tv, TextView tvTrad, EditText et,
+			EditText etTrad, int tvVisibility) {
+		// TODO Auto-generated method stub
+			tv.setVisibility(1-tvVisibility);
+			et.setText(tv.getText().toString());
+			et.setVisibility(1-tvVisibility);
+			tvTrad.setVisibility(tvVisibility);
+			etTrad.setText(tvTrad.getText().toString());
+			etTrad.setVisibility(tvVisibility);
 	}
     
 	private class MyPageAdapter extends FragmentPagerAdapter {
@@ -94,7 +94,6 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	public void onPageScrollStateChanged(int arg0) {
 		// TODO Auto-generated method stub
 		//called when the user changes the view
-		
 	}
 
 	@Override
