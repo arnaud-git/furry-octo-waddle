@@ -12,5 +12,6 @@
     <string name="string_delete">Delete</string>
     <string name="string_modify">Modify</string>
     <string name="string_save">Save!</string>
+    <string name="string_add">Add it!</string>
 
 </resources>

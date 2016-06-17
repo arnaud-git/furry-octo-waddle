@@ -1,7 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp" >
 
     <TextView
         android:id="@+id/textViewAdd"
@@ -9,41 +11,79 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/string_add_words"
+        android:layout_marginTop="5dp"
         android:background="@drawable/back"
-        android:textSize="35sp"
-        android:layout_marginTop="5dp" />
-    
-    <EditText
-        android:id="@+id/editWord"
-        android:inputType="text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="160dp"
-        android:textSize="30sp"
-        android:hint="New Word !"/>
+        android:text="@string/string_add_words"
+        android:textSize="35sp" />
 
-    <EditText
-        android:id="@+id/editWordTrad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="300dp"
-        android:hint="Translation"
-        android:inputType="text"
-        android:textSize="30sp" >
+    <RelativeLayout
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="160dp"
+        android:layout_marginTop="180dp"
+        android:background="@drawable/back"
+        android:orientation="vertical" >
 
-        <requestFocus />
-    </EditText>
+        <EditText
+            android:id="@+id/editWord"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:hint="New Word !"
+            android:inputType="text"
+            android:gravity="center"
+            android:textSize="30sp" />
 
-    <Button
-        android:id="@+id/add_button"
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/editWordTrad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:hint="Translation"
+            android:inputType="text"
+            android:gravity="center"
+            android:textSize="30sp" >
+        </EditText>
+    </RelativeLayout>
+
+        <LinearLayout
+        android:id="@+id/buttonsLearn"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textViewAdd"
-        android:layout_marginBottom="43dp"
-        android:text="@string/add_button" />
+        android:layout_marginBottom="50dp"
+        android:gravity="center"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/position_1"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/position_2"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/position_3"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/string_add" />
+    </LinearLayout>
 
 </RelativeLayout>

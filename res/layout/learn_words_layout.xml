@@ -29,7 +29,9 @@
         	android:layout_centerHorizontal="true"
         	android:gravity="center"
 	    	android:textSize="30sp"
-	   		android:visibility="invisible" />
+	   		android:visibility="invisible"
+	   		android:singleLine="true"
+	   		android:nextFocusDown="@+id/hidden_edit_word_trad" />
 
 		
 	    <TextView
@@ -50,7 +52,8 @@
         	android:layout_centerHorizontal="true"
         	android:gravity="center"
 	   		android:textSize="30sp"
-	   		android:visibility="invisible"/>
+	   		android:visibility="invisible"
+	   		android:singleLine="true"/>
 	</RelativeLayout>
       
 </RelativeLayout>
