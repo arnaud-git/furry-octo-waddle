@@ -14,7 +14,7 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnFragment extends Fragment {
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
-	String currentWord, currentWordTrad;
+	String currentWord, currentWordTrans;
 		
 	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
@@ -33,21 +33,21 @@ public class LearnFragment extends Fragment {
         Bundle savedInstanceState) {
 		
 		View v = inflater.inflate(R.layout.learn_words_layout, container, false);
-		TextView word = (TextView)v.findViewById(R.id.word);
-		TextView wordTrad = (TextView)v.findViewById(R.id.wordTrad);
+		TextView word = (TextView)v.findViewById(R.id.tvWord);
+		TextView wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
 
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
 		
 		currentWord = words[0];
-		currentWordTrad = words[1];
+		currentWordTrans = words[1];
 		word.setText(currentWord);
-		wordTrad.setText(currentWordTrad);		
+		wordTrans.setText(currentWordTrans);		
 		
 		return v;
     }
 	
 	public String[] getCurrentWords() {
-		String[] words = {currentWord,currentWordTrad};
+		String[] words = {currentWord,currentWordTrans};
 		return words;
 	}
 }

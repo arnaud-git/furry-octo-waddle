@@ -12,7 +12,7 @@
     	android:background="@drawable/back">
 	
 	    <TextView
-	        android:id="@+id/word"
+	        android:id="@+id/tvWord"
 			android:layout_width="wrap_content"
         	android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
 	   		android:visibility="visible" />
 	    
         <EditText
-            android:id="@+id/hidden_edit_word"
+            android:id="@+id/etWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         	android:layout_alignParentTop="true"
@@ -31,11 +31,11 @@
 	    	android:textSize="30sp"
 	   		android:visibility="invisible"
 	   		android:singleLine="true"
-	   		android:nextFocusDown="@+id/hidden_edit_word_trad" />
+	   		android:nextFocusDown="@+id/etWordTrans" />
 
 		
 	    <TextView
-	        android:id="@+id/wordTrad"
+	        android:id="@+id/tvWordTrans"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
         	android:layout_alignParentBottom="true"
@@ -45,7 +45,7 @@
 	   		android:visibility="visible" />
 	    
         <EditText
-            android:id="@+id/hidden_edit_word_trad"
+            android:id="@+id/etWordTrans"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
         	android:layout_alignParentBottom="true"
