@@ -24,7 +24,7 @@ public class AddActivity extends Activity{
 		setContentView(R.layout.add_layout);
 
 		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrad = (EditText) findViewById(R.id.editWordTrad);
+		editWordTrad = (EditText) findViewById(R.id.editWordTrans);
 		
 		addButton = (Button)findViewById(R.id.add_button);
 		addButton.setOnClickListener(new View.OnClickListener() {
