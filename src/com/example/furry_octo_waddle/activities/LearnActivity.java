@@ -25,12 +25,12 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 
 	MyPageAdapter pageAdapter;
 	ViewPager pager;
+	FragmentPagerAdapter adapter;
 	List<Fragment> fragments;
 
 	Button buttonDelete, buttonCancel, buttonSave, buttonModify;
 	TextView tv, tvTrad;
 	EditText et, etTrad;
-	FragmentPagerAdapter adapter;
 	LearnFragment currentLF;
 
 	@Override
@@ -119,14 +119,16 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 
 	}
 
-	protected static void modifyTextViewsVisibility(TextView tv, int tvV, TextView tvTrad, int tvTV, EditText et, int etV, EditText etTrad, int etTV) {
-		// TODO Auto-generated method stub
+	//Set the visibility of the EditTexts and the TextViews to the given arguments
+	protected static void modifyTextViewsVisibility(TextView tv, int tvV, TextView tvTrad,
+								int tvTV, EditText et, int etV, EditText etTrad, int etTV) {
 		tv.setVisibility(tvV);
 		tvTrad.setVisibility(tvTV);
 		et.setVisibility(etV);
 		etTrad.setVisibility(etTV);
 	}
 
+	//Set the visibility of the buttons to the given arguments
 	protected static void modifyButtonsVisibility(Button buttonDelete, int buttonDeleteV, Button buttonCancel, int buttonCancelV, Button buttonSave, int buttonSaveV, Button buttonModify, int buttonModifyV){
 		buttonDelete.setVisibility(buttonDeleteV);
 		buttonCancel.setVisibility(buttonCancelV);
