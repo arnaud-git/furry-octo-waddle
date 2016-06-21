@@ -24,7 +24,8 @@
             android:layout_marginTop="15dp"
             android:height= "100dp"
             android:text="@string/string_learn"
-            android:width="250dp" />
+            android:width="250dp"
+    		android:background="@drawable/back" />
 
         <Button
             android:id="@+id/buttonTest"
@@ -33,7 +34,8 @@
             android:layout_marginTop="25dp"
             android:height="75dp"
             android:text="@string/string_test"
-            android:width="200dp" />
+            android:width="200dp"
+    		android:background="@drawable/back" />
 
         <Button
             android:id="@+id/buttonAdd"
@@ -42,7 +44,8 @@
             android:layout_marginTop="25dp"
             android:height="75dp"
             android:text="@string/string_add_words"
-            android:width="200dp" />
+            android:width="200dp"
+    		android:background="@drawable/back" />
 
         <Button
             android:id="@+id/buttonTranslate"
@@ -51,7 +54,8 @@
             android:layout_marginTop="25dp"
             android:height="75dp"
             android:text="@string/string_translate"
-            android:width="200dp" />
+            android:width="200dp"
+    		android:background="@drawable/back" />
     </LinearLayout>
 
 </RelativeLayout>
