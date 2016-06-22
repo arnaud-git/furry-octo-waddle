@@ -98,7 +98,7 @@ public class Word_Translation {
 
 	private void setTraduction(String t) {
 		if (t!=null)
-			this.traduction_of_word = t;
+			this.traduction_of_word = formatString(t);
 		else 
 			this.traduction_of_word = "";
 		
@@ -106,10 +106,24 @@ public class Word_Translation {
 
 	private void setWord(String w) {
 		if(w!=null)
-			this.word =w;
+			this.word =formatString(w);
 		else 
 			this.word = "";
 		
+	}
+	
+	public static final String formatString(String word){
+		String computeWord = word ; 
+		while(computeWord.contains("  ")){
+			computeWord = computeWord.replaceAll("  ", " ");
+		}
+		if(computeWord.startsWith(" ")){
+			computeWord = computeWord.substring(1);
+		}
+		if(computeWord.endsWith(" ")){
+			computeWord = computeWord.substring(0, computeWord.length()-1);
+		}
+		return computeWord;
 	}
 
 	public final String getWord() {
