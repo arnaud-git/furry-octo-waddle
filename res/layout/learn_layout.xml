@@ -34,7 +34,8 @@
 	            android:id="@+id/buttonDelete"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="@string/string_delete" />
+	            android:text="@string/string_delete"
+    			android:background="@drawable/back" />
 	        
 	        <Button
 	            android:id="@+id/buttonCancel"
@@ -42,20 +43,23 @@
 	            android:layout_height="wrap_content"
 	            style="?android:attr/buttonStyleSmall"
 	            android:visibility="invisible"
-	            android:text="X" />
+	            android:text="X"
+    			android:background="@drawable/back" />
 	       	<Button
 	            android:id="@+id/buttonSave"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
 	            style="?android:attr/buttonStyleSmall"
 	            android:visibility="invisible"
-	            android:text="V" />
+	            android:text="V"
+    			android:background="@drawable/back" />
 	
 	        <Button
 	            android:id="@+id/buttonModify"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:text="@string/string_modify" />
+	            android:text="@string/string_modify"
+    			android:background="@drawable/back" />
 	        
     	</LinearLayout>
 
