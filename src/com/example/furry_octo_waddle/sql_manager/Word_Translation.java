@@ -8,7 +8,19 @@ public class Word_Translation {
 	/** identifiant in the database*/
 	private int id = 0 ;
 	
+	/** 1- The word 
+	 * 
+	 * OR
+	 * 
+	 * 2- Pattern Expression for query
+	 * The percent sign represents zero, one, or multiple numbers or characters. 
+	 * The underscore represents a single number or character. 
+	 * The tild at the beginning of the word indicates to make the query on words NOT LIKE the pattern expression
+	 * (eg ~ad% -> NOT LIKE ad%) 
+	 * These symbols can be used in combinations.
+	 * */
 	private String word;
+	
 	private String traduction_of_word;
 	
 	/**Language of word*/
@@ -132,4 +144,5 @@ public class Word_Translation {
 			targeted_language = tempo_lang;
 		}
 	}
+	
 }

@@ -12,8 +12,8 @@ public interface BD_rw {
 	 * @param random : if false the list is in alphabetical order otherwise in a random one
 	 * @param nombre : the length of the list, if it equals -1 the longest list will be returned 
 	 * @param word : if {@link Word_Translation word.id} is different than 0 the list contains at most only the {@link Word_Translation word} with this id in the table
-	 * Otherwise the list contains the words with the same attributes than word
-	 * except if an attribute equals to '*' then this attribute is not considerated in the query
+	 * Otherwise the list contains the words with the same attributes than word (or match the pattern expression in, 
+	 * see 2- {@link Word_Translation word.word} for further information)
 	 * */
 	public List<Word_Translation> getWordFromTable(Word_Translation word,boolean random,int nombre);
 	
@@ -44,8 +44,8 @@ public interface BD_rw {
 	/**Erases {@link Word_Translation word} from the table (database)
 	 * @param word :
 	 *	if {@link Word_Translation word.id} is different than 0, at most only the word with this id in the table will be erased
-	 * Otherwise the words with the same attributes than word will be erased
-	 * except if an attribute equals to '*' then this attribute is not considerated in the query
+	 * Otherwise the words with the same attributes than word (or match the pattern expression in
+	 * {@see}) will be erased
 	 *  */
 	public void deleteWord(Word_Translation word);
 	
