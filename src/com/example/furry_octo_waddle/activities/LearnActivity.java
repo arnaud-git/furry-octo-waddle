@@ -60,7 +60,11 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 				//buttonDelete deletes the words of the current fragment from the database
 				Toast toast = Toast.makeText(getApplicationContext(), "Ask if sure and delete the word from the DB", Toast.LENGTH_LONG);
 				toast.show();
-				//refresh the pagerAdapter and the words displayed
+				//TODO Suppress the 2 lines below and replace word_T by currentLF.getCurrentWord_T()
+				int id_word=currentLF.getCurrentWord_T().getId();
+				Word_Translation word_T= new Word_Translation(currentLF.getCurrentWord_T().getWord(),currentLF.getCurrentWord_T().getTraduction_of_word(),id_word);
+				MainActivity.cbd.deleteWord(word_T);
+				//TODO refresh the pagerAdapter and the words displayed
 			}
 		});
 
@@ -128,8 +132,12 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 				//pager.notifyDataSetChanged(); --> refreshing the list of fragment..
 				//..but the order and the position have to remain the same
 				
+				//TODO Suppress the 2 lines below and replace word_T by currentLF.getCurrentWord_T()
+				int id_word=currentLF.getCurrentWord_T().getId();
+				Word_Translation word_T= new Word_Translation(et[0].getText().toString(),et[1].getText().toString(),id_word);
+				MainActivity.cbd.modifyWordbyId(word_T);
 				//copy the words from the EditTexts in the TextViews
-				/*********HAS TO BE MODIFIED: DISPLAY THE MODIFIED WORDS IN THE DB********/
+				/*TODO *********HAS TO BE MODIFIED: DISPLAY THE MODIFIED WORDS IN THE DB********/
 				tv[0].setText(et[0].getText().toString());
 				tv[1].setText(et[1].getText().toString());
 			}
@@ -174,7 +182,6 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	@Override
 	//Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"
 	public void onPageScrollStateChanged(int arg0) {
-		// TODO Auto-generated method stub
 		adapter = (FragmentPagerAdapter)pager.getAdapter();
 		currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
 		
