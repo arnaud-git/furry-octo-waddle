@@ -38,6 +38,17 @@ public class MainActivity extends ActionBarActivity {
 				startActivity(i);
 			}
 		});
+		
+		buttonTest = (Button)findViewById(R.id.buttonTest);
+		buttonTest.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				//buttonTest sends the user on the activity Test
+				Intent i = new Intent(MainActivity.this,TestActivity.class);
+				startActivity(i);
+			}
+		});
 
 		buttonAdd = (Button)findViewById(R.id.buttonAdd);
 		buttonAdd.setOnClickListener(new View.OnClickListener() {
