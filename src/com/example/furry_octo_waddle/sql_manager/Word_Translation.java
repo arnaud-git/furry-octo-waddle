@@ -45,6 +45,15 @@ public class Word_Translation {
 		checkfornull();
 	}
 	
+	public Word_Translation(String w,String t,int l){
+		setWord(w);
+		setTraduction(t);
+		setId(l);
+		setLanguage(FRENCH);
+		setTargeted_Language(ENGLISH);
+		checkfornull();
+	}
+	
 	public Word_Translation(String w,String t,String l, String t_l,String index,String time){
 		setWord(w);
 		setTraduction(t);
