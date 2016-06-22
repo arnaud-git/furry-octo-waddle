@@ -1,6 +1,7 @@
 package com.example.furry_octo_waddle.activities;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -22,18 +23,6 @@ public class TestFragment extends Fragment {
 	TextView tvWord;
 	View v;
 	ViewPager pager;
-		
-	public static final TestFragment newInstance(String word, String wordTrans)
-	{
-		TestFragment f = new TestFragment();
-		Bundle bdl = new Bundle(1);
-
-		String[] str_array = {word, wordTrans};
-		bdl.putStringArray(EXTRA_MESSAGE, str_array);
-	    f.setArguments(bdl);
-
-	    return f;
-	}
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -78,4 +67,15 @@ public class TestFragment extends Fragment {
 		
 		return v;
     }
+
+	public static final Fragment newInstance(Word_Translation word_Translation) {
+		TestFragment f = new TestFragment();
+		Bundle bdl = new Bundle(1);
+
+		String[] str_array = {word_Translation.getWord(), word_Translation.getTraduction_of_word(),Integer.toString(word_Translation.getId())};
+		bdl.putStringArray(EXTRA_MESSAGE, str_array);
+	    f.setArguments(bdl);
+
+	    return f;
+	}
 }

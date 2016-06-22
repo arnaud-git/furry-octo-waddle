@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -76,9 +77,17 @@ public class TestActivity extends FragmentActivity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		fList.add(TestFragment.newInstance("hi","salut"));
-		fList.add(TestFragment.newInstance("car","voiture"));
-		fList.add(TestFragment.newInstance("dog","chien"));
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("~", "~"),true, -1);
+		if(words.isEmpty()){
+			//Database is empty
+			fList.add(TestFragment.newInstance(new Word_Translation("No word in the database", null)));
+			//TODO make an action
+		}
+		else{
+			for( Word_Translation word_obj : words){
+				fList.add(TestFragment.newInstance(word_obj));
+			}
+		}
 
 		return fList;
 	}
