@@ -41,7 +41,7 @@ public class AddActivity extends Activity{
 				
 				MainActivity.cbd.writeWord(word_obj);
 				
-				Toast.makeText(AddActivity.this, "\"" + word + "\""+ " saved", Toast.LENGTH_SHORT).show();
+				Toast.makeText(AddActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
 				
 				editWord.getText().clear();
 				editWordTrad.getText().clear();				

@@ -51,7 +51,7 @@ public class TestFragment extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-				if(etTrad.getText().toString().equals(wordTrans)) {
+				if(Word_Translation.matches(etTrad.getText().toString(),wordTrans)) {
 					pager.setCurrentItem(pager.getCurrentItem() + 1);
 				}
 				
