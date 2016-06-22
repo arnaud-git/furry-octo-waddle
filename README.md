@@ -11,8 +11,7 @@
 *******************************
 ***** Future Improvements *****
 *******************************
-- Make sure the word doesn't end or begin with a space character.
-- Make sure there is no more one consecutive space character in the word
+
 
 
 
