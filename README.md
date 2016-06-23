@@ -1,8 +1,9 @@
 *******************************
 *****    Bugs Noticed     *****
 *******************************
-- In Learn when you suppress the word in the first fragment, the app crashes
-- The fragments are not updated after a modification, we need to come back to the home menu.
+- [FIXED] In Learn when you suppress the word in the first fragment, the app crashes.
+- [FIXED] The fragments are not updated after a modification, we need to come back to the home menu.
+- The last fragment does not validate the answer in the activity 'Test'.
 
 
 
@@ -11,7 +12,7 @@
 *******************************
 ***** Future Improvements *****
 *******************************
-
+- In the activity test, propose either the word or its translation.
 
 
 
