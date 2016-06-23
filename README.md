@@ -13,6 +13,8 @@
 ***** Future Improvements *****
 *******************************
 - In the activity test, propose either the word or its translation.
+- In the activity test, give the choice to the user between word/translation/both.
+- Add some features in the activity 'Test': success rate, timer, etc.
 
 
 
