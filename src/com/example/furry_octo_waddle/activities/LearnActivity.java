@@ -8,6 +8,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -22,7 +24,7 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
 
 	ViewPager pager;
-	FragmentPagerAdapter adapter;
+	FragmentStatePagerAdapter adapter;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
 
@@ -65,6 +67,9 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 				Word_Translation word_T= new Word_Translation(currentLF.getCurrentWord_T().getWord(),currentLF.getCurrentWord_T().getTraduction_of_word(),id_word);
 				MainActivity.cbd.deleteWord(word_T);
 				//TODO refresh the pagerAdapter and the words displayed
+				int pos = pager.getCurrentItem();
+				fragments.remove(pos);
+				pageAdapter.notifyDataSetChanged();
 			}
 		});
 
@@ -73,7 +78,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 			public void onClick(View arg0) {
 				
 				//get the Fragment displayed when the user clicks
-				adapter = (FragmentPagerAdapter)pager.getAdapter();
+				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
 				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
 
 				//get the current TextViews and EditTexts
@@ -97,7 +102,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 			public void onClick(View arg0) {
 
 				//gets the Fragment displayed when the user clicks
-				adapter = (FragmentPagerAdapter)pager.getAdapter();
+				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
 				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
 
 				//get the current TextViews and EditTexts
@@ -116,7 +121,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 			public void onClick(View arg0) {
 
 				//gets the Fragment displayed when the user clicks
-				adapter = (FragmentPagerAdapter)pager.getAdapter();
+				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
 				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
 
 				//get the current TextViews and EditTexts
@@ -182,12 +187,14 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	@Override
 	//Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"
 	public void onPageScrollStateChanged(int arg0) {
-		adapter = (FragmentPagerAdapter)pager.getAdapter();
+		Log.d("--->","zoubal1");
+		adapter = (FragmentStatePagerAdapter)pager.getAdapter();
+		Log.d("--->","zoubal");
 		currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
-		
+		Log.d("--->","zoubal2");
 		TextView[] tv = getCurrentTv(currentLF);
 		EditText[] et = getCurrentEt(currentLF);
-
+		Log.d("--->","zoubal3");
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
 		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);		
 	}
@@ -220,7 +227,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		return fList;
 	}
 
-	private class MyPageAdapter extends FragmentPagerAdapter {
+	private class MyPageAdapter extends FragmentStatePagerAdapter {
 		private List<Fragment> fragments;
 
 		public MyPageAdapter(FragmentManager fm, List<Fragment> fragments) {
@@ -235,6 +242,11 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		@Override
 		public int getCount() {
 			return this.fragments.size();
+		}
+		
+		@Override
+		public int getItemPosition(Object object) {
+		    return PagerAdapter.POSITION_NONE;
 		}
 	}
 }
