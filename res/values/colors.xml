@@ -5,4 +5,5 @@
     <color name="my_yellow">#7FFFFF</color>
     <color name="myLearnColor">#FFFF7F</color>
 	<color name="myGoldColor">#FFD700</color>
+	<color name="mybrightgrey">#DDDDDD</color>
 </resources>
