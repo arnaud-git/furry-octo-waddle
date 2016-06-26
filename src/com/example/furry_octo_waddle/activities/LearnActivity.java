@@ -2,26 +2,27 @@ package com.example.furry_octo_waddle.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
+public class LearnActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
 	ViewPager pager;
 	FragmentStatePagerAdapter adapter;
@@ -35,7 +36,6 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.learn_layout);
 
@@ -147,10 +147,18 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 				tv[1].setText(et[1].getText().toString());
 			}
 		});
-
+		try{
+			ActionBar actionBar = getSupportActionBar();
+			actionBar.setSubtitle(R.string.string_learn);
+			actionBar.setHomeButtonEnabled(true);			
+		}
+		catch(Exception e){
+			MainActivity.printDebug(2, e.getMessage());
+		}
 	}
 
-	//Set the visibility of the EditTexts and the TextViews to the given arguments
+
+	/**Set the visibility of the EditTexts and the TextViews to the given arguments*/
 	protected static void modifyTextViewsVisibility(TextView tv, int tvV, TextView tvTrans,
 								int tvTV, EditText et, int etV, EditText etTrans, int etTV) {
 		tv.setVisibility(tvV);
@@ -159,7 +167,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		etTrans.setVisibility(etTV);
 	}
 
-	//Set the visibility of the buttons to the given arguments
+	/**Set the visibility of the buttons to the given arguments*/
 	protected static void modifyButtonsVisibility(Button buttonDelete, int buttonDeleteV,
 								Button buttonCancel, int buttonCancelV, Button buttonSave, int buttonSaveV, Button buttonModify, int buttonModifyV){
 		buttonDelete.setVisibility(buttonDeleteV);
@@ -168,7 +176,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		buttonModify.setVisibility(buttonModifyV);
 	}
 
-	//returns the TextViews of the current activity
+	/**@returns the TextViews of the current activity*/
 	protected TextView[] getCurrentTv(LearnFragment currentLF) {
 		tv = (TextView) currentLF.getView().findViewById(R.id.tvWord);
 		tvTrans = (TextView) currentLF.getView().findViewById(R.id.tvWordTrans);
@@ -176,7 +184,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		return ans;
 	}
 
-	//returns the TextViews of the current activity
+	/**@returns the TextViews of the current activity*/
 	protected EditText[] getCurrentEt(LearnFragment currentLF) {
 		et = (EditText) currentLF.getView().findViewById(R.id.etWord);
 		etTrans = (EditText) currentLF.getView().findViewById(R.id.etWordTrans);
@@ -185,7 +193,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	}
 
 	@Override
-	//Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"
+	/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 	public void onPageScrollStateChanged(int arg0) {
 		Log.d("--->","zoubal1");
 		adapter = (FragmentStatePagerAdapter)pager.getAdapter();
@@ -209,7 +217,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 		// TODO Auto-generated method stub
 	}
 
-	//returns a list of Fragment (word and translation from the DB)
+	/**@returns a list of Fragment (word and translation from the DB)*/
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
@@ -226,7 +234,19 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 
 		return fList;
 	}
-
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		MainActivity.printDebug(2, "Lamsg");
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
+	}
+	
 	private class MyPageAdapter extends FragmentStatePagerAdapter {
 		private List<Fragment> fragments;
 
