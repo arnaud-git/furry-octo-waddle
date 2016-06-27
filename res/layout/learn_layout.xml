@@ -11,70 +11,71 @@
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-    
-<ScrollView 
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:isScrollContainer="false"
-    android:fillViewport="true">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:fillViewport="true"
+        android:isScrollContainer="false" >
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:layout_marginTop="100dp"/>
+            android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:id="@+id/buttonsLearn"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="50dp"
-            android:layout_marginTop="50dp"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:layout_below="@+id/viewpager" >
+            <android.support.v4.view.ViewPager
+                android:id="@+id/viewpager"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginTop="100dp" />
 
-            <Button
-                android:id="@+id/buttonDelete"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/buttonsLearn"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/back"
-                android:text="@string/string_delete"
-                android:layout_margin="5dp" />
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/viewpager"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="50dp"
+                android:gravity="center"
+                android:orientation="horizontal" >
 
-            <Button
-                android:id="@+id/buttonCancel"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/back"
-                android:text="X"
-                android:visibility="invisible"
-                android:layout_margin="5dp" />
+                <Button
+                    android:id="@+id/buttonDelete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/back"
+                    android:text="@string/string_delete" />
 
-            <Button
-                android:id="@+id/buttonSave"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/back"
-                android:text="V"
-                android:visibility="invisible" 
-                android:layout_margin="5dp"/>
+                <Button
+                    android:id="@+id/buttonCancel"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/back"
+                    android:text="X"
+                    android:visibility="invisible" />
 
-            <Button
-                android:id="@+id/buttonModify"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/back"
-                android:text="@string/string_modify" 
-                android:layout_margin="5dp"/>
-        </LinearLayout>
-       
-    </RelativeLayout>
-     </ScrollView>
+                <Button
+                    android:id="@+id/buttonSave"
+                    style="?android:attr/buttonStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/back"
+                    android:text="V"
+                    android:visibility="invisible" />
+
+                <Button
+                    android:id="@+id/buttonModify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/back"
+                    android:text="@string/string_modify" />
+            </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
+
 </RelativeLayout>

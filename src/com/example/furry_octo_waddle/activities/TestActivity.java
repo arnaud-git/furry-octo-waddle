@@ -11,14 +11,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 
 
-public class TestActivity extends FragmentActivity {
+public class TestActivity extends ActionBarActivity {
 
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
@@ -29,7 +33,7 @@ public class TestActivity extends FragmentActivity {
 		Log.d("cc","zaboul12");
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_test);
+		setContentView(R.layout.test_layout);
 		
 		Log.d("cc","zaboul1");
 
@@ -53,7 +57,26 @@ public class TestActivity extends FragmentActivity {
 	        	return true; 
 	        }
 	     });
-		
+	    try{
+			ActionBar actionBar = getSupportActionBar();
+			actionBar.setSubtitle(R.string.string_test);
+			actionBar.setHomeButtonEnabled(true);			
+		}
+		catch(Exception e){
+			MainActivity.printDebug(2, e.getMessage());
+		}
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		MainActivity.printDebug(2, "Lamsg");
+	    switch (item.getItemId()) {
+	    // Respond to the action bar's Up/Home button
+	    case android.R.id.home:
+	        NavUtils.navigateUpFromSameTask(this);
+	        return true;
+	    }
+	    return super.onOptionsItemSelected(item);
 	}
 
 	private class MyPageAdapter extends FragmentPagerAdapter {
