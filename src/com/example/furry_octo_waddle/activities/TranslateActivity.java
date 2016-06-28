@@ -6,13 +6,15 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-import android.app.ListActivity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -20,31 +22,46 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TranslateActivity extends ListActivity {
+public class TranslateActivity extends ActionBarActivity{
 
 	Button addButton;
 	EditText editWord, editWordTrad;
 	String word, wordTrad,s_query;
 	Word_Translation word_obj;
 	CheckBox checkBox ;
+	private ListView lstView;
+	private boolean modification;
+
 
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.translate_layout);
+		try{
+			ActionBar actionBar = getSupportActionBar();
+			actionBar.setSubtitle(R.string.string_translate);
+			actionBar.setHomeButtonEnabled(true);	
+		}
+		catch(Exception e){
+			MainActivity.printDebug(2, e.getMessage());
+		}
 		listWords();
 	}
 
 
-	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		word_obj = (Word_Translation) getListAdapter().getItem(position);
-		writeWord();
-	}
-
 	private void listWords(){
 		findViewById(R.id.modif_word).setVisibility(View.GONE);
+		findViewById(R.id.listlay).setVisibility(View.VISIBLE);
 		TextView search_text = (TextView) findViewById(R.id.search);
+		search_text.setSelectAllOnFocus(true);
 		checkBox = (CheckBox) findViewById(R.id.search_all);
+		lstView = (ListView)findViewById(android.R.id.list);
+		lstView.setOnItemClickListener(new OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				word_obj = (Word_Translation) lstView.getAdapter().getItem(position);
+				writeWord();			
+			}
+		});
 		search_text.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -65,27 +82,27 @@ public class TranslateActivity extends ListActivity {
 	}
 
 	public void onCheckboxClicked(View view) {
-	    // Is the view now checked?
-	    //boolean checked = ((CheckBox) view).isChecked();
-	    
-	    // Check which checkbox was clicked
-	    switch(view.getId()) {
-	        case R.id.search_all:
-	        	query_bd(s_query);
-	            break;
-	        default: return;
-	    }
+		// Is the view now checked?
+		//boolean checked = ((CheckBox) view).isChecked();
+
+		// Check which checkbox was clicked
+		switch(view.getId()) {
+		case R.id.search_all:
+			query_bd(s_query);
+			break;
+		default: return;
+		}
 	}
-	
+
 	private void query_bd(String s){
 		Word_Translation query;
 		s_query=s;
 		if (checkBox.isChecked()){
-		query = new Word_Translation(s+"%", "%");
+			query = new Word_Translation(s+"%", "%");
 		}else{
 			query = new Word_Translation(s+"%", "");
 		}
-		
+
 		List<Word_Translation> list = null;
 		if(s.length()>0){
 			list = MainActivity.cbd.getWordFromTable(query, Order.LANGUAGE_ASC, -1);
@@ -94,9 +111,10 @@ public class TranslateActivity extends ListActivity {
 		}
 		Words_Array_Adapter adapter = new Words_Array_Adapter(this,
 				android.R.layout.simple_list_item_1, list);
-		setListAdapter(adapter);
+		lstView.setAdapter(adapter);
 	}
 	private void writeWord(){
+		modification =true;
 		findViewById(R.id.modif_word).setVisibility(View.VISIBLE);
 		findViewById(R.id.listlay).setVisibility(View.GONE);
 		editWord = (EditText) findViewById(R.id.editWord);
@@ -128,4 +146,21 @@ public class TranslateActivity extends ListActivity {
 			}
 		});
 	}
+
+	@Override  
+	public boolean onOptionsItemSelected(MenuItem item) {  
+		switch (item.getItemId()) {  
+		case android.R.id.home:
+			MainActivity.printDebug(2, "modification : " +modification);
+			if(modification){
+				listWords();
+				return true;
+			}else{
+				MainActivity.printDebug(2, "finish: " +modification);
+				finish();  
+			}
+			break;  
+		}  
+		return false;  
+	}  
 }

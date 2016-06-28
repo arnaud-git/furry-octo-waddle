@@ -10,8 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 public class Words_Array_Adapter extends ArrayAdapter<Word_Translation> {
@@ -31,7 +29,6 @@ public class Words_Array_Adapter extends ArrayAdapter<Word_Translation> {
 		TextView textView_t= (TextView) rowView.findViewById(R.id.label_t);
 		textView.setText(values.get(position).getWord());
 		textView_t.setText(values.get(position).getTraduction_of_word());
-
 		return rowView;
 	}
 }
