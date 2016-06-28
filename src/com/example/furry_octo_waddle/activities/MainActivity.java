@@ -16,7 +16,7 @@ public class MainActivity extends ActionBarActivity {
 	public static final String APPLICATION_TAG_NAME ="furry_octo_waddle"; 
 	public static final boolean DEBUG = true;
 	public static final int DEBUG_LEVEL = 2;
-	private static final boolean DEBUG_LEVEL_ACTIVATE = true;
+	private static final boolean DEBUG_LEVEL_ACTIVATE = false;
 	public static BD_rw cbd  = null;
 
 	Button buttonLearn, buttonTest, buttonAdd, buttonTranslate;
@@ -57,6 +57,17 @@ public class MainActivity extends ActionBarActivity {
 			public void onClick(View arg0) {
 				//buttonAdd sends the user on the activity Learn
 				Intent i = new Intent(MainActivity.this,AddActivity.class);
+				startActivity(i);
+			}
+		});
+		
+		buttonTranslate = (Button)findViewById(R.id.buttonTranslate);
+		buttonTranslate.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				//buttonAdd sends the user on the activity Learn
+				Intent i = new Intent(MainActivity.this,TranslateActivity.class);
 				startActivity(i);
 			}
 		});

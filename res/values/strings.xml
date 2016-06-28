@@ -13,5 +13,6 @@
     <string name="string_modify">Modify</string>
     <string name="string_save">Save!</string>
     <string name="string_add">Add it!</string>
+    <string name="string_update">Update</string>
 
 </resources>
