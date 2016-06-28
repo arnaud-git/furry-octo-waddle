@@ -8,14 +8,24 @@ public interface BD_rw {
 	public List<Word_Translation> getRandomFrenchWordNotTranslated(int nombre);
 	public List<Word_Translation> getRandomPairOfWords(int number);
 	
-	/** @return a list of {@link Word_Translation words} from the table
-	 * @param random : if false the list is in alphabetical order otherwise in a random one
+	/**Orders*/
+	public enum Order {
+		/**Randomly arranged*/
+		RANDOM,
+		/**Alphabetical order (using {@link Word_Translation word.word} for the order )*/
+		LANGUAGE_ASC,
+		/**Last recent entries*/
+		STAMP_DESC, NULL}
+	
+	/** @return a list of {@link Word_Translation words} from the table 
+	 * @param orderby :the order of the list 
 	 * @param nombre : the length of the list, if it equals -1 the longest list will be returned 
 	 * @param word : if {@link Word_Translation word.id} is different than 0 the list contains at most only the {@link Word_Translation word} with this id in the table
 	 * Otherwise the list contains the words with the same attributes than word (or match the pattern expression in) 
-	 * @see  2- {@link Word_Translation word.word} for further information on expression pattern)
+	 * @see  2- {@link Word_Translation word.word} for further information on expression pattern) \n
+	 * {@link Order} for the different order parameters
 	 * */
-	public List<Word_Translation> getWordFromTable(Word_Translation word,boolean random,int nombre);
+	public List<Word_Translation> getWordFromTable(Word_Translation word,Order orderby,int nombre);
 	
 	/** @deprecated Instantiate a {@link Word_Translation} object and 
 	 * Use {@link writeWord(Word_Translation word)}*/

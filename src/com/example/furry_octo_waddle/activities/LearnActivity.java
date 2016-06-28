@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
@@ -213,7 +214,7 @@ public class LearnActivity extends FragmentActivity implements ViewPager.OnPageC
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),true, -1);
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
