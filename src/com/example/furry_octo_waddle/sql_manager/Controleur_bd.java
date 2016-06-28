@@ -50,17 +50,17 @@ public class Controleur_bd implements BD_rw{
 			if(newRowId>=0)
 				word.setId((int)newRowId);
 			//else 	
-				//Erreur
+			//Erreur
 		}catch (SQLException e){
 			MainActivity.printDebug(1, e.getMessage());
 		}
 	}
-	public List<Word_Translation> lireDepuisLaBase(String[] args,boolean random,int nombre){
+	public List<Word_Translation> lireDepuisLaBase(String[] args,Order random,int nombre){
 		return getWordFromTable(new Word_Translation(args[2],args[3], args[0], args[1]),random,nombre);
 	}
 
 	@Override
-	public List<Word_Translation> getWordFromTable(Word_Translation word,boolean random,int nombre){
+	public List<Word_Translation> getWordFromTable(Word_Translation word,Order random,int nombre){
 		List<Word_Translation> list = new ArrayList<Word_Translation>();
 		MainActivity.printDebug(1,"GET");
 		word.printWord();
@@ -105,9 +105,23 @@ public class Controleur_bd implements BD_rw{
 			String sortOrder = // language_to_column_Correspondance(word.getLanguage())+ " DESC";
 					// Mettre l'ordre alphabetique
 					null;
-			if(random)
+			switch(random){
+			case RANDOM : 
 				sortOrder = " RANDOM() ";
-
+				break;
+			case LANGUAGE_ASC :
+				sortOrder = " "+language_to_column_Correspondance(word.getLanguage())+ " ASC ";
+				break;
+			case STAMP_DESC :
+				sortOrder = " "+FeedEntry.COLUMN_NAME_TIMESTAMP+ " DESC ";
+				break;
+			case NULL : 
+				sortOrder = null;
+				break;
+			default : 
+				sortOrder = null;
+				break;
+			}
 			//
 			String nb = null;
 			if(nombre >=0)
@@ -225,22 +239,22 @@ public class Controleur_bd implements BD_rw{
 
 	@Override
 	public List<Word_Translation> getRandomEnglishWordNotTranslated(int nombre) {
-		String[] var = {"@fr","@en","","*"};
-		List<Word_Translation> retour = lireDepuisLaBase(var, true, nombre);
+		String[] var = {Word_Translation.FRENCH,Word_Translation.ENGLISH,"","%"};
+		List<Word_Translation> retour = lireDepuisLaBase(var, Order.RANDOM, nombre);
 		return retour;
 	}
 
 	@Override
 	public List<Word_Translation> getRandomFrenchWordNotTranslated(int nombre) {
-		String[] var = {"@fr","@en","*",""};
-		List<Word_Translation> retour = lireDepuisLaBase(var, true, nombre);
+		String[] var = {Word_Translation.FRENCH,Word_Translation.ENGLISH,"%",""};
+		List<Word_Translation> retour = lireDepuisLaBase(var, Order.RANDOM, nombre);
 		return retour;
 	}
 
 	@Override
 	public List<Word_Translation> getRandomPairOfWords(int number) {
-		String[] var = {"@fr","@en","*","*"};
-		List<Word_Translation> retour = lireDepuisLaBase(var, true, number);
+		String[] var = {Word_Translation.FRENCH,Word_Translation.ENGLISH,"%","%"};
+		List<Word_Translation> retour = lireDepuisLaBase(var, Order.RANDOM, number);
 		return retour;
 	}
 
@@ -379,7 +393,7 @@ public class Controleur_bd implements BD_rw{
 	@Override
 	public void showTable() {
 
-		List<Word_Translation> res = getWordFromTable(new Word_Translation("%", "%"), true, -1);
+		List<Word_Translation> res = getWordFromTable(new Word_Translation("%", "%"), Order.RANDOM, -1);
 		for (Word_Translation toto : res){
 			MainActivity.printDebug(1,"Id = "+toto.getId()+" 1-"+toto.getWord()+" 2-"+toto.getTraduction_of_word());
 		}

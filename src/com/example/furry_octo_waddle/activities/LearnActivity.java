@@ -21,6 +21,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
@@ -222,7 +223,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),true, -1);
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));

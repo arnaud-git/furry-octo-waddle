@@ -1,7 +1,7 @@
 *******************************
 *****    Bugs Noticed     *****
 *******************************
-- In Learn when you suppress the word in the first fragment, the app crashes.
+- In Learn when you suppress the word in the first fragment (without any swipe) the app crashes.
 - [FIXED] The fragments are not updated after a modification, we need to come back to the home menu.
 - The last fragment does not validate the answer in the activity 'Test'.
 
@@ -14,6 +14,8 @@
 *******************************
 - In the activity test, propose either the word or its translation.
 - In the activity test, give the choice to the user between word/translation/both.
+- In the activity test, let the user skip or obtain a hint.
+- Change TextView search in Translate_layout into a SearchView (implies knowledge of Cursor)
 - Add some features in the activity 'Test': success rate, timer, etc.
 
 

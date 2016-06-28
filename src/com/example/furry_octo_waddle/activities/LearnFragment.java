@@ -11,6 +11,7 @@ import android.widget.ViewSwitcher;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class LearnFragment extends Fragment {
@@ -41,7 +42,7 @@ public class LearnFragment extends Fragment {
 		TextView wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
 
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
-		List<Word_Translation> res = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", Integer.parseInt(words[2])),false,-1);
+		List<Word_Translation> res = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", Integer.parseInt(words[2])),Order.NULL,-1);
 		if(res.size()==1)
 			word_obj = res.get(0);
 		else 
