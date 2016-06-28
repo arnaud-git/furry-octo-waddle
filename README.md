@@ -15,6 +15,7 @@
 - In the activity test, propose either the word or its translation.
 - In the activity test, give the choice to the user between word/translation/both.
 - In the activity test, let the user skip or obtain a hint.
+- Change TextView search in Translate_layout into a SearchView (implies knowledge of Cursor)
 - Add some features in the activity 'Test': success rate, timer, etc.
 
 
