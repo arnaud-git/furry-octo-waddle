@@ -63,8 +63,8 @@ public class TestActivity extends ActionBarActivity {
 				currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 				editTestWord = currentLF.getEditTestWord();
 				editTestWord.setHint(currentLF.getCurrentWords()[1]);
-
-				editTestWord.setHintTextColor(Color.parseColor("#FF0033"));
+				
+				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
 				editTestWord.setTextColor(Color.parseColor("#FF0033"));
 				
 			}
