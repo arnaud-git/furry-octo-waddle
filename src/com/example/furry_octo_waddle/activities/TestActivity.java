@@ -3,49 +3,48 @@ package com.example.furry_octo_waddle.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.WindowManager;
 
-
-public class TestActivity extends FragmentActivity {
+public class TestActivity extends ActionBarActivity {
 
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
 	
+	FragmentPagerAdapter adapter;
+	TestFragment currentLF;
+	
+	Button answerButton;
+	EditText editTestWord;
+	
+	
 	public void onCreate(Bundle savedInstanceState) {
 		
-		Log.d("cc","zaboul12");
-
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_test);
-		
-		Log.d("cc","zaboul1");
 
 		fragments = getFragments();
 
 		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
 
-		Log.d("cc","zaboul2");
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
 
-
-		Log.d("cc","zaboul3");
-		//getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
-		
 	    pager.setOnTouchListener(new View.OnTouchListener() 
 	    {         
 	        @Override
@@ -54,6 +53,22 @@ public class TestActivity extends FragmentActivity {
 	        	return true; 
 	        }
 	     });
+
+		answerButton = (Button) findViewById(R.id.answer_button);
+		answerButton.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+				adapter = (FragmentPagerAdapter)pager.getAdapter();
+				currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
+				editTestWord = currentLF.getEditTestWord();
+				editTestWord.setHint(currentLF.getCurrentWords()[1]);
+
+				editTestWord.setHintTextColor(Color.parseColor("#FF0033"));
+				editTestWord.setTextColor(Color.parseColor("#FF0033"));
+				
+			}
+		});
 		
 	}
 

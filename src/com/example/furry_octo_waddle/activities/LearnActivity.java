@@ -5,12 +5,11 @@ import java.util.List;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +21,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnActivity extends FragmentActivity implements ViewPager.OnPageChangeListener {
+public class LearnActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
 	ViewPager pager;
 	FragmentStatePagerAdapter adapter;

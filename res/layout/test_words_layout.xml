@@ -9,7 +9,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
     	android:layout_height="match_parent"
-    	android:background="@color/yellow"	>
+    	android:background="@drawable/back"	>
 	    <TextView
 	        android:id="@+id/word"
 			android:layout_width="wrap_content"
@@ -17,9 +17,7 @@
         	android:layout_alignParentTop="true"
         	android:layout_centerHorizontal="true"
         	android:gravity="center"
-	        android:textSize="30sp"
-    		android:background="@color/yellow"
-			android:text = "mot!" />
+	        android:textSize="30sp" />
 
         <EditText
             android:id="@+id/test_word"
@@ -29,7 +27,7 @@
         	android:layout_centerHorizontal="true"
         	android:gravity="center"
 	   		android:textSize="30sp"
-	   		android:hint="trad!"/>
+	   		android:hint="..."/>
 	</RelativeLayout>
       
 </RelativeLayout>

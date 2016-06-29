@@ -9,4 +9,16 @@
 		    android:layout_height="wrap_content"
 		    android:layout_marginTop="60dp"
 		    android:layout_marginBottom="300dp"/>
+
+    <Button
+        android:id="@+id/answer_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginRight="3dp"
+        android:layout_marginTop="3dp"
+        android:background="@drawable/back"
+        android:text="@string/string_answer" />
+
 </RelativeLayout>
