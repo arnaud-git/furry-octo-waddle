@@ -1,8 +1,7 @@
 package com.example.furry_octo_waddle.activities;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,7 +10,7 @@ import android.widget.Toast;
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class AddActivity extends Activity{
+public class AddActivity extends ActionBarActivity{
 	
 	Button addButton;
 	EditText editWord, editWordTrad;
