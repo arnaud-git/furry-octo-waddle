@@ -78,4 +78,13 @@ public class TestFragment extends Fragment {
 
 	    return f;
 	}
+	
+	public String[] getCurrentWords() {
+		String[] ans = {word, wordTrans};
+		return ans;
+	}
+	
+	public EditText getEditTestWord() {
+		return etTrad;
+	}
 }

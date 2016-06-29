@@ -6,32 +6,31 @@
     android:paddingLeft="10dp"
     android:paddingRight="10dp" >
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/back" >
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/word"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/yellow" >
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@color/yellow"
+            android:gravity="center"
+            android:text="mot!"
+            android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/word"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:background="@color/yellow"
-                android:gravity="center"
-                android:text="mot!"
-                android:textSize="30sp" />
-
-            <EditText
-                android:id="@+id/test_word"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_centerHorizontal="true"
-                android:gravity="center"
-                android:hint="trad!"
-                android:textSize="30sp" />
-        </RelativeLayout>
+        <EditText
+            android:id="@+id/test_word"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:hint="..."
+            android:textSize="30sp" />
+    </RelativeLayout>
 
 </RelativeLayout>

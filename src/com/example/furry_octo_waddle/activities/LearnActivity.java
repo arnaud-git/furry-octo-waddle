@@ -5,11 +5,11 @@ import java.util.List;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -123,8 +123,9 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 			public void onClick(View arg0) {
 
 				//gets the Fragment displayed when the user clicks
+				int pos = pager.getCurrentItem();
 				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
+				currentLF = (LearnFragment) adapter.getItem(pos);
 
 				//get the current TextViews and EditTexts
 				TextView[] tv = getCurrentTv(currentLF);
@@ -135,18 +136,16 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
 				modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
 
-				//modify the word in the DB
-				//pager.notifyDataSetChanged(); --> refreshing the list of fragment..
-				//..but the order and the position have to remain the same
-				
 				//TODO Suppress the 2 lines below and replace word_T by currentLF.getCurrentWord_T()
 				int id_word=currentLF.getCurrentWord_T().getId();
 				Word_Translation word_T= new Word_Translation(et[0].getText().toString(),et[1].getText().toString(),id_word);
 				MainActivity.cbd.modifyWordbyId(word_T);
-				//copy the words from the EditTexts in the TextViews
+				
 				/*TODO *********HAS TO BE MODIFIED: DISPLAY THE MODIFIED WORDS IN THE DB********/
-				tv[0].setText(et[0].getText().toString());
-				tv[1].setText(et[1].getText().toString());
+				currentLF.setCurrentWord_T(word_T);
+				fragments.set(pos, currentLF);
+				pageAdapter.notifyDataSetChanged();
+				//does not work the same way as Delete... :'(
 			}
 		});
 		try{
@@ -197,14 +196,10 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	@Override
 	/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 	public void onPageScrollStateChanged(int arg0) {
-		Log.d("--->","zoubal1");
 		adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-		Log.d("--->","zoubal");
 		currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
-		Log.d("--->","zoubal2");
 		TextView[] tv = getCurrentTv(currentLF);
 		EditText[] et = getCurrentEt(currentLF);
-		Log.d("--->","zoubal3");
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
 		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);		
 	}
@@ -260,6 +255,10 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		public Fragment getItem(int position) {
 			return this.fragments.get(position);
 		}
+		
+		public void setItem(int position, Fragment newFragment) {
+			this.fragments.set(position, newFragment);
+		}
 
 		@Override
 		public int getCount() {
@@ -268,7 +267,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		
 		@Override
 		public int getItemPosition(Object object) {
-		    return PagerAdapter.POSITION_NONE;
+		    return POSITION_NONE;
 		}
 	}
 }
