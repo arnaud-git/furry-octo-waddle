@@ -30,16 +30,16 @@ public class TestActivity extends ActionBarActivity {
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
-	
+
 	FragmentPagerAdapter adapter;
 	TestFragment currentLF;
-	
+
 	Button answerButton;
 	EditText editTestWord;
-	
-	
+
+
 	public void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.test_layout);
@@ -51,23 +51,15 @@ public class TestActivity extends ActionBarActivity {
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
 
-	    pager.setOnTouchListener(new View.OnTouchListener() 
-	    {         
-	        @Override
-	        public boolean onTouch(View v, MotionEvent event)
-	        { 
-	        	return true; 
-	        }
-	     });
-	    try{
-			ActionBar actionBar = getSupportActionBar();
-			actionBar.setSubtitle(R.string.string_test);
-			actionBar.setHomeButtonEnabled(true);			
-		}
-		catch(Exception e){
-			MainActivity.printDebug(2, e.getMessage());
-		}
-	    answerButton = (Button) findViewById(R.id.answer_button);
+		pager.setOnTouchListener(new View.OnTouchListener() 
+		{         
+			@Override
+			public boolean onTouch(View v, MotionEvent event)
+			{ 
+				return true; 
+			}
+		});		
+		answerButton = (Button) findViewById(R.id.answer_button);
 		answerButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -76,26 +68,13 @@ public class TestActivity extends ActionBarActivity {
 				currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 				editTestWord = currentLF.getEditTestWord();
 				editTestWord.setHint(currentLF.getCurrentWords()[1]);
-				
+
 				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
 				editTestWord.setTextColor(Color.parseColor("#FF0033"));
-				
+
 			}
 		});
 	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		MainActivity.printDebug(2, "Lamsg");
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
-
 
 	private class MyPageAdapter extends FragmentPagerAdapter {
 		private List<Fragment> fragments;
@@ -114,7 +93,7 @@ public class TestActivity extends ActionBarActivity {
 			return this.fragments.size();
 		}
 	}
-	
+
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
@@ -132,7 +111,7 @@ public class TestActivity extends ActionBarActivity {
 
 		return fList;
 	}
-	
+
 	public static ViewPager getPager() {
 		return pager;
 	}

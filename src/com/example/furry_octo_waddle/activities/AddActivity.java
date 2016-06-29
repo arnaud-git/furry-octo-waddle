@@ -52,26 +52,6 @@ public class AddActivity extends ActionBarActivity{
 				editWord.getText().clear();
 				editWordTrad.getText().clear();				
 			}
-		});
-		try{
-			ActionBar actionBar = getSupportActionBar();
-			actionBar.setSubtitle(R.string.string_add_words);
-			actionBar.setHomeButtonEnabled(true);			
-		}
-		catch(Exception e){
-			MainActivity.printDebug(2, e.getMessage());
-		}
-	
-	}
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		MainActivity.printDebug(2, "Lamsg");
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
+		});		
 	}
 }

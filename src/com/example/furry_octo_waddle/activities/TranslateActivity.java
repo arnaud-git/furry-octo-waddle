@@ -36,14 +36,6 @@ public class TranslateActivity extends ActionBarActivity{
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.translate_layout);
-		try{
-			ActionBar actionBar = getSupportActionBar();
-			actionBar.setSubtitle(R.string.string_translate);
-			actionBar.setHomeButtonEnabled(true);	
-		}
-		catch(Exception e){
-			MainActivity.printDebug(2, e.getMessage());
-		}
 		listWords();
 	}
 

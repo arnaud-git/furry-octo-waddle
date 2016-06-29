@@ -25,7 +25,7 @@
         
         <activity
 			android:name="com.example.furry_octo_waddle.activities.LearnActivity"
-			android:label="@string/app_name"
+			android:label="@string/string_learn"
 			android:windowSoftInputMode="adjustResize"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data
@@ -35,7 +35,7 @@
  		
         <activity
 			android:name="com.example.furry_octo_waddle.activities.AddActivity"
-			android:label="@string/app_name"
+			android:label="@string/string_add"
 			android:windowSoftInputMode="adjustResize"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data
@@ -46,7 +46,7 @@
  		
         <activity
 			android:name="com.example.furry_octo_waddle.activities.TestActivity"
-			android:label="@string/app_name"
+			android:label="@string/string_test"
 			android:windowSoftInputMode="stateAlwaysVisible"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data
@@ -57,7 +57,7 @@
  		
         <activity
 			android:name="com.example.furry_octo_waddle.activities.TranslateActivity"
-			android:label="@string/app_name" 
+			android:label="@string/string_translate" 
 			android:windowSoftInputMode="adjustResize"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data

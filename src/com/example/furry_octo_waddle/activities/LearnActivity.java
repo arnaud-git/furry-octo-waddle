@@ -147,15 +147,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				pageAdapter.notifyDataSetChanged();
 				//does not work the same way as Delete... :'(
 			}
-		});
-		try{
-			ActionBar actionBar = getSupportActionBar();
-			actionBar.setSubtitle(R.string.string_learn);
-			actionBar.setHomeButtonEnabled(true);			
-		}
-		catch(Exception e){
-			MainActivity.printDebug(2, e.getMessage());
-		}
+		});	
 	}
 
 
@@ -232,17 +224,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		return fList;
 	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		MainActivity.printDebug(2, "Lamsg");
-	    switch (item.getItemId()) {
-	    // Respond to the action bar's Up/Home button
-	    case android.R.id.home:
-	        NavUtils.navigateUpFromSameTask(this);
-	        return true;
-	    }
-	    return super.onOptionsItemSelected(item);
-	}
 	
 	private class MyPageAdapter extends FragmentStatePagerAdapter {
 		private List<Fragment> fragments;
