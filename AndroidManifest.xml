@@ -45,6 +45,17 @@
  		</activity>
  		
         <activity
+			android:name="com.example.furry_octo_waddle.activities.ModifyActivity"
+			android:label="@string/string_translate"
+			android:windowSoftInputMode="adjustResize"
+			android:parentActivityName="com.example.furry_octo_waddle.activities.TranslateActivity" >
+			<meta-data
+            	android:name="android.support.PARENT_ACTIVITY"
+            	android:value="com.example.furry_octo_waddle.activities.TranslateActivity" />         
+ 		          
+ 		</activity>
+        
+        <activity
 			android:name="com.example.furry_octo_waddle.activities.TestActivity"
 			android:label="@string/string_test"
 			android:windowSoftInputMode="stateAlwaysVisible"

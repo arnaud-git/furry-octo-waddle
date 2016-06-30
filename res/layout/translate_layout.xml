@@ -32,43 +32,4 @@
             android:layout_below="@+id/search" />
     </RelativeLayout>
 
-    <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fillViewport="true"
-        android:isScrollContainer="false" >
-
-        <RelativeLayout
-            android:id="@+id/modif_word"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-
-           <include
-               android:id="@+id/viewpager" 
-               layout="@layout/word_layout"
-               android:layout_height="wrap_content"
-               android:layout_width="match_parent"
-               android:layout_marginTop="50dp"
-               android:layout_marginBottom="35dp"/>
-
-            <LinearLayout
-                android:id="@+id/buttonsLearn"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_below="@+id/viewpager"
-                android:layout_marginBottom="50dp"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/add_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/back"
-                    android:text="@string/string_update" />
-            </LinearLayout>
-        </RelativeLayout>
-    </ScrollView>
-
 </RelativeLayout>

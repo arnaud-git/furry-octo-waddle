@@ -6,6 +6,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -41,7 +42,6 @@ public class TranslateActivity extends ActionBarActivity{
 
 
 	private void listWords(){
-		findViewById(R.id.modif_word).setVisibility(View.GONE);
 		findViewById(R.id.listlay).setVisibility(View.VISIBLE);
 		TextView search_text = (TextView) findViewById(R.id.search);
 		search_text.setSelectAllOnFocus(true);
@@ -51,7 +51,9 @@ public class TranslateActivity extends ActionBarActivity{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				word_obj = (Word_Translation) lstView.getAdapter().getItem(position);
-				writeWord();			
+				Intent i = new Intent(TranslateActivity.this,ModifyActivity.class);
+				i.putExtra("word_obj", word_obj.getId());
+				startActivity(i);
 			}
 		});
 		search_text.addTextChangedListener(new TextWatcher() {
@@ -105,69 +107,5 @@ public class TranslateActivity extends ActionBarActivity{
 				android.R.layout.simple_list_item_1, list);
 		lstView.setAdapter(adapter);
 	}
-	private void writeWord(){
-		modification =true;
-		findViewById(R.id.modif_word).setVisibility(View.VISIBLE);
-		findViewById(R.id.listlay).setVisibility(View.GONE);
-		view_of_the_word(1);
-		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
 
-		word_obj.printWord();
-		MainActivity.printDebug(2, word_obj.getWord());
-		editWord.setText(word_obj.getWord());
-		editWordTrans.setText(word_obj.getTraduction_of_word());
-		editWordTrans.requestFocus();
-		//editWordTrans.setSelection(editWordTrans.getText().length());
-		addButton = (Button)findViewById(R.id.add_button);
-		addButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				word = editWord.getText().toString();
-				wordTrad = editWordTrans.getText().toString();
-
-				//create the new object with the typed words
-				//save the new object in the database
-				// Will be better to put the languages in the inputs
-				word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
-
-				MainActivity.cbd.modifyWordbyId(word_obj);
-
-				Toast.makeText(TranslateActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
-				editWord.getText().clear();
-				editWordTrans.getText().clear();		
-				listWords();
-			}
-		});
-	}
-
-	@Override  
-	public boolean onOptionsItemSelected(MenuItem item) {  
-		switch (item.getItemId()) {  
-		case android.R.id.home:
-			MainActivity.printDebug(2, "modification : " +modification);
-			if(modification){
-				listWords();
-				return true;
-			}else{
-				MainActivity.printDebug(2, "finish: " +modification);
-				finish();  
-			}
-			break;  
-		}  
-		return false;  
-	}  
-	
-	private void view_of_the_word(int i){
-		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
-		TextView tvWord = (TextView) findViewById(R.id.tvWord);
-		TextView tvWordTrans = (TextView) findViewById(R.id.tvWordTrans);
-		editWord.setVisibility(View.VISIBLE);
-		editWordTrans.setVisibility(View.VISIBLE);
-		
-		tvWord.setVisibility(View.GONE);
-		tvWordTrans.setVisibility(View.GONE);
-	}
 }
