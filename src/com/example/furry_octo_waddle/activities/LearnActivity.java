@@ -27,7 +27,7 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
 
 	ViewPager pager;
-	FragmentStatePagerAdapter adapter;
+	//FragmentStatePagerAdapter adapter;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
 
@@ -45,17 +45,23 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		buttonSave = (Button) findViewById(R.id.buttonSave);
 		buttonModify = (Button) findViewById(R.id.buttonModify);
-		
+
 
 		//gets a list of Fragment from the DB
 		fragments = getFragments();
+		
 		//sets the pageAdapter with the list of Fragment
 		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
 
 		//gets pager
 		pager = (ViewPager)findViewById(R.id.viewpager);
+		
 		//links the pager to the pageAdapter
 		pager.setAdapter(pageAdapter);
+		
+		//Get the first current LF
+		currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
+		
 		//detect the scrolling to reinitialize the buttons and the views of the current Activity
 		pager.setOnPageChangeListener(this);
 		MainActivity.printDebug(5," ezfez "+findViewById(R.id.buttonsLearn).getHeight());
@@ -65,11 +71,11 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				//buttonDelete deletes the words of the current fragment from the database
 				Toast toast = Toast.makeText(getApplicationContext(), "Ask if sure and delete the word from the DB", Toast.LENGTH_LONG);
 				toast.show();
-				//TODO Suppress the 2 lines below and replace word_T by currentLF.getCurrentWord_T()
-				int id_word=currentLF.getCurrentWord_T().getId();
-				Word_Translation word_T= new Word_Translation(currentLF.getCurrentWord_T().getWord(),currentLF.getCurrentWord_T().getTraduction_of_word(),id_word);
-				MainActivity.cbd.deleteWord(word_T);
-				//TODO refresh the pagerAdapter and the words displayed
+
+				//Deletes in the db
+				MainActivity.cbd.deleteWordbyIndex(currentLF.getCurrentWord_T().getId());
+				
+				//Refreshes pager
 				int pos = pager.getCurrentItem();
 				fragments.remove(pos);
 				pageAdapter.notifyDataSetChanged();
@@ -79,11 +85,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonModify.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-				
-				//get the Fragment displayed when the user clicks
-				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
-
 				//get the current TextViews and EditTexts
 				TextView[] tv = getCurrentTv(currentLF);
 				EditText[] et = getCurrentEt(currentLF);
@@ -103,11 +104,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonCancel.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-
-				//gets the Fragment displayed when the user clicks
-				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-				currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
-
 				//get the current TextViews and EditTexts
 				TextView[] tvWords = getCurrentTv(currentLF);
 				EditText[] etWords = getCurrentEt(currentLF);
@@ -122,12 +118,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonSave.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
-
-				//gets the Fragment displayed when the user clicks
 				int pos = pager.getCurrentItem();
-				adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-				currentLF = (LearnFragment) adapter.getItem(pos);
-
 				//get the current TextViews and EditTexts
 				TextView[] tv = getCurrentTv(currentLF);
 				EditText[] et = getCurrentEt(currentLF);
@@ -137,16 +128,15 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
 				modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
 
-				//TODO Suppress the 2 lines below and replace word_T by currentLF.getCurrentWord_T()
+				//Modifies in the db
 				int id_word=currentLF.getCurrentWord_T().getId();
 				Word_Translation word_T= new Word_Translation(et[0].getText().toString(),et[1].getText().toString(),id_word);
 				MainActivity.cbd.modifyWordbyId(word_T);
 				
-				/*TODO *********HAS TO BE MODIFIED: DISPLAY THE MODIFIED WORDS IN THE DB********/
+				//Refreshes pager
 				currentLF.setCurrentWord_T(word_T);
 				fragments.set(pos, currentLF);
 				pageAdapter.notifyDataSetChanged();
-				//does not work the same way as Delete... :'(
 			}
 		});	
 	}
@@ -154,7 +144,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 	/**Set the visibility of the EditTexts and the TextViews to the given arguments*/
 	protected static void modifyTextViewsVisibility(TextView tv, int tvV, TextView tvTrans,
-								int tvTV, EditText et, int etV, EditText etTrans, int etTV) {
+			int tvTV, EditText et, int etV, EditText etTrans, int etTV) {
 		tv.setVisibility(tvV);
 		tvTrans.setVisibility(tvTV);
 		et.setVisibility(etV);
@@ -163,7 +153,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 	/**Set the visibility of the buttons to the given arguments*/
 	protected static void modifyButtonsVisibility(Button buttonDelete, int buttonDeleteV,
-								Button buttonCancel, int buttonCancelV, Button buttonSave, int buttonSaveV, Button buttonModify, int buttonModifyV){
+			Button buttonCancel, int buttonCancelV, Button buttonSave, int buttonSaveV, Button buttonModify, int buttonModifyV){
 		buttonDelete.setVisibility(buttonDeleteV);
 		buttonCancel.setVisibility(buttonCancelV);
 		buttonSave.setVisibility(buttonSaveV);
@@ -189,8 +179,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	@Override
 	/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 	public void onPageScrollStateChanged(int arg0) {
-		adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-		currentLF = (LearnFragment) adapter.getItem(pager.getCurrentItem());
+		//adapter = (FragmentStatePagerAdapter)pager.getAdapter();
+		currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
 		TextView[] tv = getCurrentTv(currentLF);
 		EditText[] et = getCurrentEt(currentLF);
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
@@ -224,8 +214,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 		return fList;
 	}
-	
-	
+
+
 	private class MyPageAdapter extends FragmentStatePagerAdapter {
 		private List<Fragment> fragments;
 
@@ -237,7 +227,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		public Fragment getItem(int position) {
 			return this.fragments.get(position);
 		}
-		
+
 		public void setItem(int position, Fragment newFragment) {
 			this.fragments.set(position, newFragment);
 		}
@@ -246,10 +236,10 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		public int getCount() {
 			return this.fragments.size();
 		}
-		
+
 		@Override
 		public int getItemPosition(Object object) {
-		    return POSITION_NONE;
+			return POSITION_NONE;
 		}
 	}
 }
