@@ -3,7 +3,7 @@
 *******************************
 - [FIXED] In Learn when you suppress the word in the first fragment (without any swipe) the app crashes.
 - [FIXED] The fragments are not updated after a modification, we need to come back to the home menu.
-- The last fragment does not validate the answer in the activity 'Test'.
+- [1/2 FIXED] The last fragment does not validate the answer in the activity 'Test'.
 
 
 

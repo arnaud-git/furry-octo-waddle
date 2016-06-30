@@ -41,25 +41,26 @@ public class TestFragment extends Fragment {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-				
+					int after) {				
 			}
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				// TODO Auto-generated method stub
 				if(Word_Translation.matches(editWordTrans.getText().toString(),wordTrans)) {
-					pager.setCurrentItem(pager.getCurrentItem() + 1);
+					MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
+					if(pager.getCurrentItem()+1<pager.getAdapter().getCount())
+						pager.setCurrentItem(pager.getCurrentItem() + 1);
+					
+					//TODO print results
+					else 
+						getActivity().finish();
 				}
 				
 			}
 
 			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				
+			public void afterTextChanged(Editable s) {			
 			}
 			
 		});
