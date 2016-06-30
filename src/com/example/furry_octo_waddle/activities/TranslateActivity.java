@@ -25,7 +25,7 @@ import android.widget.Toast;
 public class TranslateActivity extends ActionBarActivity{
 
 	Button addButton;
-	EditText editWord, editWordTrad;
+	EditText editWord, editWordTrans;
 	String word, wordTrad,s_query;
 	Word_Translation word_obj;
 	CheckBox checkBox ;
@@ -109,20 +109,23 @@ public class TranslateActivity extends ActionBarActivity{
 		modification =true;
 		findViewById(R.id.modif_word).setVisibility(View.VISIBLE);
 		findViewById(R.id.listlay).setVisibility(View.GONE);
+		view_of_the_word(1);
 		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrad = (EditText) findViewById(R.id.editWordTrans);
+		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
 
 		word_obj.printWord();
 		MainActivity.printDebug(2, word_obj.getWord());
 		editWord.setText(word_obj.getWord());
-		editWordTrad.setText(word_obj.getTraduction_of_word());
+		editWordTrans.setText(word_obj.getTraduction_of_word());
+		editWordTrans.requestFocus();
+		//editWordTrans.setSelection(editWordTrans.getText().length());
 		addButton = (Button)findViewById(R.id.add_button);
 		addButton.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View arg0) {
 				word = editWord.getText().toString();
-				wordTrad = editWordTrad.getText().toString();
+				wordTrad = editWordTrans.getText().toString();
 
 				//create the new object with the typed words
 				//save the new object in the database
@@ -133,7 +136,7 @@ public class TranslateActivity extends ActionBarActivity{
 
 				Toast.makeText(TranslateActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
 				editWord.getText().clear();
-				editWordTrad.getText().clear();		
+				editWordTrans.getText().clear();		
 				listWords();
 			}
 		});
@@ -155,4 +158,16 @@ public class TranslateActivity extends ActionBarActivity{
 		}  
 		return false;  
 	}  
+	
+	private void view_of_the_word(int i){
+		editWord = (EditText) findViewById(R.id.editWord);
+		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
+		TextView tvWord = (TextView) findViewById(R.id.tvWord);
+		TextView tvWordTrans = (TextView) findViewById(R.id.tvWordTrans);
+		editWord.setVisibility(View.VISIBLE);
+		editWordTrans.setVisibility(View.VISIBLE);
+		
+		tvWord.setVisibility(View.GONE);
+		tvWordTrans.setVisibility(View.GONE);
+	}
 }

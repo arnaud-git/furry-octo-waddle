@@ -14,51 +14,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" >
 
-                <TextView
-                    android:id="@+id/textViewAdd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/back"
-                    android:text="@string/string_add_words"
-                    android:textSize="35sp" />
-
-                <RelativeLayout
+                <include layout="@layout/word_layout"
                     android:id="@+id/viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_below="@+id/textViewAdd"
-                    android:layout_marginBottom="160dp"
-                    android:layout_marginTop="180dp"
-                    android:background="@drawable/back"
-                    android:orientation="vertical" >
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginBottom="35dp"
+                    android:orientation="vertical" />
 
-                    <EditText
-                        android:id="@+id/editWord"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
-                        android:hint="New Word !"
-                        android:inputType="text"
-                        android:textSize="30sp" />
-
-                    <EditText
-                        android:id="@+id/editWordTrans"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_below="@id/editWord"
-                        android:layout_centerHorizontal="true"
-                        android:gravity="center"
-                        android:hint="Translation"
-                        android:inputType="text"
-                        android:textSize="30sp" >
-                    </EditText>
-                </RelativeLayout>
 
                 <LinearLayout
                     android:id="@+id/buttonsLearn"

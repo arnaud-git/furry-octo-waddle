@@ -115,4 +115,5 @@ public class TestActivity extends ActionBarActivity {
 	public static ViewPager getPager() {
 		return pager;
 	}
+	
 }

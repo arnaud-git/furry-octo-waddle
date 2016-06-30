@@ -37,7 +37,7 @@ public class LearnFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
 		
-		View v = inflater.inflate(R.layout.learn_words_layout, container, false);
+		View v = inflater.inflate(R.layout.word_layout, container, false);
 		TextView word = (TextView)v.findViewById(R.id.tvWord);
 		TextView wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
 

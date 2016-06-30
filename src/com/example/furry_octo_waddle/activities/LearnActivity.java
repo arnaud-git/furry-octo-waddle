@@ -45,6 +45,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonCancel = (Button) findViewById(R.id.buttonCancel);
 		buttonSave = (Button) findViewById(R.id.buttonSave);
 		buttonModify = (Button) findViewById(R.id.buttonModify);
+		
 
 		//gets a list of Fragment from the DB
 		fragments = getFragments();
@@ -57,7 +58,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		pager.setAdapter(pageAdapter);
 		//detect the scrolling to reinitialize the buttons and the views of the current Activity
 		pager.setOnPageChangeListener(this);
-
+		MainActivity.printDebug(5," ezfez "+findViewById(R.id.buttonsLearn).getHeight());
 		buttonDelete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -179,8 +180,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 	/**@returns the TextViews of the current activity*/
 	protected EditText[] getCurrentEt(LearnFragment currentLF) {
-		et = (EditText) currentLF.getView().findViewById(R.id.etWord);
-		etTrans = (EditText) currentLF.getView().findViewById(R.id.etWordTrans);
+		et = (EditText) currentLF.getView().findViewById(R.id.editWord);
+		etTrans = (EditText) currentLF.getView().findViewById(R.id.editWordTrans);
 		EditText[] ans = {et,etTrans};
 		return ans;
 	}

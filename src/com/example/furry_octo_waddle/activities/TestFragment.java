@@ -19,7 +19,7 @@ public class TestFragment extends Fragment {
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	String word, wordTrans;
-	EditText etTrad;
+	EditText editWordTrans;
 	TextView tvWord;
 	View v;
 	ViewPager pager;
@@ -28,17 +28,16 @@ public class TestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
         Bundle savedInstanceState) {
 		
-		v = inflater.inflate(R.layout.test_words_layout, container, false);
-		tvWord = (TextView)v.findViewById(R.id.word);
-		etTrad = (EditText)v.findViewById(R.id.test_word);
-
+		v = inflater.inflate(R.layout.word_layout, container, false);
+		view_of_the_word(0);
+		MainActivity.printDebug(2, "msg");
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
 		pager = TestActivity.getPager();
 		
 		tvWord.setText(words[0]);
 		wordTrans = words[1];
 		
-		etTrad.addTextChangedListener(new TextWatcher() {
+		editWordTrans.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
@@ -51,7 +50,7 @@ public class TestFragment extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-				if(Word_Translation.matches(etTrad.getText().toString(),wordTrans)) {
+				if(Word_Translation.matches(editWordTrans.getText().toString(),wordTrans)) {
 					pager.setCurrentItem(pager.getCurrentItem() + 1);
 				}
 				
@@ -85,6 +84,18 @@ public class TestFragment extends Fragment {
 	}
 	
 	public EditText getEditTestWord() {
-		return etTrad;
+		return editWordTrans;
+	}
+	
+	private void view_of_the_word(int i){
+		EditText editWord = (EditText) v.findViewById(R.id.editWord);
+		editWordTrans = (EditText) v.findViewById(R.id.editWordTrans);
+		tvWord = (TextView) v.findViewById(R.id.tvWord);
+		TextView tvWordTrans = (TextView) v.findViewById(R.id.tvWordTrans);
+		editWord.setVisibility(View.GONE);
+		editWordTrans.setVisibility(View.VISIBLE);
+		editWordTrans.setHint("...");
+		tvWord.setVisibility(View.VISIBLE);
+		tvWordTrans.setVisibility(View.GONE);
 	}
 }
