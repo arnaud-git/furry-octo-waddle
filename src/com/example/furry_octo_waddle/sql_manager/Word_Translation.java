@@ -6,6 +6,7 @@ import android.util.Log;
 
 public class Word_Translation {
 	/** identifiant in the database*/
+	public static final String WORD_ID = "word_id";
 	private int id = 0 ;
 
 	/** 1- The word 

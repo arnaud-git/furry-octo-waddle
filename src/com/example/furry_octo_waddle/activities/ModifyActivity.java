@@ -50,7 +50,7 @@ public class ModifyActivity extends ActionBarActivity{
 	}
 	
 	private void writeWord(){
-		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", getIntent().getExtras().getInt("word_obj")),Order.NULL,1);
+		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", getIntent().getExtras().getInt(Word_Translation.WORD_ID)),Order.NULL,1);
 		if(list.size()>0)
 			word_obj=list.get(0);
 		MainActivity.printDebug(2, word_obj.getWord());

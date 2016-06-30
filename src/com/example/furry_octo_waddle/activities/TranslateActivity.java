@@ -52,7 +52,7 @@ public class TranslateActivity extends ActionBarActivity{
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 				word_obj = (Word_Translation) lstView.getAdapter().getItem(position);
 				Intent i = new Intent(TranslateActivity.this,ModifyActivity.class);
-				i.putExtra("word_obj", word_obj.getId());
+				i.putExtra(Word_Translation.WORD_ID, word_obj.getId());
 				startActivity(i);
 			}
 		});
