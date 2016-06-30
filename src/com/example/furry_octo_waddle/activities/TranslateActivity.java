@@ -6,15 +6,19 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -107,5 +111,24 @@ public class TranslateActivity extends ActionBarActivity{
 				android.R.layout.simple_list_item_1, list);
 		lstView.setAdapter(adapter);
 	}
+	private class Words_Array_Adapter extends ArrayAdapter<Word_Translation> {
+		private final Context context;
+		private final  List<Word_Translation> values;
 
+		public Words_Array_Adapter(Context context, int resource, List<Word_Translation> objects) {
+			super(context, resource, objects);
+			values = objects;
+			this.context = context;
+		}
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View rowView = inflater.inflate(R.layout.row_layout, parent, false);
+			TextView textView = (TextView) rowView.findViewById(R.id.label);
+			TextView textView_t= (TextView) rowView.findViewById(R.id.label_t);
+			textView.setText(values.get(position).getWord());
+			textView_t.setText(values.get(position).getTraduction_of_word());
+			return rowView;
+		}
+	}
 }
