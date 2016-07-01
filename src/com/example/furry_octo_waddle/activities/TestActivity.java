@@ -79,6 +79,8 @@ public class TestActivity extends ActionBarActivity {
 
 				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
 				editTestWord.setTextColor(Color.parseColor("#FF0033"));
+				
+				pager.setCurrentItem(pager.getAdapter().getCount() - 1);
 			}
 		});
 	}

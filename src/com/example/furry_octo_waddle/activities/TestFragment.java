@@ -65,6 +65,7 @@ public class TestFragment extends Fragment implements Serializable{
 					else {
 						Intent i = new Intent(getActivity(), TestResultsActivity.class);
 						i.putExtra("score", (100*TestActivity.getNumWordsFound())/pager.getAdapter().getCount());
+						getActivity().finish();
 						startActivity(i);
 					}
 					TestActivity.setAnswerClicked(false);
