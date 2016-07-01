@@ -36,6 +36,9 @@ public class TestActivity extends ActionBarActivity {
 
 	Button answerButton;
 	EditText editTestWord;
+	
+	static boolean answerClicked = false;
+	static int numWordsFound;
 
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class TestActivity extends ActionBarActivity {
 
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
+		
+		setAnswerClicked(false);
 
 		pager.setOnTouchListener(new View.OnTouchListener() 
 		{         
@@ -67,11 +72,13 @@ public class TestActivity extends ActionBarActivity {
 				adapter = (FragmentPagerAdapter)pager.getAdapter();
 				currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 				editTestWord = currentLF.getEditTestWord();
+				editTestWord.setText("");
 				editTestWord.setHint(currentLF.getCurrentWords()[1]);
+				
+				setAnswerClicked(true);
 
 				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
 				editTestWord.setTextColor(Color.parseColor("#FF0033"));
-
 			}
 		});
 	}
@@ -116,4 +123,19 @@ public class TestActivity extends ActionBarActivity {
 		return pager;
 	}
 	
+	public static void setAnswerClicked(boolean clickedOrNot) {
+		answerClicked = clickedOrNot;
+	}
+	
+	public static boolean getAnswerClicked() {
+		return answerClicked;
+	}
+	
+	public static void incrementNumWordsFound(){
+		numWordsFound++;
+	}
+	
+	public static int getNumWordsFound(){
+		return numWordsFound;
+	}
 }

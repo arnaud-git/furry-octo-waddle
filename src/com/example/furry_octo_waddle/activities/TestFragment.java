@@ -1,21 +1,24 @@
 package com.example.furry_octo_waddle.activities;
 
-import com.example.furry_octo_waddle.R;
-import com.example.furry_octo_waddle.sql_manager.Word_Translation;
+import java.io.Serializable;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class TestFragment extends Fragment {
+import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation;
+
+public class TestFragment extends Fragment implements Serializable{
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	String word, wordTrans;
@@ -47,16 +50,25 @@ public class TestFragment extends Fragment {
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
+				
 				if(Word_Translation.matches(editWordTrans.getText().toString(),wordTrans)) {
-					MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
+					
+					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
+					
+					if(!TestActivity.getAnswerClicked())
+						TestActivity.incrementNumWordsFound();
+					
 					if(pager.getCurrentItem()+1<pager.getAdapter().getCount())
 						pager.setCurrentItem(pager.getCurrentItem() + 1);
 					
 					//TODO print results
-					else 
-						getActivity().finish();
+					else {
+						Intent i = new Intent(getActivity(), TestResultsActivity.class);
+						i.putExtra("score", (100*TestActivity.getNumWordsFound())/pager.getAdapter().getCount());
+						startActivity(i);
+					}
+					TestActivity.setAnswerClicked(false);
 				}
-				
 			}
 
 			@Override

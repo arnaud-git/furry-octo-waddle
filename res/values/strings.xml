@@ -15,5 +15,6 @@
     <string name="string_add">Add it!</string>
     <string name="string_update">Update</string>
     <string name="string_answer">Ans</string>
+    <string name="string_results">Results</string>
 
 </resources>
