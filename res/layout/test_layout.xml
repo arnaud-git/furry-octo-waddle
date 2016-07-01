@@ -30,6 +30,18 @@
         android:layout_marginTop="5dp"
         android:background="@drawable/back"
         android:text="@string/string_answer" />
+
+    <TextView
+        android:id="@+id/liveScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/answer_button"
+        android:layout_alignBottom="@+id/answer_button"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="20dp"
+        android:text="12/23"
+        android:textSize="30sp" />
+
 	</RelativeLayout>
 	</ScrollView>
 </RelativeLayout>

@@ -19,6 +19,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
@@ -80,7 +81,7 @@ public class TestActivity extends ActionBarActivity {
 				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
 				editTestWord.setTextColor(Color.parseColor("#FF0033"));
 				
-				pager.setCurrentItem(pager.getAdapter().getCount() - 1);
+				//pager.setCurrentItem(pager.getAdapter().getCount() - 1);
 			}
 		});
 	}

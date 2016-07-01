@@ -23,9 +23,11 @@ public class TestFragment extends Fragment implements Serializable{
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	String word, wordTrans;
 	EditText editWordTrans;
-	TextView tvWord;
+	TextView tvWord, liveScoreTextView;
 	View v;
 	ViewPager pager;
+	String liveScore;
+	int listLength;
 	
 	@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, 
@@ -39,6 +41,12 @@ public class TestFragment extends Fragment implements Serializable{
 		
 		tvWord.setText(words[0]);
 		wordTrans = words[1];
+		
+		listLength = pager.getAdapter().getCount();
+		
+		liveScoreTextView = (TextView) getActivity().findViewById(R.id.liveScore);
+		liveScore = "0/" + String.valueOf(listLength);
+		liveScoreTextView.setText(liveScore);
 		
 		editWordTrans.addTextChangedListener(new TextWatcher() {
 
@@ -68,6 +76,8 @@ public class TestFragment extends Fragment implements Serializable{
 						getActivity().finish();
 						startActivity(i);
 					}
+					liveScore = String.valueOf(TestActivity.getNumWordsFound()) + "/" + String.valueOf(listLength);
+					liveScoreTextView.setText(liveScore);
 					TestActivity.setAnswerClicked(false);
 				}
 			}
