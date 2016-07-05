@@ -56,6 +56,7 @@ public class TestActivity extends ActionBarActivity {
 		pager.setAdapter(pageAdapter);
 		
 		setAnswerClicked(false);
+		numWordsFound = 0;
 
 		pager.setOnTouchListener(new View.OnTouchListener() 
 		{         

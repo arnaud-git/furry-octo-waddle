@@ -45,7 +45,7 @@ public class TestFragment extends Fragment implements Serializable{
 		listLength = pager.getAdapter().getCount();
 		
 		liveScoreTextView = (TextView) getActivity().findViewById(R.id.liveScore);
-		liveScore = "0/" + String.valueOf(listLength);
+		liveScore = "0/0";
 		liveScoreTextView.setText(liveScore);
 		
 		editWordTrans.addTextChangedListener(new TextWatcher() {
@@ -76,7 +76,7 @@ public class TestFragment extends Fragment implements Serializable{
 						getActivity().finish();
 						startActivity(i);
 					}
-					liveScore = String.valueOf(TestActivity.getNumWordsFound()) + "/" + String.valueOf(listLength);
+					liveScore = String.valueOf(TestActivity.getNumWordsFound()) + "/" + String.valueOf(pager.getCurrentItem());
 					liveScoreTextView.setText(liveScore);
 					TestActivity.setAnswerClicked(false);
 				}
