@@ -343,7 +343,7 @@ public class Controleur_bd implements BD_rw{
 		word.printWord();
 		MainActivity.printDebug(1, "DELETE");
 		supprimerDeLaBase(word);
-		showTable();
+		//showTable();
 	}
 
 	@Override
@@ -352,7 +352,7 @@ public class Controleur_bd implements BD_rw{
 		word.printWord();
 		modifierDansLaBase(word);
 		MainActivity.printDebug(1, "MODIFY");
-		showTable();
+		//showTable();
 	}
 
 	/*public void test(){
@@ -372,12 +372,12 @@ public class Controleur_bd implements BD_rw{
 		ecrireDansLaBase(new Word_Translation("warrior", "guerrier"));
 		ecrireDansLaBase(new Word_Translation("Poulet", "Hush"));
 		ecrireDansLaBase(new Word_Translation("Moi", "me"));
-		showTable();
+		//showTable();
 		MainActivity.printDebug(1,"Apres ecriture "); 
 		String args1[] ={Word_Translation.ENGLISH,"Pwahahaha","","",Word_Translation.FRENCH,"Mwahaha"};
 		modifierDansLaBase(new Extra_Word_Translation("6",args1));
 		deleteWordbyIndex(5, Extra.EXTRA);
-		showTable();
+		//showTable();
 
 		//resetTable();
 		//dropTable();
@@ -427,8 +427,8 @@ public class Controleur_bd implements BD_rw{
 	public void writeWord(Word_Translation word) {
 		if (word.getWord().length()!=0)
 			ecrireDansLaBase(word);
-		MainActivity.printDebug(1, "write");
-		showTable();
+		//MainActivity.printDebug(1, "write");
+		//showTable();
 	}
 
 	@Override
@@ -443,7 +443,7 @@ public class Controleur_bd implements BD_rw{
 		String[] args= {"%","%","%","%","%","%"};
 		res = getWordFromTable(new Extra_Word_Translation(args), Order.LANGUAGE_ASC, -1);
 		for (Word_Translation toto : res){
-			MainActivity.printDebug(1,"Id = "+toto.getId()+" 1-"+toto.getWord()+" 2-"+toto.getTraduction_of_word());
+			toto.printWord();
 		}
 
 	}
