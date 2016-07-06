@@ -36,7 +36,8 @@ public class LearnFragment extends Fragment {
 		TextView word = (TextView)v.findViewById(R.id.tvWord);
 		TextView wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
 		if(word_obj==null){
-			List<Word_Translation> res = MainActivity.cbd.getWordFromTable(new Word_Translation( getArguments().getInt(Word_Translation.WORD_ID),"%", "%"),Order.NULL,-1);
+			Word_Translation query = new Word_Translation( getArguments().getInt(Word_Translation.WORD_ID),"%", "%");
+			List<Word_Translation> res = MainActivity.cbd.getWordFromTable(query,Order.NULL,-1);
 			if(res.size()==1)
 				word_obj = res.get(0);
 			else 

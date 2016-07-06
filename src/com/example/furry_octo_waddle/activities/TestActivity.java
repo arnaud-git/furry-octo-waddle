@@ -106,8 +106,8 @@ public class TestActivity extends ActionBarActivity {
 
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
-
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("~", "~"),Order.RANDOM, -1);
+		Word_Translation query = new Word_Translation("~", "~");
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(query,Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(TestFragment.newInstance(new Word_Translation("No word in the database", null)));

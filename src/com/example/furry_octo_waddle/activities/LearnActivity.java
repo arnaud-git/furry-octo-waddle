@@ -130,7 +130,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 				//Modifies in the db
 				int id_word=currentLF.getCurrentWord_T().getId();
-				Word_Translation word_T= new Word_Translation(id_word,et[0].getText().toString(),et[1].getText().toString());
+				Word_Translation word_T= null ;
+				word_T  = new Word_Translation(id_word,et[0].getText().toString(),et[1].getText().toString());
 				MainActivity.cbd.modifyWordbyId(word_T);
 				
 				//Refreshes pager
@@ -198,8 +199,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	/**@returns a list of Fragment (word and translation from the DB)*/
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
-
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),Order.RANDOM, -1);
+		Word_Translation query = new Word_Translation("%", "%");
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(query,Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
