@@ -2,23 +2,22 @@ package com.example.furry_octo_waddle.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.app.NavUtils;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
@@ -31,7 +30,11 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
 
-	Button buttonDelete, buttonCancel, buttonSave, buttonModify;
+	static Button buttonDelete;
+	static Button buttonCancel;
+	static Button buttonSave;
+	static Button buttonModify;
+	
 	TextView tv, tvTrans;
 	EditText et, etTrans;
 	LearnFragment currentLF;
@@ -64,7 +67,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		
 		//detect the scrolling to reinitialize the buttons and the views of the current Activity
 		pager.setOnPageChangeListener(this);
-		MainActivity.printDebug(5," ezfez "+findViewById(R.id.buttonsLearn).getHeight());
+		
 		buttonDelete.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View arg0) {
@@ -112,6 +115,9 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				modifyTextViewsVisibility(tvWords[0], 0, tvWords[1], 0, etWords[0], 4, etWords[1], 4);
 				//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
 				modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
+				
+				tvWords[0].setText(currentLF.getCurrentWord_T().getWord());
+				tvWords[1].setText(currentLF.getCurrentWord_T().getTraduction_of_word());				
 			}
 		});
 
@@ -123,24 +129,25 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				TextView[] tv = getCurrentTv(currentLF);
 				EditText[] et = getCurrentEt(currentLF);
 
+				//Modifies in the db
+				int id_word=currentLF.getCurrentWord_T().getId();
+				TextView[] visibleViews = currentLF.getVisibleViews();
+				
+				Word_Translation word_T= new Word_Translation(visibleViews[0].getText().toString(), visibleViews[1].getText().toString(),id_word);
+				MainActivity.cbd.modifyWordbyId(word_T);
+				
 				//sets the EditTexts to invisible and the TextViews to visible
 				modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
 				//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
 				modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
-
-				//Modifies in the db
-				int id_word=currentLF.getCurrentWord_T().getId();
-				Word_Translation word_T= new Word_Translation(et[0].getText().toString(),et[1].getText().toString(),id_word);
-				MainActivity.cbd.modifyWordbyId(word_T);
 				
 				//Refreshes pager
 				currentLF.setCurrentWord_T(word_T);
 				fragments.set(pos, currentLF);
 				pageAdapter.notifyDataSetChanged();
 			}
-		});	
+		});
 	}
-
 
 	/**Set the visibility of the EditTexts and the TextViews to the given arguments*/
 	protected static void modifyTextViewsVisibility(TextView tv, int tvV, TextView tvTrans,
@@ -211,6 +218,18 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		}
 
 		return fList;
+	}
+	
+	/**@returns a list of Button with Delete, Cancel, Save and Modify*/
+	public static ArrayList<Button> getButtons() {
+		ArrayList<Button> buttonList = new ArrayList<Button>();
+		
+		buttonList.add(buttonDelete);
+		buttonList.add(buttonCancel);
+		buttonList.add(buttonSave);
+		buttonList.add(buttonModify);
+		
+		return buttonList;
 	}
 
 
