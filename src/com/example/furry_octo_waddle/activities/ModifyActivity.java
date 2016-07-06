@@ -50,7 +50,7 @@ public class ModifyActivity extends ActionBarActivity{
 	}
 	
 	private void writeWord(){
-		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", getIntent().getExtras().getInt(Word_Translation.WORD_ID)),Order.NULL,1);
+		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation(getIntent().getExtras().getInt(Word_Translation.WORD_ID),"%", "%" ),Order.NULL,1);
 		if(list.size()>0)
 			word_obj=list.get(0);
 		MainActivity.printDebug(2, word_obj.getWord());
@@ -79,7 +79,7 @@ public class ModifyActivity extends ActionBarActivity{
 				//create the new object with the typed words
 				//save the new object in the database
 				// Will be better to put the languages in the inputs
-				word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
+				word_obj = new Word_Translation(word_obj.getId(),word, wordTrad);
 
 				MainActivity.cbd.modifyWordbyId(word_obj);
 

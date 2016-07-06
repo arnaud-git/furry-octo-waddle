@@ -1,10 +1,12 @@
 package com.example.furry_octo_waddle.sql_manager;
 
 import com.example.furry_octo_waddle.activities.MainActivity;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
 
 import android.util.Log;
 
 public class Word_Translation {
+	public enum Extra{NORMAL,EXTRA}
 	/** identifiant in the database*/
 	public static final String WORD_ID = "word_id";
 	private int id = 0 ;
@@ -21,24 +23,26 @@ public class Word_Translation {
 	 * These symbols can be used in combinations.
 	 * */
 	private String word;
-
-	private String traduction_of_word;
-
+	
 	/**Language of word*/
 	private String language;
+	
+	private String traduction_of_word;
+
+	private Extra type = Extra.NORMAL; 
 
 	/**Language of traduction of the word*/
 	private String targeted_language;
-
+	
 	//TODO Peut-etre les changer en int ou avec un enum
 	//The different languages 
 	public static final String ENGLISH = "@en";
 	public static final String FRENCH = "@fr";
 
 	/**Last modification of the word*/
-	private String last_modification_time;
+	String last_modification_time ="%";
 
-	public Word_Translation(String w,String t,String l, String t_l){
+	public Word_Translation(String l,String w,String t_l,String t){
 		setWord(w);
 		setTraduction(t);
 		setLanguage(l);
@@ -46,7 +50,7 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	public Word_Translation(String w,String t,int l){
+	public Word_Translation(int l,String w,String t){
 		setWord(w);
 		setTraduction(t);
 		setId(l);
@@ -55,7 +59,7 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	public Word_Translation(String w,String t,String l, String t_l,String index,String time){
+	public Word_Translation(String index,String l, String w,String t_l,String t ,String time){
 		setWord(w);
 		setTraduction(t);
 		setLanguage(l);
@@ -66,7 +70,7 @@ public class Word_Translation {
 	}
 
 
-	public Word_Translation(String w,String t,String l, String t_l,String index){
+	public Word_Translation(String index,String l,String w,String t_l,String t){
 		setWord(w);
 		setTraduction(t);
 		setLanguage(l);
@@ -83,21 +87,21 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	private void setTargeted_Language(String t_l) {
+	protected void setTargeted_Language(String t_l) {
 		if(t_l!=null)
 			this.targeted_language =t_l;
 		else
 			this.targeted_language = "";
 	}
 
-	private void setLanguage(String l) {
+	protected void setLanguage(String l) {
 		if(l!=null)
 			this.language =l;
 		else
 			this.language="";
 	}
 
-	private void setTraduction(String t) {
+	protected void setTraduction(String t) {
 		if (t!=null)
 			this.traduction_of_word = formatString(t);
 		else 
@@ -105,7 +109,7 @@ public class Word_Translation {
 
 	}
 
-	private void setWord(String w) {
+	protected void setWord(String w) {
 		if(w!=null)
 			this.word =formatString(w);
 		else 
@@ -113,7 +117,7 @@ public class Word_Translation {
 
 	}
 
-	private static final String formatString(String word){
+	protected static final String formatString(String word){
 		String computeWord = word ; 
 		computeWord = computeWord.replaceAll("\\s{2,}", " ");
 		if(computeWord.startsWith(" ")){
@@ -126,7 +130,7 @@ public class Word_Translation {
 		return computeWord;
 	}
 
-	private static final String escapePunctuation(String word){
+	protected static final String escapePunctuation(String word){
 		String[] punct11 ={";",":","\\x21","\\x3f","\\x2d"};
 		String[] punct10 = {"\\x28"};
 		String[] punct01 ={",",".","\\x29"};
@@ -162,7 +166,10 @@ public class Word_Translation {
 		return targeted_language;
 	}
 
-
+	public String getTime(){
+		return last_modification_time;
+	}
+	
 	public void setId(int id){
 		this.id=id;
 	}
@@ -178,7 +185,7 @@ public class Word_Translation {
 				word+" -> "+targeted_language+ " : " + traduction_of_word+"\t"+last_modification_time);
 	}
 
-	private void checkfornull(){
+	protected void checkfornull(){
 		if(word.length()==0 && traduction_of_word.length()>0){
 			word = traduction_of_word;
 			traduction_of_word = "";
@@ -194,5 +201,37 @@ public class Word_Translation {
 		MainActivity.printDebug(1, escapePunctuation(word1));
 		MainActivity.printDebug(1, escapePunctuation(word2));
 		return word1.equalsIgnoreCase(word2);
+	}
+	
+	public String[] getArgs(){
+		String[] ret =  {
+				forQuery(id),
+				word,
+				traduction_of_word,
+				forQuery(last_modification_time)} ;
+		return ret;
+	}
+	
+	public Extra getType(){
+		return type;
+	}
+	
+	protected String forQuery(String param){
+		if(param.length()==0)
+			return "%";
+		else
+			return param;
+	}
+	
+	protected static String forQuery(int id){
+		if(id==0)
+			return "%";
+		else
+			return String.valueOf(id);
+	}
+	
+	protected void setType(Extra extra) {
+		type=extra;
+		
 	}
 }

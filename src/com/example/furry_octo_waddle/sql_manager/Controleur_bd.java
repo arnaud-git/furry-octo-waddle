@@ -11,6 +11,7 @@ import android.database.SQLException;
 import android.database.sqlite.*;
 import android.support.v7.app.ActionBarActivity;
 import com.example.furry_octo_waddle.sql_manager.FeedReaderContract.FeedEntry;
+import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
 
 /** Parts of code were found on https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
  */
@@ -36,15 +37,23 @@ public class Controleur_bd implements BD_rw{
 
 		// Create a new map of values, where column names are the keys
 		ContentValues values = new ContentValues();
-		values.put(language_to_column_Correspondance(word.getLanguage()), word.getWord());
-		values.put(language_to_column_Correspondance(word.getTargeted_language()), word.getTraduction_of_word());
+		String[] args = projectionForQuery(word);
+		String[] args_word = word.getArgs();
+		for(int index = 1; index < args.length-1;index ++)
+			values.put(args[index], args_word[index]);
+
+		String table = null;
+		if(word.getType()==Extra.NORMAL)
+			table = FeedEntry.TABLE_NAME;
+		if(word.getType()==Extra.EXTRA)
+			table = FeedEntry.EXTENDED_TABLE_NAME;
 
 		// Insert the new row, returning the primary key value of the new row
 		try{
 
 			//TODO Remove ***OrThrow
 			long newRowId = db.insertOrThrow(
-					FeedEntry.TABLE_NAME,
+					table,
 					null,
 					values);
 			if(newRowId>=0)
@@ -56,10 +65,10 @@ public class Controleur_bd implements BD_rw{
 		}
 	}
 	public List<Word_Translation> lireDepuisLaBase(String[] args,Order random,int nombre){
-		return getWordFromTable(new Word_Translation(args[2],args[3], args[0], args[1]),random,nombre);
+		return getWordFromTable(new Word_Translation(args[0],args[2], args[1], args[3]),random,nombre);
 	}
 
-	@Override
+	@Override	
 	public List<Word_Translation> getWordFromTable(Word_Translation word,Order random,int nombre){
 		List<Word_Translation> list = new ArrayList<Word_Translation>();
 		MainActivity.printDebug(1,"GET");
@@ -67,35 +76,37 @@ public class Controleur_bd implements BD_rw{
 		try{
 			SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
+
+			//Define the table
+			String table = null;
+			if(word.getType()==Extra.NORMAL)
+				table = FeedEntry.TABLE_NAME;
+			if(word.getType()==Extra.EXTRA)
+				table = FeedEntry.EXTENDED_TABLE_NAME;
+
 			// Define a projection that specifies which columns from the database
 			// you will actually use after this query.
 			//MainActivity.printDebug(1, "ICI");
-			String[] projection = {
-					FeedEntry._ID,
-					language_to_column_Correspondance(word.getLanguage()),
-					language_to_column_Correspondance(word.getTargeted_language()),
-					FeedEntry.COLUMN_NAME_TIMESTAMP
-			};
+			String[] projection =  projectionForQuery(word);
 
 			// Define 'where' part of query.
-			String selection = null;
+			String selection = "";
 			//String sel =null;
 			List<String> sel = new ArrayList<String>();
 			String mot = word.getWord(), trad = word.getTraduction_of_word() ;
 			if(word.getId()==0){
-				selection = language_to_column_Correspondance(word.getLanguage());
-				if (mot.startsWith("~")){
-					selection = selection + " NOT ";
-					mot=mot.substring(1);
+				String[] arguments = word.getArgs();
+				for(int index = 1;index<arguments.length-1;index++){
+					selection = selection + projection[index];
+					if (arguments[index].startsWith("~")){
+						selection = selection + " NOT ";
+						arguments[index]=arguments[index].substring(1);
+					}
+					sel.add(arguments[index]);
+					selection = selection +" LIKE ? ";
+					if(index+1<arguments.length-1)
+						selection= selection +" AND ";
 				}
-				selection = selection +" LIKE ? AND "+language_to_column_Correspondance(word.getTargeted_language())  ;
-				if (trad.startsWith("~")){
-					selection = selection + " NOT ";
-					trad=trad.substring(1);
-				}
-				selection = selection +  " LIKE ? "  ;
-				sel.add(mot);
-				sel.add(trad);
 			}else{
 				selection = FeedEntry._ID + " LIKE ? "  ;
 				sel.add(String.valueOf(word.getId()));
@@ -110,7 +121,10 @@ public class Controleur_bd implements BD_rw{
 				sortOrder = " RANDOM() ";
 				break;
 			case LANGUAGE_ASC :
-				sortOrder = " "+language_to_column_Correspondance(word.getLanguage())+ " ASC ";
+				if(word.getType()==Extra.NORMAL)
+					sortOrder = " "+language_to_column_Correspondance(word.getLanguage())+ " ASC ";
+				if(word.getType()==Extra.EXTRA)
+					sortOrder = " "+FeedEntry.COLUMN_NAME_WORD+ " ASC ";
 				break;
 			case STAMP_DESC :
 				sortOrder = " "+FeedEntry.COLUMN_NAME_TIMESTAMP+ " DESC ";
@@ -138,7 +152,7 @@ public class Controleur_bd implements BD_rw{
 			//the query
 			Cursor c = db.query(
 					false,
-					FeedEntry.TABLE_NAME,  // The table to query
+					table,  // The table to query
 					projection,                               // The columns to return
 					selection,                                // The columns for the WHERE clause
 					selectionArgs,                         // The values for the WHERE clause
@@ -151,13 +165,26 @@ public class Controleur_bd implements BD_rw{
 			if(c.getCount()>0){
 				MainActivity.printDebug(1,"Recuperation de  " +c.getCount() +" trad.");
 				while(c.moveToNext()){
-					list.add(new Word_Translation(c.getString(1), c.getString(2)
-							//Si d'autres colonnes pour d'autres langues
-							,column_to_language_Correspondance(c.getColumnName(1))
-							,column_to_language_Correspondance(c.getColumnName(2))
-							,c.getString(0)
-							,c.getString(3)
-							));
+					if(word.getType()==Extra.NORMAL)
+						list.add(new Word_Translation(c.getString(0),
+								//Si d'autres colonnes pour d'autres langues
+								column_to_language_Correspondance(c.getColumnName(1)),
+								 c.getString(1),
+								column_to_language_Correspondance(c.getColumnName(2)),
+								c.getString(2),
+								c.getString(3)
+								));
+					else
+						if(word.getType()==Extra.EXTRA){
+							String[] args= {c.getString(1),
+									c.getString(2),
+									c.getString(3),
+									c.getString(4),
+									c.getString(5),
+									c.getString(6)
+							};
+							list.add(new Extra_Word_Translation(c.getString(0),args,c.getString(7)));
+						}
 				}
 			}else{
 				MainActivity.printDebug(1,"Rien dans la table "); 
@@ -177,11 +204,19 @@ public class Controleur_bd implements BD_rw{
 	public void modifierDansLaBase(Word_Translation word){
 		//mDbHelper = new FeedReaderDbHelper(ma.getApplicationContext());
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
-
+		
+		String table = null;
+		if(word.getType()==Extra.NORMAL)
+			table = FeedEntry.TABLE_NAME;
+		if(word.getType()==Extra.EXTRA)
+			table = FeedEntry.EXTENDED_TABLE_NAME;
+		
 		// New value for one column
 		ContentValues values = new ContentValues();
-		values.put(language_to_column_Correspondance(word.getLanguage()), word.getWord());
-		values.put(language_to_column_Correspondance(word.getTargeted_language()), word.getTraduction_of_word());
+		String[] args = projectionForQuery(word);
+		String[] args_word = word.getArgs();
+		for(int index = 1; index < args.length-1;index ++)
+			values.put(args[index], args_word[index]);
 		values.put(FeedEntry.COLUMN_NAME_TIMESTAMP, FeedEntry.COLUMN_TIMESTAMP_DEFAULT);
 
 		// Which row to update, based on the ID
@@ -190,7 +225,7 @@ public class Controleur_bd implements BD_rw{
 		try{
 			//reutrn the number of row affected
 			int count = db.update(
-					FeedEntry.TABLE_NAME,
+					table,
 					values,
 					selection,
 					selectionArgs);
@@ -207,29 +242,35 @@ public class Controleur_bd implements BD_rw{
 		try{
 			String selection = null;
 			List<String> sel =new ArrayList<String>();
-			String mot = word.getWord(), trad = word.getTraduction_of_word() ;
 			if(word.getId()==0){
-				selection = language_to_column_Correspondance(word.getLanguage());
-				if (mot.startsWith("~")){
-					selection = selection + " NOT ";
-					mot = mot.substring(1);
+				String[] arguments = word.getArgs();
+				String[] projection = projectionForQuery(word);
+				for(int index = 1;index<arguments.length-1;index++){
+					selection = selection + projection[index];
+					if (arguments[index].startsWith("~")){
+						selection = selection + " NOT ";
+						arguments[index]=arguments[index].substring(1);
+					}
+					sel.add(arguments[index]);
+					selection = selection +" LIKE ? ";
+					if(index+1<arguments.length-1)
+						selection= selection +" AND ";
 				}
-				selection = selection +" LIKE ? && "+ language_to_column_Correspondance(word.getTargeted_language())  ;
-				if (trad.startsWith("~")){
-					selection = selection + " NOT ";
-					trad = trad.substring(1);
-				}
-				selection = selection  + " LIKE ? "  ;
-				sel.add(mot);
-				sel.add(trad);
-			}else{
+			}
+			else{
 				selection = FeedEntry._ID + " LIKE ? "  ;
 				sel.add(String.valueOf(word.getId()));
 			}
 			for (String toto :sel)	
 				MainActivity.printDebug(1, toto);
 			String[] selectionArgs = (String[]) sel.toArray(new String[sel.size()]);
-			db.delete(FeedEntry.TABLE_NAME, selection, selectionArgs);
+
+			String table = null;
+			if(word.getType()==Extra.NORMAL)
+				table = FeedEntry.TABLE_NAME;
+			if(word.getType()==Extra.EXTRA)
+				table = FeedEntry.EXTENDED_TABLE_NAME;
+			db.delete(table, selection, selectionArgs);
 
 		}catch(Exception e){
 			MainActivity.printDebug(1,e.getMessage()); 
@@ -285,14 +326,15 @@ public class Controleur_bd implements BD_rw{
 
 	@Override
 	public void deleteEnglishWord(String englishWord) {
-		Word_Translation var = new Word_Translation(englishWord,null,Word_Translation.ENGLISH,null);
+		Word_Translation var = new Word_Translation(Word_Translation.ENGLISH,englishWord,null,null);
 		//var.printWord();
 		supprimerDeLaBase(var);
 	}
 
 	@Override
-	public void deleteWordbyIndex(int index){
-		Word_Translation var = new Word_Translation(null,null,null,null,String.valueOf(index));
+	public void deleteWordbyIndex(int index, Extra type){
+		Word_Translation var = new Word_Translation(String.valueOf(index),null,null,null,null);
+		var.setType(type);
 		supprimerDeLaBase(var);
 	}
 
@@ -314,41 +356,40 @@ public class Controleur_bd implements BD_rw{
 	}
 
 	/*public void test(){
-		ecrireDansLaBase(new Word_Translation("salut", ""));
-		ecrireDansLaBase(new Word_Translation("Bojour", "Hello"));
+		resetTable(Extra.EXTRA);
+		String args[] = {"@en","yoyo","prout","iferi","@fr","ezidnezoinenz"};
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		ecrireDansLaBase(new Extra_Word_Translation(args));
+		/*ecrireDansLaBase(new Word_Translation("Bojour", "Hello"));
 		ecrireDansLaBase(new Word_Translation("Hush", "Frite"));
 		ecrireDansLaBase(new Word_Translation("enracine", "engrained"));
 		ecrireDansLaBase(new Word_Translation("warrior", "guerrier"));
 		ecrireDansLaBase(new Word_Translation("Poulet", "Hush"));
 		ecrireDansLaBase(new Word_Translation("Moi", "me"));
-		String[] args = {"@en","@fr","*",""};
+		showTable();
 		MainActivity.printDebug(1,"Apres ecriture "); 
-		modifierDansLaBase(new Word_Translation("Pwahahaha","Mwahaha",Word_Translation.ENGLISH,Word_Translation.FRENCH,"336"));
-		MainActivity.printDebug(1,"Premier "); 
-		List<Word_Translation> retour = lireDepuisLaBase(args, false, -1);
+		String args1[] ={Word_Translation.ENGLISH,"Pwahahaha","","",Word_Translation.FRENCH,"Mwahaha"};
+		modifierDansLaBase(new Extra_Word_Translation("6",args1));
+		deleteWordbyIndex(5, Extra.EXTRA);
+		showTable();
 
-		if(retour !=null){
-			for (Word_Translation mot : retour){
-				mot.printWord();
-			}
-		}
-		MainActivity.printDebug(1,"Deuxieme "); 
-		String[] args1 = {"@en","@fr","","*"};
-		retour = lireDepuisLaBase(args1, true, -1);
-
-		if(retour !=null){
-			for (Word_Translation mot : retour){
-				mot.printWord();
-			}
-		}
 		//resetTable();
 		//dropTable();
 	}*/
 
-	public void resetTable(){
+	public void resetTable(Extra extra){
 		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 		MainActivity.printDebug(1,"Table reset"); 
-		db.delete(FeedEntry.TABLE_NAME, null, null);
+		if(extra==Extra.NORMAL)
+			db.delete(FeedEntry.TABLE_NAME, null, null);
+		if(extra==Extra.EXTRA)
+			db.delete(FeedEntry.EXTENDED_TABLE_NAME, null, null);
 	}
 
 	/** Deletes the table from the database*/
@@ -392,11 +433,35 @@ public class Controleur_bd implements BD_rw{
 
 	@Override
 	public void showTable() {
-
+		MainActivity.printDebug(1,"Table:");
 		List<Word_Translation> res = getWordFromTable(new Word_Translation("%", "%"), Order.RANDOM, -1);
 		for (Word_Translation toto : res){
 			MainActivity.printDebug(1,"Id = "+toto.getId()+" 1-"+toto.getWord()+" 2-"+toto.getTraduction_of_word());
 		}
+		
+		MainActivity.printDebug(1,"EXtended_Table:");
+		String[] args= {"%","%","%","%","%","%"};
+		res = getWordFromTable(new Extra_Word_Translation(args), Order.LANGUAGE_ASC, -1);
+		for (Word_Translation toto : res){
+			MainActivity.printDebug(1,"Id = "+toto.getId()+" 1-"+toto.getWord()+" 2-"+toto.getTraduction_of_word());
+		}
 
+	}
+
+	private String[] projectionForQuery(Word_Translation word){
+		if(word.getType()==Extra.NORMAL){
+			String[] res = {
+					FeedEntry._ID,
+					language_to_column_Correspondance(word.getLanguage()),
+					language_to_column_Correspondance(word.getTargeted_language()),
+					FeedEntry.COLUMN_NAME_TIMESTAMP
+			};
+			return res;
+		}else{
+			if(word.getType()==Extra.EXTRA){
+				return FeedEntry.getColumns(Extra.EXTRA);
+			}
+		}
+		return null;
 	}
 }

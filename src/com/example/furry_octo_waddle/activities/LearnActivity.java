@@ -73,7 +73,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				toast.show();
 
 				//Deletes in the db
-				MainActivity.cbd.deleteWordbyIndex(currentLF.getCurrentWord_T().getId());
+				MainActivity.cbd.deleteWord(currentLF.getCurrentWord_T());
 				
 				//Refreshes pager
 				int pos = pager.getCurrentItem();
@@ -130,7 +130,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 				//Modifies in the db
 				int id_word=currentLF.getCurrentWord_T().getId();
-				Word_Translation word_T= new Word_Translation(et[0].getText().toString(),et[1].getText().toString(),id_word);
+				Word_Translation word_T= new Word_Translation(id_word,et[0].getText().toString(),et[1].getText().toString());
 				MainActivity.cbd.modifyWordbyId(word_T);
 				
 				//Refreshes pager

@@ -1,6 +1,8 @@
 package com.example.furry_octo_waddle.sql_manager;
 
 import java.util.List;
+
+import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
 /** BD_rw*/
 public interface BD_rw {
 	/* Will be deprecated */
@@ -49,7 +51,7 @@ public interface BD_rw {
 	
 	/**Erases {@link Word_Translation word} represented by the index from the table (database)
 	 * @param index : the index of the word in the table*/
-	public void deleteWordbyIndex(int index);
+	public void deleteWordbyIndex(int index,Extra type);
 		
 	/**Erases {@link Word_Translation word} from the table (database)
 	 * @param word :
@@ -66,7 +68,7 @@ public interface BD_rw {
 	
 	/**Erases all contents in the table 
 	 * (the table still exists after the call)*/
-	public void resetTable();
+	public void resetTable(Extra type);
 	
 	public void showTable();
 }
