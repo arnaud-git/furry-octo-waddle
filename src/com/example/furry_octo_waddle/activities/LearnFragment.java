@@ -17,6 +17,7 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnFragment extends Fragment {
 
 	private Word_Translation word_obj= null;
+	private boolean modified = false;
 
 	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
@@ -44,7 +45,7 @@ public class LearnFragment extends Fragment {
 		}
 		word.setText(word_obj.getWord());
 		wordTrans.setText(word_obj.getTraduction_of_word());		
-
+		((LearnActivity)getActivity()).setListenerActionMode(v);
 		return v;
 	}
 
@@ -55,5 +56,13 @@ public class LearnFragment extends Fragment {
 
 	public void setCurrentWord_T(Word_Translation toto){
 		word_obj=toto;
+	}
+	
+	public boolean getCurrentStatus() {
+		return modified;
+	}
+
+	public void setCurrentStatus(boolean modified){
+		this.modified=modified;
 	}
 }
