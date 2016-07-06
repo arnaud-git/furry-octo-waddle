@@ -307,6 +307,10 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		EditText[] et = getCurrentEt(currentLF);
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
 		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
+	
+		//If the user swipe the view, the application ends the ActionMode
+		if(mActionMode != null)
+			mActionMode.finish();
 	}
 
 	@Override
