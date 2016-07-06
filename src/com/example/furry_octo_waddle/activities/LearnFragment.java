@@ -24,7 +24,7 @@ public class LearnFragment extends Fragment {
 	TextView word, wordTrans;
 	EditText editWord, editWordTrans;
 	ArrayList<Button> butList;
-	
+	private boolean modified = false;
 
 	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
@@ -95,6 +95,9 @@ public class LearnFragment extends Fragment {
 			}	
 		});
 
+		wordTrans.setText(word_obj.getTraduction_of_word());		
+		((LearnActivity)getActivity()).setListenerActionMode(v);
+		
 		return v;
 	}
 
@@ -121,5 +124,13 @@ public class LearnFragment extends Fragment {
 			displayedViews[1] = editWordTrans;
 		
 		return displayedViews;
+	}
+
+	public boolean getCurrentStatus() {
+		return modified;
+	}
+
+	public void setCurrentStatus(boolean modified){
+		this.modified=modified;
 	}
 }
