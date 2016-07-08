@@ -1,15 +1,9 @@
 package com.example.furry_octo_waddle.activities;
 
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-
-import android.support.v7.app.ActionBarActivity;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,18 +24,7 @@ public class AddActivity extends ActionBarActivity{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_layout);
-		view_of_the_word(1);
-		//editWord = (EditText) findViewById(R.id.editWord);
-		//editWordTrans = (EditText) findViewById(R.id.editWordTrans);
-		
-		addButton = (Button)findViewById(R.id.add_button);
-		addButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				save_current_word();		
-			}
-		});		
+		view_of_the_word(1);	
 	}
 	
 	private void view_of_the_word(int i){
@@ -75,12 +58,6 @@ public class AddActivity extends ActionBarActivity{
 	    getMenuInflater().inflate(R.menu.context_menu, menu);
 	    menu.findItem(R.id.editting_word).setVisible(false);
 	    menu.findItem(R.id.deleting_word).setVisible(false);
-	    /*MenuItem searchItem = menu.findItem(R.id.action_search);
-	    SearchView searchView =
-	            (SearchView) MenuItemCompat.getActionView(searchItem);*/
-
-	    // Configure the search info and add any event listeners...
-
 	    return super.onCreateOptionsMenu(menu);
 	}
 	

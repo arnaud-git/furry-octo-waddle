@@ -35,7 +35,6 @@ public class ModifyActivity extends ActionBarActivity{
 		setContentView(R.layout.modify_layout);
 		view_of_the_word(1);
 		writeWord();
-		addbutton_update();
 	}
 	
 	private void view_of_the_word(int i){
@@ -66,17 +65,6 @@ public class ModifyActivity extends ActionBarActivity{
 		editWordTrans.requestFocus();
 		//editWordTrans.setSelection(editWordTrans.getText().length());
 		
-	}
-	
-	private void addbutton_update(){
-		addButton = (Button)findViewById(R.id.add_button);
-		addButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				save_current_word();
-			}
-		});
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -123,12 +111,6 @@ public class ModifyActivity extends ActionBarActivity{
 	public boolean onCreateOptionsMenu(Menu menu) {
 	    getMenuInflater().inflate(R.menu.context_menu, menu);
 	    menu.findItem(R.id.editting_word).setVisible(false);
-	    /*MenuItem searchItem = menu.findItem(R.id.action_search);
-	    SearchView searchView =
-	            (SearchView) MenuItemCompat.getActionView(searchItem);*/
-
-	    // Configure the search info and add any event listeners...
-
 	    return super.onCreateOptionsMenu(menu);
 	}
 }
