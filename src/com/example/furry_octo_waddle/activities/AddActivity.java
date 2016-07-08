@@ -5,6 +5,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.v7.app.ActionBarActivity;
@@ -38,20 +39,7 @@ public class AddActivity extends ActionBarActivity{
 			
 			@Override
 			public void onClick(View arg0) {
-				word = editWord.getText().toString();
-				wordTrad = editWordTrans.getText().toString();
-								
-				//create the new object with the typed words
-				//save the new object in the database
-				// Will be better to put the languages in the inputs
-				word_obj = new Word_Translation(word, wordTrad);
-				
-				MainActivity.cbd.writeWord(word_obj);
-				
-				Toast.makeText(AddActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
-				
-				editWord.getText().clear();
-				editWordTrans.getText().clear();				
+				save_current_word();		
 			}
 		});		
 	}
@@ -65,5 +53,45 @@ public class AddActivity extends ActionBarActivity{
 		editWordTrans.setVisibility(View.VISIBLE);
 		tvWord.setVisibility(View.GONE);
 		tvWordTrans.setVisibility(View.GONE);
+	}
+	
+	private void save_current_word(){
+		word = editWord.getText().toString();
+		wordTrad = editWordTrans.getText().toString();
+
+		//create the new object with the typed words
+		//save the new object in the database
+		// Will be better to put the languages in the inputs
+		word_obj = new Word_Translation(word, wordTrad);
+
+		MainActivity.cbd.writeWord(word_obj);
+
+		Toast.makeText(AddActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+		finish();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    getMenuInflater().inflate(R.menu.context_menu, menu);
+	    menu.findItem(R.id.editting_word).setVisible(false);
+	    menu.findItem(R.id.deleting_word).setVisible(false);
+	    /*MenuItem searchItem = menu.findItem(R.id.action_search);
+	    SearchView searchView =
+	            (SearchView) MenuItemCompat.getActionView(searchItem);*/
+
+	    // Configure the search info and add any event listeners...
+
+	    return super.onCreateOptionsMenu(menu);
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.saving_word:
+	            save_current_word();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }

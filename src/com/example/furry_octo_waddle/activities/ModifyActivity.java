@@ -5,6 +5,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import android.support.v7.app.ActionBarActivity;
@@ -73,19 +74,61 @@ public class ModifyActivity extends ActionBarActivity{
 
 			@Override
 			public void onClick(View arg0) {
-				word = editWord.getText().toString();
-				wordTrad = editWordTrans.getText().toString();
-
-				//create the new object with the typed words
-				//save the new object in the database
-				// Will be better to put the languages in the inputs
-				word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
-
-				MainActivity.cbd.modifyWordbyId(word_obj);
-
-				Toast.makeText(ModifyActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
-				finish();
+				save_current_word();
 			}
 		});
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.saving_word:
+	            save_current_word();
+	            finish();
+	            return true;
+	        case R.id.deleting_word:
+	        	delete_current_word();
+	        	finish();
+	        	return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	private void delete_current_word() {
+			//buttonDelete deletes the words of the current fragment from the database
+			Toast toast = Toast.makeText(getApplicationContext(), "Ask if sure and delete the word from the DB", Toast.LENGTH_LONG);
+			toast.show();
+
+			//Deletes in the db
+			MainActivity.cbd.deleteWordbyIndex(word_obj.getId());	
+			
+	}
+
+	private void save_current_word(){
+		word = editWord.getText().toString();
+		wordTrad = editWordTrans.getText().toString();
+
+		//create the new object with the typed words
+		//save the new object in the database
+		// Will be better to put the languages in the inputs
+		word_obj = new Word_Translation(word, wordTrad);
+
+		MainActivity.cbd.writeWord(word_obj);
+
+		Toast.makeText(ModifyActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    getMenuInflater().inflate(R.menu.context_menu, menu);
+	    menu.findItem(R.id.editting_word).setVisible(false);
+	    /*MenuItem searchItem = menu.findItem(R.id.action_search);
+	    SearchView searchView =
+	            (SearchView) MenuItemCompat.getActionView(searchItem);*/
+
+	    // Configure the search info and add any event listeners...
+
+	    return super.onCreateOptionsMenu(menu);
 	}
 }
