@@ -21,54 +21,8 @@
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="35dp"
                 />
-
-            <LinearLayout
-                android:id="@+id/buttonsLearn"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-				android:layout_below="@+id/viewpager"                
-				android:layout_marginBottom="5dp"
-                android:gravity="center"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/buttonDelete"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/back"
-                    android:text="@string/string_delete" />
-
-                <Button
-                    android:id="@+id/buttonCancel"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/back"
-                    android:text="X"
-                    android:visibility="invisible" />
-
-                <Button
-                    android:id="@+id/buttonSave"
-                    style="?android:attr/buttonStyleSmall"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/back"
-                    android:text="V"
-                    android:visibility="invisible" />
-
-                <Button
-                    android:id="@+id/buttonModify"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/back"
-                    android:text="@string/string_modify" />
-            </LinearLayout>
         </RelativeLayout>
+        
     </ScrollView>
 
 </RelativeLayout>
