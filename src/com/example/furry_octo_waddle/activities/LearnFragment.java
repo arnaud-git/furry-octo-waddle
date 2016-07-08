@@ -23,7 +23,6 @@ public class LearnFragment extends Fragment {
 	private Word_Translation word_obj= null;
 	TextView word, wordTrans;
 	EditText editWord, editWordTrans;
-	ArrayList<Button> butList;
 	private boolean modified = false;
 
 	public static final LearnFragment newInstance(Word_Translation word_obj)
@@ -58,42 +57,6 @@ public class LearnFragment extends Fragment {
 		editWord.setText(word_obj.getWord());
 		wordTrans.setText(word_obj.getTraduction_of_word());
 		editWordTrans.setText(word_obj.getTraduction_of_word());
-		
-		word.setClickable(true);
-		wordTrans.setClickable(true);
-		
-		word.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				butList = LearnActivity.getButtons();
-				LearnActivity.modifyButtonsVisibility(butList.get(0),4,butList.get(1),0,butList.get(2),0,butList.get(3),4);
-				
-				wordTrans.setVisibility(0);
-				editWordTrans.setVisibility(4);
-				word.setVisibility(4);
-				editWord.setVisibility(0);
-				editWord.setText(word.getText().toString());
-				wordTrans.setText(editWordTrans.getText().toString());
-			}	
-		});
-		
-		wordTrans.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				
-				butList = LearnActivity.getButtons();
-				LearnActivity.modifyButtonsVisibility(butList.get(0),4,butList.get(1),0,butList.get(2),0,butList.get(3),4);
-				
-				wordTrans.setVisibility(4);
-				editWordTrans.setVisibility(0);
-				word.setVisibility(0);
-				editWord.setVisibility(4);
-				word.setText(editWord.getText().toString());
-				editWordTrans.setText(wordTrans.getText().toString());
-			}	
-		});
 
 		((LearnActivity)getActivity()).setListenerActionMode(v);
 		
@@ -107,22 +70,6 @@ public class LearnFragment extends Fragment {
 
 	public void setCurrentWord_T(Word_Translation toto){
 		word_obj=toto;
-	}
-	
-	public TextView[] getVisibleViews() {
-		TextView[] displayedViews = new TextView[2];
-		
-		if(word.getVisibility() == View.VISIBLE)
-			displayedViews[0] = word; //1 if the textview is currently displayed
-		else
-			displayedViews[0] = editWord; //2 if the edittext is currently displayed
-		
-		if(wordTrans.getVisibility() == View.VISIBLE)
-			displayedViews[1] = wordTrans;
-		else
-			displayedViews[1] = editWordTrans;
-		
-		return displayedViews;
 	}
 
 	public boolean getCurrentStatus() {

@@ -30,13 +30,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	ViewPager pager;
 	//FragmentStatePagerAdapter adapter;
 	MyPageAdapter pageAdapter;
-	List<Fragment> fragments;
-
-	static Button buttonDelete;
-	static Button buttonCancel;
-	static Button buttonSave;
-	static Button buttonModify;
-	
+	List<Fragment> fragments;	
 	TextView tv, tvTrans;
 	EditText et, etTrans;
 	LearnFragment currentLF;
@@ -114,12 +108,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.learn_layout);
 
-		buttonDelete = (Button) findViewById(R.id.buttonDelete);
-		buttonCancel = (Button) findViewById(R.id.buttonCancel);
-		buttonSave = (Button) findViewById(R.id.buttonSave);
-		buttonModify = (Button) findViewById(R.id.buttonModify);
-
-
 		//gets a list of Fragment from the DB
 		fragments = getFragments();
 
@@ -137,52 +125,22 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 		//detect the scrolling to reinitialize the buttons and the views of the current Activity
 		pager.setOnPageChangeListener(this);
-		
-		buttonDelete.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {			
-				delete_current_word();				
-			}
-		});
-
-		buttonModify.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				modify_current_word();
-
-			}
-		});
-
-		buttonCancel.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				cancel_modification();
-			}
-		});
-
-		buttonSave.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View arg0) {
-				save_current_word();			
-			}
-		});	
-
 	}
 	
 	
 	protected void modify_current_word() {
+		
 		//get the current TextViews and EditTexts
 		TextView[] tv = getCurrentTv(currentLF);
 		EditText[] et = getCurrentEt(currentLF);
 		currentLF.setCurrentStatus(true);
 		//sets the EditTexts to invisible and the TextViews to visible
 		modifyTextViewsVisibility(tv[0], 4, tv[1], 4, et[0], 0, et[1], 0);
-		//sets the buttons 'Cancel and Save' to invisible and 'Delete and Modify' to visible
-		modifyButtonsVisibility(buttonDelete, 4, buttonCancel, 0, buttonSave, 0, buttonModify, 4);
 
 		//copy the words from the TextViews in the EditTexts
 		et[0].setText(tv[0].getText().toString());
 		et[1].setText(tv[1].getText().toString());
+		
 		if (mActionMode != null) {
 			mActionMode.invalidate();
 		}
@@ -197,8 +155,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		currentLF.setCurrentStatus(false);
 		//sets the TextViews to invisible and the EditTexts to visible
 		modifyTextViewsVisibility(tvWords[0], 0, tvWords[1], 0, etWords[0], 4, etWords[1], 4);
-		//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
-		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
+		
 		if (mActionMode != null) {
 			mActionMode.invalidate();
 		}
@@ -214,8 +171,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 		//sets the EditTexts to invisible and the TextViews to visible
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
-		//sets the buttons 'Delete and Modify' to invisible and 'Cancel and Save' to visible
-		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
 
 		//Modifies in the db
 		int id_word=currentLF.getCurrentWord_T().getId();
@@ -326,8 +281,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		TextView[] tv = getCurrentTv(currentLF);
 		EditText[] et = getCurrentEt(currentLF);
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
-		modifyButtonsVisibility(buttonDelete, 0, buttonCancel, 4, buttonSave, 4, buttonModify, 0);
-	
+
 		//If the user swipe the view, the application ends the ActionMode
 		if(mActionMode != null)
 			mActionMode.finish();
@@ -345,7 +299,7 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%"),Order.RANDOM, -1);
+		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "~"),Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
@@ -355,22 +309,9 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				fList.add(LearnFragment.newInstance(word_obj));
 			}
 		}
-
+		
 		return fList;
 	}
-	
-	/**@returns a list of Button with Delete, Cancel, Save and Modify*/
-	public static ArrayList<Button> getButtons() {
-		ArrayList<Button> buttonList = new ArrayList<Button>();
-		
-		buttonList.add(buttonDelete);
-		buttonList.add(buttonCancel);
-		buttonList.add(buttonSave);
-		buttonList.add(buttonModify);
-		
-		return buttonList;
-	}
-
 
 	private class MyPageAdapter extends FragmentStatePagerAdapter {
 		private List<Fragment> fragments;
