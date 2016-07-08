@@ -67,7 +67,8 @@ public class AddActivity extends ActionBarActivity{
 		MainActivity.cbd.writeWord(word_obj);
 
 		Toast.makeText(AddActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
-		finish();
+		editWord.setText("");
+		editWordTrans.setText("");
 	}
 	
 	@Override

@@ -1,5 +1,7 @@
 package com.example.furry_octo_waddle.activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
@@ -28,6 +30,23 @@ public class ModifyActivity extends ActionBarActivity{
 	EditText editWord, editWordTrans;
 	String word, wordTrad;
 	Word_Translation word_obj;
+	
+	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+	    @Override
+	    public void onClick(DialogInterface dialog, int which) {
+	        switch (which){
+	        case DialogInterface.BUTTON_POSITIVE:
+	            //Yes button clicked
+	        	delete_current_word();
+	        	finish();
+	            break;
+
+	        case DialogInterface.BUTTON_NEGATIVE:
+	            //No button clicked
+	            break;
+	        }
+	    }
+	};
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -87,8 +106,7 @@ public class ModifyActivity extends ActionBarActivity{
 	            finish();
 	            return true;
 	        case R.id.deleting_word:
-	        	delete_current_word();
-	        	finish();
+	        	confirm_deletion();
 	        	return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -97,12 +115,10 @@ public class ModifyActivity extends ActionBarActivity{
 	
 	private void delete_current_word() {
 			//buttonDelete deletes the words of the current fragment from the database
-			Toast toast = Toast.makeText(getApplicationContext(), "Ask if sure and delete the word from the DB", Toast.LENGTH_LONG);
+			Toast toast = Toast.makeText(getApplicationContext(), "Word deleted !", Toast.LENGTH_LONG);
 			toast.show();
-
 			//Deletes in the db
 			MainActivity.cbd.deleteWordbyIndex(word_obj.getId());	
-			
 	}
 
 	private void save_current_word(){
@@ -130,5 +146,11 @@ public class ModifyActivity extends ActionBarActivity{
 	    // Configure the search info and add any event listeners...
 
 	    return super.onCreateOptionsMenu(menu);
+	}
+	
+	protected void confirm_deletion() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to delete this word?").setPositiveButton("Yes", dialogClickListener)
+		.setNegativeButton("No", dialogClickListener).show();
 	}
 }
