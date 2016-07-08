@@ -79,4 +79,14 @@ public class LearnFragment extends Fragment {
 	public void setCurrentStatus(boolean modified){
 		this.modified=modified;
 	}
+	
+	public TextView[] getTextViews() {
+		TextView[] ans = {word, wordTrans};
+		return ans;
+	}
+	
+	public EditText[] getEditTexts() {
+		EditText[] ans = {editWord, editWordTrans};
+		return ans;
+	}
 }

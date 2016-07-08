@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
 import android.view.Menu;
@@ -25,14 +26,11 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnActivity extends ActionBarActivity implements ViewPager.OnPageChangeListener {
+public class LearnActivity extends ActionBarActivity {
 
 	ViewPager pager;
-	//FragmentStatePagerAdapter adapter;
 	MyPageAdapter pageAdapter;
-	List<Fragment> fragments;	
-	TextView tv, tvTrans;
-	EditText et, etTrans;
+	List<Fragment> fragments;
 	LearnFragment currentLF;
 
 	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
@@ -67,7 +65,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 			case R.id.deleting_word:
 				mode.finish(); // Action picked, so close the CAB
 				confirm_deletion();
-				//delete_current_word();
 				return true;
 			case R.id.saving_word:
 				save_current_word();
@@ -124,15 +121,39 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
 
 		//detect the scrolling to reinitialize the buttons and the views of the current Activity
-		pager.setOnPageChangeListener(this);
+		pager.setOnPageChangeListener(pageChanged);
 	}
 	
+	OnPageChangeListener pageChanged = new OnPageChangeListener() {
+
+		@Override
+		/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
+		public void onPageScrollStateChanged(int arg0) {
+			currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
+			TextView[] tv = currentLF.getTextViews();
+			EditText[] et = currentLF.getEditTexts();
+			modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
+
+			//If the user swipe the view, the application ends the ActionMode
+			if(mActionMode != null)
+				mActionMode.finish();
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+		}
+
+		@Override
+		public void onPageSelected(int arg0) {
+		}
+	
+	};
 	
 	protected void modify_current_word() {
 		
 		//get the current TextViews and EditTexts
-		TextView[] tv = getCurrentTv(currentLF);
-		EditText[] et = getCurrentEt(currentLF);
+		TextView[] tv = currentLF.getTextViews();
+		EditText[] et = currentLF.getEditTexts();
 		currentLF.setCurrentStatus(true);
 		//sets the EditTexts to invisible and the TextViews to visible
 		modifyTextViewsVisibility(tv[0], 4, tv[1], 4, et[0], 0, et[1], 0);
@@ -150,8 +171,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 	protected void cancel_modification() {
 		
 		//get the current TextViews and EditTexts
-		TextView[] tvWords = getCurrentTv(currentLF);
-		EditText[] etWords = getCurrentEt(currentLF);
+		TextView[] tvWords = currentLF.getTextViews();
+		EditText[] etWords = currentLF.getEditTexts();
 		currentLF.setCurrentStatus(false);
 		//sets the TextViews to invisible and the EditTexts to visible
 		modifyTextViewsVisibility(tvWords[0], 0, tvWords[1], 0, etWords[0], 4, etWords[1], 4);
@@ -166,8 +187,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 
 		int pos = pager.getCurrentItem();
 		//get the current TextViews and EditTexts
-		TextView[] tv = getCurrentTv(currentLF);
-		EditText[] et = getCurrentEt(currentLF);
+		TextView[] tv = currentLF.getTextViews();
+		EditText[] et = currentLF.getEditTexts();
 
 		//sets the EditTexts to invisible and the TextViews to visible
 		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
@@ -257,44 +278,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		buttonModify.setVisibility(buttonModifyV);
 	}
 
-	/**@returns the TextViews of the current activity*/
-	protected TextView[] getCurrentTv(LearnFragment currentLF) {
-		tv = (TextView) currentLF.getView().findViewById(R.id.tvWord);
-		tvTrans = (TextView) currentLF.getView().findViewById(R.id.tvWordTrans);
-		TextView[] ans = {tv,tvTrans};
-		return ans;
-	}
-
-	/**@returns the TextViews of the current activity*/
-	protected EditText[] getCurrentEt(LearnFragment currentLF) {
-		et = (EditText) currentLF.getView().findViewById(R.id.editWord);
-		etTrans = (EditText) currentLF.getView().findViewById(R.id.editWordTrans);
-		EditText[] ans = {et,etTrans};
-		return ans;
-	}
-
-	@Override
-	/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
-	public void onPageScrollStateChanged(int arg0) {
-		//adapter = (FragmentStatePagerAdapter)pager.getAdapter();
-		currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
-		TextView[] tv = getCurrentTv(currentLF);
-		EditText[] et = getCurrentEt(currentLF);
-		modifyTextViewsVisibility(tv[0], 0, tv[1], 0, et[0], 4, et[1], 4);
-
-		//If the user swipe the view, the application ends the ActionMode
-		if(mActionMode != null)
-			mActionMode.finish();
-	}
-
-	@Override
-	public void onPageScrolled(int arg0, float arg1, int arg2) {
-	}
-
-	@Override
-	public void onPageSelected(int arg0) {
-	}
-
 	/**@returns a list of Fragment (word and translation from the DB)*/
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
@@ -323,10 +306,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		@Override
 		public Fragment getItem(int position) {
 			return this.fragments.get(position);
-		}
-
-		public void setItem(int position, Fragment newFragment) {
-			this.fragments.set(position, newFragment);
 		}
 
 		@Override
