@@ -2,8 +2,9 @@ package com.example.furry_octo_waddle.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-import android.content.Context;
-import android.annotation.SuppressLint;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,13 +12,10 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.view.ActionMode;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -73,8 +71,9 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				//mode.finish(); // Action picked, so close the CAB
 				return true;
 			case R.id.deleting_word:
-				delete_current_word();
 				mode.finish(); // Action picked, so close the CAB
+				confirm_deletion();
+				//delete_current_word();
 				return true;
 			case R.id.saving_word:
 				save_current_word();
@@ -93,6 +92,22 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		}
 	};
 	protected ActionMode mActionMode =null;
+	
+	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+	    @Override
+	    public void onClick(DialogInterface dialog, int which) {
+	        switch (which){
+	        case DialogInterface.BUTTON_POSITIVE:
+	            //Yes button clicked
+	        	delete_current_word();
+	            break;
+
+	        case DialogInterface.BUTTON_NEGATIVE:
+	            //No button clicked
+	            break;
+	        }
+	    }
+	};
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -235,6 +250,12 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		fragments.remove(pos);
 		pageAdapter.notifyDataSetChanged();
 	}
+	
+	protected void confirm_deletion() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setMessage("Are you sure you want to delete this word?").setPositiveButton("Yes", dialogClickListener)
+		.setNegativeButton("No", dialogClickListener).show();
+	}
 
 	protected void setListenerActionMode(View v){
 		v.setOnLongClickListener(new View.OnLongClickListener() {
@@ -261,7 +282,6 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 			mode.getMenu().findItem(R.id.editting_word).setVisible(true);
 		}
 		return true;
-
 	}
 
 	/**Set the visibility of the EditTexts and the TextViews to the given arguments*/

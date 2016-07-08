@@ -95,7 +95,6 @@ public class LearnFragment extends Fragment {
 			}	
 		});
 
-		wordTrans.setText(word_obj.getTraduction_of_word());		
 		((LearnActivity)getActivity()).setListenerActionMode(v);
 		
 		return v;
