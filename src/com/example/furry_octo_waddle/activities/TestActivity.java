@@ -122,30 +122,29 @@ public class TestActivity extends ActionBarActivity {
 	Runnable r = new Runnable() {
 	    @Override
 	    public void run(){
-			currentLF.displayNewTestFragment(); //call the method of TestFragment that is responsible for the view modification
+			currentLF.displayNewTestFragment(); //call the method of TestFragment which is responsible for the view modification
 	    }
 	};
 	
 	public void show_word_and_swipe() {
 		answerClicked = true;
+		
 		adapter = (FragmentPagerAdapter)pager.getAdapter();
 		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 		
 		currentLF.getEditTestWord().setVisibility(View.INVISIBLE);
-		
 		TextView textWordTrans = currentLF.getTextWordTrans();
 		textWordTrans.setVisibility(View.VISIBLE);
 		textWordTrans.setText(currentLF.getCurrentWords()[1]);
 		textWordTrans.setTextColor(Color.parseColor("#FF0033"));
 		
 		Handler h = new Handler();
-		h.postDelayed(r, 1000); //include a delay of 1sec before displaying a new fragment
+		h.postDelayed(r, 1000); //include a delay of 1 sec before displaying a new fragment
 		
 		answerClicked = false;
 	}
 	
-	public static void updateScore(boolean found) {
-		if(found)
+	public static void incrementScore() {
 			numWordsFound++;
 	}
 	
