@@ -77,6 +77,8 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 				return false;
 			}
 		}
+		
+		
 
 		// Called when the user exits the action mode
 		@Override
@@ -337,6 +339,34 @@ public class LearnActivity extends ActionBarActivity implements ViewPager.OnPage
 		@Override
 		public int getItemPosition(Object object) {
 			return POSITION_NONE;
+		}
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    getMenuInflater().inflate(R.menu.context_menu, menu);
+	    menu.findItem(R.id.saving_word).setVisible(false);
+	    return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		MainActivity.printDebug(25,"Item id "+ item.getItemId());
+		switch (item.getItemId()) {
+		case R.id.editting_word:
+			modify_current_word();
+			//mode.finish(); // Action picked, so close the CAB
+			return true;
+		case R.id.deleting_word:
+			// Action picked, so close the CAB
+			confirm_deletion();
+			//delete_current_word();
+			return true;
+		case R.id.saving_word:
+			save_current_word(); // Action picked, so close the CAB
+			return true;
+		default:
+			return false;
 		}
 	}
 }
