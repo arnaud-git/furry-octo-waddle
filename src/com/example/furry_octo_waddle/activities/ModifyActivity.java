@@ -100,9 +100,9 @@ public class ModifyActivity extends ActionBarActivity{
 		//create the new object with the typed words
 		//save the new object in the database
 		// Will be better to put the languages in the inputs
-		word_obj = new Word_Translation(word, wordTrad);
+		word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
 
-		MainActivity.cbd.writeWord(word_obj);
+		MainActivity.cbd.modifyWordbyId(word_obj);
 
 		Toast.makeText(ModifyActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
 	}
