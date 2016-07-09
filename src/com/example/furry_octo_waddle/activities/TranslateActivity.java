@@ -41,11 +41,17 @@ public class TranslateActivity extends ActionBarActivity{
 	private ListView lstView;
 	private boolean modification;
 
-
+	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.translate_layout);
 		listWords();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		query_bd("");
 	}
 
 
