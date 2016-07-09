@@ -19,6 +19,12 @@
         android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/string_delete"/>
     
+    <item
+        android:id="@+id/answer"
+        app:showAsAction="ifRoom"
+        android:title="@string/string_answer"
+        android:visible="false" />
+    
      
 
 </menu>
