@@ -33,59 +33,6 @@ public class LearnActivity extends Base_Activity {
 	List<Fragment> fragments;
 	LearnFragment currentLF;
 
-	private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
-
-		// Called when the action mode is created; startActionMode() was called
-		@Override
-		public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-			// Inflate a menu resource providing context menu items
-			MenuInflater inflater = mode.getMenuInflater();
-			inflater.inflate(R.menu.context_menu, menu);
-			showActionMode(mode, menu);
-			return true;
-		}
-
-		// Called each time the action mode is shown. Always called after onCreateActionMode, but
-		// may be called multiple times if the mode is invalidated.
-		@Override
-		public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-			showActionMode(mode, menu);
-			return true; // Return false if nothing is done
-		}
-
-		// Called when the user selects a contextual menu item
-		@Override
-		public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-			MainActivity.printDebug(25,"Item id "+ item.getItemId());
-			switch (item.getItemId()) {
-			case R.id.editting_word:
-				modify_current_word();
-				//mode.finish(); // Action picked, so close the CAB
-				return true;
-			case R.id.deleting_word:
-				mode.finish(); // Action picked, so close the CAB
-				confirm_deletion();
-				return true;
-			case R.id.saving_word:
-				save_current_word();
-				mode.finish(); // Action picked, so close the CAB
-				return true;
-			default:
-				return false;
-			}
-		}
-
-
-
-		// Called when the user exits the action mode
-		@Override
-		public void onDestroyActionMode(ActionMode mode) {
-			cancel_modification();
-			mActionMode = null;
-		}
-	};
-	protected ActionMode mActionMode =null;
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -117,11 +64,6 @@ public class LearnActivity extends Base_Activity {
 		/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 		public void onPageScrollStateChanged(int arg0) {
 			currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
-
-			//If the user swipe the view, the application ends the ActionMode
-			//setCurrentFragment(currentLF);
-			if(mActionMode != null)
-				mActionMode.finish();
 		}
 
 		@Override
@@ -149,21 +91,6 @@ public class LearnActivity extends Base_Activity {
 		default : return super.onOptionsItemSelected(item);
 		}
 	}	
-
-	protected void setListenerActionMode(View v){
-		v.setOnLongClickListener(new View.OnLongClickListener() {
-			// Called when the user long-clicks on someView
-			public boolean onLongClick(View view) {
-				if (mActionMode != null) {
-					return false;
-				}
-				// Start the CAB using the ActionMode.Callback defined above
-				mActionMode = startSupportActionMode(mActionModeCallback);
-				view.setSelected(true);
-				return true;
-			}
-		});
-	}
 
 	protected boolean showActionMode(ActionMode mode, Menu menu){
 		if(currentLF.getCurrentStatus()){
@@ -222,17 +149,11 @@ public class LearnActivity extends Base_Activity {
 	protected void save_current_word() {
 		super.save_current_word();
 		currentLF.setCurrentStatus(false);
-		if (mActionMode != null) {
-			mActionMode.invalidate();
-		}
 	}
 
 	@Override
 	protected void delete_current_word(){
 		super.delete_current_word();
-		if (mActionMode != null) {
-			mActionMode.invalidate();
-		}
 		int pos = pager.getCurrentItem();
 		fragments.remove(pos);
 		pageAdapter.notifyDataSetChanged();
@@ -243,18 +164,12 @@ public class LearnActivity extends Base_Activity {
 	protected void modify_current_word() {
 		super.modify_current_word();
 		currentLF.setCurrentStatus(true);
-		if (mActionMode != null) {
-			mActionMode.invalidate();
-		}
 	}
 	
 	@Override
 	protected void cancel_modification() {
 		super.cancel_modification();
 		currentLF.setCurrentStatus(false);
-		if (mActionMode != null) {
-			mActionMode.invalidate();
-		}
 	}
 
 	@Override

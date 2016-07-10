@@ -50,7 +50,6 @@ public class LearnFragment extends Fragment {
 		}
 		MainActivity.printDebug(63,"Salut "+word_obj.getWord() );
 
-		((LearnActivity)getActivity()).setListenerActionMode(view);
 		this.view=view;
 		((LearnActivity)getActivity()).setFragment(this);		
 		return view;
