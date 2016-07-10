@@ -1,47 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
-    
-        <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:fillViewport="true"
-        android:isScrollContainer="false" >
+	xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+	android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
-     
-     <com.example.furry_octo_waddle.activities.WrapContentViewPager
-        	android:id="@+id/viewpager"
-		    android:layout_width="match_parent"
-		    android:layout_height="wrap_content"
-		    android:layout_marginTop="50dp"
-		    android:layout_marginBottom="60dp"/>
+	<ScrollView android:layout_width="fill_parent"
+		android:layout_height="fill_parent" android:fillViewport="true"
+		android:isScrollContainer="false">
 
-    <Button
-        android:id="@+id/answer_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:background="@drawable/back"
-        android:text="@string/string_answer" />
+		<RelativeLayout android:layout_width="match_parent"
+			android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/liveScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/answer_button"
-        android:layout_alignBottom="@+id/answer_button"
-        android:layout_alignParentLeft="true"
-        android:layout_marginLeft="20dp"
-        android:text="12/23"
-        android:textSize="30sp" />
+			<com.example.furry_octo_waddle.activities.TestWrapContentViewPager
+				android:id="@+id/viewpager" android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:layout_marginTop="50dp"
+				android:layout_marginBottom="60dp" />
 
-	</RelativeLayout>
+			<TextView android:id="@+id/liveScore" android:layout_width="wrap_content"
+				android:layout_height="wrap_content" android:layout_alignParentLeft="true"
+				android:layout_marginLeft="20dp" android:text="12/23"
+				android:textSize="30sp" />
+
+		</RelativeLayout>
 	</ScrollView>
 </RelativeLayout>

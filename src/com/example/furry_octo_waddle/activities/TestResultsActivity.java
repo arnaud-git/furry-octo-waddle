@@ -2,11 +2,12 @@ package com.example.furry_octo_waddle.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.widget.TextView;
 
 import com.example.furry_octo_waddle.R;
 
-public class TestResultsActivity extends Activity{
+public class TestResultsActivity extends ActionBarActivity{
 	
 	TextView finalScoreTest, finalCommentTest;
 	String finalComment;

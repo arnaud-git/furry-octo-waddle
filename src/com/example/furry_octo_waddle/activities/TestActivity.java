@@ -5,19 +5,15 @@ import java.util.List;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.NavUtils;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
-import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v7.app.ActionBarActivity;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,11 +31,10 @@ public class TestActivity extends ActionBarActivity {
 	FragmentPagerAdapter adapter;
 	TestFragment currentLF;
 
-	Button answerButton;
 	EditText editTestWord;
 	
-	static boolean answerClicked = false;
 	static int numWordsFound;
+	static boolean answerClicked = false;
 
 
 	public void onCreate(Bundle savedInstanceState) {
@@ -55,35 +50,7 @@ public class TestActivity extends ActionBarActivity {
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
 		
-		setAnswerClicked(false);
-
-		pager.setOnTouchListener(new View.OnTouchListener() 
-		{         
-			@Override
-			public boolean onTouch(View v, MotionEvent event)
-			{ 
-				return true; 
-			}
-		});		
-		answerButton = (Button) findViewById(R.id.answer_button);
-		answerButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View arg0) {
-				adapter = (FragmentPagerAdapter)pager.getAdapter();
-				currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
-				editTestWord = currentLF.getEditTestWord();
-				editTestWord.setText("");
-				editTestWord.setHint(currentLF.getCurrentWords()[1]);
-				
-				setAnswerClicked(true);
-
-				editTestWord.setHintTextColor(Color.parseColor("#FFCCCC"));
-				editTestWord.setTextColor(Color.parseColor("#FF0033"));
-				
-				//pager.setCurrentItem(pager.getAdapter().getCount() - 1);
-			}
-		});
+		numWordsFound = 0;
 	}
 
 	private class MyPageAdapter extends FragmentPagerAdapter {
@@ -126,19 +93,62 @@ public class TestActivity extends ActionBarActivity {
 		return pager;
 	}
 	
-	public static void setAnswerClicked(boolean clickedOrNot) {
-		answerClicked = clickedOrNot;
+	public static int getNumWordsFound(){
+		return numWordsFound;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    getMenuInflater().inflate(R.menu.context_menu, menu);
+	    menu.findItem(R.id.editting_word).setVisible(false);
+	    menu.findItem(R.id.deleting_word).setVisible(false);
+	    menu.findItem(R.id.saving_word).setVisible(false);
+	    menu.findItem(R.id.answer).setVisible(true);
+	    return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    // Handle item selection
+	    switch (item.getItemId()) {
+	        case R.id.answer:
+	        	show_word_and_swipe();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	
+	Runnable r = new Runnable() {
+	    @Override
+	    public void run(){
+			currentLF.displayNewTestFragment(); //call the method of TestFragment which is responsible for the view modification
+	    }
+	};
+	
+	public void show_word_and_swipe() {
+		answerClicked = true;
+		
+		adapter = (FragmentPagerAdapter)pager.getAdapter();
+		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
+		
+		currentLF.getEditTestWord().setVisibility(View.INVISIBLE);
+		TextView textWordTrans = currentLF.getTextWordTrans();
+		textWordTrans.setVisibility(View.VISIBLE);
+		textWordTrans.setText(currentLF.getCurrentWords()[1]);
+		textWordTrans.setTextColor(Color.parseColor("#FF0033"));
+		
+		Handler h = new Handler();
+		h.postDelayed(r, 1000); //include a delay of 1 sec before displaying a new fragment
+		
+		answerClicked = false;
+	}
+	
+	public static void incrementScore() {
+			numWordsFound++;
 	}
 	
 	public static boolean getAnswerClicked() {
 		return answerClicked;
-	}
-	
-	public static void incrementNumWordsFound(){
-		numWordsFound++;
-	}
-	
-	public static int getNumWordsFound(){
-		return numWordsFound;
 	}
 }

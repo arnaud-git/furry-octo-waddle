@@ -11,12 +11,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.view.ActionMode;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView.MultiChoiceModeListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView.OnItemClickListener;
@@ -37,11 +41,17 @@ public class TranslateActivity extends ActionBarActivity{
 	private ListView lstView;
 	private boolean modification;
 
-
+	@Override
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.translate_layout);
 		listWords();
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		query_bd("");
 	}
 
 
@@ -60,6 +70,7 @@ public class TranslateActivity extends ActionBarActivity{
 				startActivity(i);
 			}
 		});
+		
 		search_text.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -111,6 +122,9 @@ public class TranslateActivity extends ActionBarActivity{
 				android.R.layout.simple_list_item_1, list);
 		lstView.setAdapter(adapter);
 	}
+	
+	
+	
 	private class Words_Array_Adapter extends ArrayAdapter<Word_Translation> {
 		private final Context context;
 		private final  List<Word_Translation> values;

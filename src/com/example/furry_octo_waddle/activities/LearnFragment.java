@@ -1,14 +1,18 @@
 package com.example.furry_octo_waddle.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.ViewSwitcher;
-
-import java.util.List;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
@@ -17,6 +21,10 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class LearnFragment extends Fragment {
 
 	private Word_Translation word_obj= null;
+	TextView word, wordTrans;
+	EditText editWord, editWordTrans;
+	private View view ;
+	private boolean modified = false;
 
 	public static final LearnFragment newInstance(Word_Translation word_obj)
 	{
@@ -24,7 +32,6 @@ public class LearnFragment extends Fragment {
 		Bundle bdl = new Bundle(1);
 		bdl.putInt(Word_Translation.WORD_ID, word_obj.getId());
 		f.setArguments(bdl);
-
 		return f;
 	}
 
@@ -32,9 +39,8 @@ public class LearnFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.word_layout, container, false);
-		TextView word = (TextView)v.findViewById(R.id.tvWord);
-		TextView wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
+		View view = inflater.inflate(R.layout.word_layout, container, false);
+
 		if(word_obj==null){
 			Word_Translation query = new Word_Translation( getArguments().getInt(Word_Translation.WORD_ID),"%", "%");
 			List<Word_Translation> res = MainActivity.cbd.getWordFromTable(query,Order.NULL,-1);
@@ -43,10 +49,11 @@ public class LearnFragment extends Fragment {
 			else 
 				MainActivity.printDebug(1, "Renvoie liste trop longue");
 		}
-		word.setText(word_obj.getWord());
-		wordTrans.setText(word_obj.getTraduction_of_word());		
+		MainActivity.printDebug(63,"Salut "+word_obj.getWord() );
 
-		return v;
+		this.view=view;
+		((LearnActivity)getActivity()).setFragment(this);		
+		return view;
 	}
 
 
@@ -57,4 +64,18 @@ public class LearnFragment extends Fragment {
 	public void setCurrentWord_T(Word_Translation toto){
 		word_obj=toto;
 	}
+
+	public boolean getCurrentStatus() {
+		return modified;
+	}
+
+	public void setCurrentStatus(boolean modified){
+		this.modified=modified;
+	}
+
+	
+	public View getViewPos(){
+		return view;
+	}
+	
 }

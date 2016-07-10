@@ -22,8 +22,9 @@ public class TestFragment extends Fragment implements Serializable{
 
 	public static final String EXTRA_MESSAGE = "EXTRA_MESSAGE";
 	String word, wordTrans;
-	EditText editWordTrans;
-	TextView tvWord, liveScoreTextView;
+	EditText editWord, editWordTrans;
+	TextView tvWord, tvWordTrans;
+	TextView liveScoreTextView;
 	View v;
 	ViewPager pager;
 	String liveScore;
@@ -34,19 +35,26 @@ public class TestFragment extends Fragment implements Serializable{
         Bundle savedInstanceState) {
 		
 		v = inflater.inflate(R.layout.word_layout, container, false);
-		view_of_the_word(0);
+
 		MainActivity.printDebug(2, "msg");
 		String[] words = getArguments().getStringArray(EXTRA_MESSAGE);
-		pager = TestActivity.getPager();
+
+		editWord = (EditText) v.findViewById(R.id.editWord);
+		tvWordTrans = (TextView) v.findViewById(R.id.tvWordTrans);
+		editWordTrans = (EditText) v.findViewById(R.id.editWordTrans);
+		tvWord = (TextView) v.findViewById(R.id.tvWord);
 		
-		tvWord.setText(words[0]);
+		display_correct_word_views();
+		
 		wordTrans = words[1];
+		tvWord.setText(words[0]);
+		editWordTrans.setHint("...");
 		
+		pager = TestActivity.getPager();
 		listLength = pager.getAdapter().getCount();
 		
 		liveScoreTextView = (TextView) getActivity().findViewById(R.id.liveScore);
-		liveScore = "0/" + String.valueOf(listLength);
-		liveScoreTextView.setText(liveScore);
+		liveScoreTextView.setText("0/0");
 		
 		editWordTrans.addTextChangedListener(new TextWatcher() {
 
@@ -59,26 +67,11 @@ public class TestFragment extends Fragment implements Serializable{
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				
-				if(Word_Translation.matches(editWordTrans.getText().toString(),wordTrans)) {
+				if(Word_Translation.matches(editWordTrans.getText().toString(),wordTrans) && !TestActivity.getAnswerClicked()) {
 					
 					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
-					
-					if(!TestActivity.getAnswerClicked())
-						TestActivity.incrementNumWordsFound();
-					
-					if(pager.getCurrentItem()+1<pager.getAdapter().getCount())
-						pager.setCurrentItem(pager.getCurrentItem() + 1);
-					
-					//TODO print results
-					else {
-						Intent i = new Intent(getActivity(), TestResultsActivity.class);
-						i.putExtra("score", (100*TestActivity.getNumWordsFound())/pager.getAdapter().getCount());
-						getActivity().finish();
-						startActivity(i);
-					}
-					liveScore = String.valueOf(TestActivity.getNumWordsFound()) + "/" + String.valueOf(listLength);
-					liveScoreTextView.setText(liveScore);
-					TestActivity.setAnswerClicked(false);
+					TestActivity.incrementScore();
+					displayNewTestFragment();
 				}
 			}
 
@@ -107,19 +100,40 @@ public class TestFragment extends Fragment implements Serializable{
 		return ans;
 	}
 	
-	public EditText getEditTestWord() {
-		return editWordTrans;
+	private void display_correct_word_views (){
+		
+		editWord.setVisibility(View.INVISIBLE);
+		editWordTrans.setVisibility(View.VISIBLE);
+		editWordTrans.requestFocus();
+		tvWord.setVisibility(View.VISIBLE);
+		tvWordTrans.setVisibility(View.INVISIBLE);
 	}
 	
-	private void view_of_the_word(int i){
-		EditText editWord = (EditText) v.findViewById(R.id.editWord);
-		editWordTrans = (EditText) v.findViewById(R.id.editWordTrans);
-		tvWord = (TextView) v.findViewById(R.id.tvWord);
-		TextView tvWordTrans = (TextView) v.findViewById(R.id.tvWordTrans);
-		editWord.setVisibility(View.GONE);
-		editWordTrans.setVisibility(View.VISIBLE);
-		editWordTrans.setHint("...");
-		tvWord.setVisibility(View.VISIBLE);
-		tvWordTrans.setVisibility(View.GONE);
+	public String getLiveScore() {
+		return String.valueOf(TestActivity.getNumWordsFound() + "/" + String.valueOf(pager.getCurrentItem()));
+	}
+	
+	public void displayNewTestFragment(){
+		
+		if(pager.getCurrentItem() + 1 < pager.getAdapter().getCount()) {
+			pager.setCurrentItem(pager.getCurrentItem() + 1);
+			liveScoreTextView.setText(getLiveScore());
+		}
+		
+		//TODO print results
+		else {
+			Intent i = new Intent(getActivity(), TestResultsActivity.class);
+			i.putExtra("score", (100*TestActivity.getNumWordsFound())/pager.getAdapter().getCount());
+			getActivity().finish();
+			startActivity(i);
+		}
+	}
+	
+	public TextView getTextWordTrans(){
+		return (TextView) getView().findViewById(R.id.tvWordTrans);
+	}
+	
+	public EditText getEditTestWord() {
+		return editWordTrans;
 	}
 }

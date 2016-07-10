@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/saving_word"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/string_save"/>
+    
+    <item
+        android:id="@+id/editting_word"
+        android:icon="@android:drawable/ic_menu_edit"
+        app:showAsAction="ifRoom"
+        android:title="@string/string_modify"/>
+
+    <item
+        android:id="@+id/deleting_word"
+        app:showAsAction="ifRoom"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/string_delete"/>
+    
+    <item
+        android:id="@+id/answer"
+        app:showAsAction="ifRoom"
+        android:title="@string/string_answer"
+        android:visible="false" />
+    
+     
+
+</menu>
