@@ -66,7 +66,7 @@ public class Base_Activity extends ActionBarActivity{
 		toast.show();
 
 		//Deletes in the db
-		MainActivity.cbd.deleteWordbyIndex(word_obj.getId());	
+		MainActivity.cbd.deleteWord(word_obj);	
 	}
 
 	protected void save_current_word(){
@@ -76,7 +76,7 @@ public class Base_Activity extends ActionBarActivity{
 		//create the new object with the typed words
 		//save the new object in the database
 		// Will be better to put the languages in the inputs
-		word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
+		word_obj = new Word_Translation(word_obj.getId(),word, wordTrad);
 
 		// TODO cbd one function for thes cases
 		if(word_obj.getId()>0)
