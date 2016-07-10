@@ -24,115 +24,32 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class ModifyActivity extends ActionBarActivity{
-	
-	Button addButton;
-	EditText editWord, editWordTrans;
-	String word, wordTrad;
-	Word_Translation word_obj;
-	
-	DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-	    @Override
-	    public void onClick(DialogInterface dialog, int which) {
-	        switch (which){
-	        case DialogInterface.BUTTON_POSITIVE:
-	            //Yes button clicked
-	        	delete_current_word();
-	        	finish();
-	            break;
+public class ModifyActivity extends Base_Activity{
 
-	        case DialogInterface.BUTTON_NEGATIVE:
-	            //No button clicked
-	            break;
-	        }
-	    }
-	};
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.modify_layout);
-		view_of_the_word(1);
-		writeWord();
-	}
-	
-	private void view_of_the_word(int i){
-		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
-		TextView tvWord = (TextView) findViewById(R.id.tvWord);
-		TextView tvWordTrans = (TextView) findViewById(R.id.tvWordTrans);
-		editWord.setVisibility(View.VISIBLE);
-		editWordTrans.setVisibility(View.VISIBLE);
-		
-		tvWord.setVisibility(View.GONE);
-		tvWordTrans.setVisibility(View.GONE);
-	}
-	
-	private void writeWord(){
+		setViewByLayout();
 		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", getIntent().getExtras().getInt(Word_Translation.WORD_ID)),Order.NULL,1);
 		if(list.size()>0)
 			word_obj=list.get(0);
-		MainActivity.printDebug(2, word_obj.getWord());
-		view_of_the_word(1);
-		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
-
-		word_obj.printWord();
-		MainActivity.printDebug(2, word_obj.getWord());
-		editWord.setText(word_obj.getWord());
-		editWordTrans.setText(word_obj.getTraduction_of_word());
-		editWordTrans.requestFocus();
-		//editWordTrans.setSelection(editWordTrans.getText().length());
+		writeWord();
 		
 	}
 	
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle item selection
-	    switch (item.getItemId()) {
-	        case R.id.saving_word:
-	            save_current_word();
-	            finish();
-	            return true;
-	        case R.id.deleting_word:
-	        	confirm_deletion();
-	        	return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
-	
-	private void delete_current_word() {
-			//buttonDelete deletes the words of the current fragment from the database
-			Toast toast = Toast.makeText(getApplicationContext(), "Word deleted !", Toast.LENGTH_LONG);
-			toast.show();
-			//Deletes in the db
-			MainActivity.cbd.deleteWordbyIndex(word_obj.getId());	
-	}
-
-	private void save_current_word(){
-		word = editWord.getText().toString();
-		wordTrad = editWordTrans.getText().toString();
-
-		//create the new object with the typed words
-		//save the new object in the database
-		// Will be better to put the languages in the inputs
-		word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
-
-		MainActivity.cbd.modifyWordbyId(word_obj);
-
-		Toast.makeText(ModifyActivity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+	@Override
+	protected void save_current_word(){
+		super.save_current_word();
+		finish();
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    getMenuInflater().inflate(R.menu.context_menu, menu);
-	    menu.findItem(R.id.editting_word).setVisible(false);
-	    return super.onCreateOptionsMenu(menu);
-	}
-	
-	protected void confirm_deletion() {
-		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setMessage("Are you sure you want to delete this word?").setPositiveButton("Yes", dialogClickListener)
-		.setNegativeButton("No", dialogClickListener).show();
+	public boolean onCreateOptionsMenu(Menu menu){
+		boolean retour = super.onCreateOptionsMenu(menu);
+		menu.findItem(R.id.editting_word).setVisible(false);
+		//menu.findItem(R.id.deleting_word).setVisible(false);
+		return retour;
 	}
 }

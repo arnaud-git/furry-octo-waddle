@@ -23,6 +23,7 @@ public class LearnFragment extends Fragment {
 	private Word_Translation word_obj= null;
 	TextView word, wordTrans;
 	EditText editWord, editWordTrans;
+	private View view ;
 	private boolean modified = false;
 
 	public static final LearnFragment newInstance(Word_Translation word_obj)
@@ -31,7 +32,6 @@ public class LearnFragment extends Fragment {
 		Bundle bdl = new Bundle(1);
 		bdl.putInt(Word_Translation.WORD_ID, word_obj.getId());
 		f.setArguments(bdl);
-
 		return f;
 	}
 
@@ -39,12 +39,8 @@ public class LearnFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, 
 			Bundle savedInstanceState) {
 
-		View v = inflater.inflate(R.layout.word_layout, container, false);
-		word = (TextView)v.findViewById(R.id.tvWord);
-		wordTrans = (TextView)v.findViewById(R.id.tvWordTrans);
-		editWord = (EditText)v.findViewById(R.id.editWord);
-		editWordTrans = (EditText)v.findViewById(R.id.editWordTrans);
-		
+		View view = inflater.inflate(R.layout.word_layout, container, false);
+
 		if(word_obj==null){
 			List<Word_Translation> res = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "%", getArguments().getInt(Word_Translation.WORD_ID)),Order.NULL,-1);
 			if(res.size()==1)
@@ -52,15 +48,11 @@ public class LearnFragment extends Fragment {
 			else 
 				MainActivity.printDebug(1, "Renvoie liste trop longue");
 		}
-		
-		word.setText(word_obj.getWord());
-		editWord.setText(word_obj.getWord());
-		wordTrans.setText(word_obj.getTraduction_of_word());
-		editWordTrans.setText(word_obj.getTraduction_of_word());
+		MainActivity.printDebug(63,"Salut "+word_obj.getWord() );
 
-		((LearnActivity)getActivity()).setListenerActionMode(v);
-		
-		return v;
+		this.view=view;
+		((LearnActivity)getActivity()).setFragment(this);		
+		return view;
 	}
 
 
@@ -79,14 +71,10 @@ public class LearnFragment extends Fragment {
 	public void setCurrentStatus(boolean modified){
 		this.modified=modified;
 	}
+
 	
-	public TextView[] getTextViews() {
-		TextView[] ans = {word, wordTrans};
-		return ans;
+	public View getViewPos(){
+		return view;
 	}
 	
-	public EditText[] getEditTexts() {
-		EditText[] ans = {editWord, editWordTrans};
-		return ans;
-	}
 }
