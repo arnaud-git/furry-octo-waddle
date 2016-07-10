@@ -24,6 +24,9 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 	private static final String SQL_DELETE_ENTRIES =
 	    "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
 	
+	private static final String SQL_DELETE_EXTRA_ENTRIES =
+		    "DROP TABLE IF EXISTS " + FeedEntry.EXTENDED_TABLE_NAME;
+	
 	/** If you change the database schema, you must increment the database version.*/
     public static final int DATABASE_VERSION = 8;
     public static final String DATABASE_NAME = "FeedReader.db";
@@ -48,6 +51,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        onUpgrade(db, oldVersion, newVersion);
+    	if(oldVersion < 9)
+    		db.execSQL(SQL_DELETE_EXTRA_ENTRIES);
     }
 }
