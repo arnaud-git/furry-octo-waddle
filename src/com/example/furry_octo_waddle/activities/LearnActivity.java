@@ -176,12 +176,14 @@ public class LearnActivity extends Base_Activity {
 	public boolean onCreateOptionsMenu(Menu menu){
 		boolean retour = super.onCreateOptionsMenu(menu);
 		if(currentLF.getCurrentStatus()){
+			getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
 			menu.findItem(R.id.editting_word).setVisible(false);
 			menu.findItem(R.id.saving_word).setVisible(true);
 		}
 		else {
 			menu.findItem(R.id.saving_word).setVisible(false);
 			menu.findItem(R.id.editting_word).setVisible(true);
+			getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
 		}
 		return retour;
 	}
