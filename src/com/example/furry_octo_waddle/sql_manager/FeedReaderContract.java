@@ -12,6 +12,7 @@ public final class FeedReaderContract {
 	/** Inner class that defines the table contents */
 	public static abstract class FeedEntry implements BaseColumns {
 		public static final String TABLE_NAME = "translation_table";
+		public static final String EXTENDED_TABLE_NAME = "extra_translation_table";
 		public static final String COLUMN_NAME_ENGLISH_WORD = "english_word";
 		public static final String COLUMN_NAME_FRENCH_WORD = "french_word";
 		public static final String EXTENDED_TABLE_NAME = "extra_translation_table";

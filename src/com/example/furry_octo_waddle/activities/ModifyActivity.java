@@ -48,6 +48,7 @@ public class ModifyActivity extends Base_Activity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu){
 		boolean retour = super.onCreateOptionsMenu(menu);
+		getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
 		menu.findItem(R.id.editting_word).setVisible(false);
 		//menu.findItem(R.id.deleting_word).setVisible(false);
 		return retour;
