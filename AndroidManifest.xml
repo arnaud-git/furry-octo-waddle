@@ -27,6 +27,7 @@
 			android:name="com.example.furry_octo_waddle.activities.LearnActivity"
 			android:label="@string/string_learn"
 			android:windowSoftInputMode="adjustResize"
+			android:configChanges="orientation|screenSize"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data
             	android:name="android.support.PARENT_ACTIVITY"
@@ -59,6 +60,7 @@
 			android:name="com.example.furry_octo_waddle.activities.TestActivity"
 			android:label="@string/string_test"
 			android:windowSoftInputMode="stateAlwaysVisible"
+			android:configChanges="orientation|screenSize"
 			android:parentActivityName="com.example.furry_octo_waddle.activities.MainActivity" >
 			<meta-data
             	android:name="android.support.PARENT_ACTIVITY"
