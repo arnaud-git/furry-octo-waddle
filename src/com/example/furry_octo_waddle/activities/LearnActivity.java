@@ -26,7 +26,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnActivity extends Base_Activity {
+public class LearnActivity extends BaseActivity {
 
 	ViewPager pager;
 	MyPageAdapter pageAdapter;
@@ -63,7 +63,10 @@ public class LearnActivity extends Base_Activity {
 		@Override
 		/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 		public void onPageScrollStateChanged(int arg0) {
+			currentLF.setCurrentStatus(false);
 			currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
+			showFragment(currentLF);
+			invalidateOptionsMenu();
 		}
 
 		@Override
@@ -108,7 +111,7 @@ public class LearnActivity extends Base_Activity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("%", "~"),Order.RANDOM, -1);
+		List<Word_Translation> words = action.getWordFromTable(new Word_Translation("%", "~"),Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));

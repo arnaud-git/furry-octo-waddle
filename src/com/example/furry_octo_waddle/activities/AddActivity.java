@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class AddActivity extends Base_Activity{
+public class AddActivity extends BaseActivity{
 	
 	
 	@Override

@@ -31,7 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class TranslateActivity extends ActionBarActivity{
+public class TranslateActivity extends BaseActivity{
 
 	Button addButton;
 	EditText editWord, editWordTrans;
@@ -114,16 +114,23 @@ public class TranslateActivity extends ActionBarActivity{
 
 		List<Word_Translation> list = null;
 		if(s.length()>0){
-			list = MainActivity.cbd.getWordFromTable(query, Order.LANGUAGE_ASC, -1);
+			list = action.getWordFromTable(query, Order.LANGUAGE_ASC, -1);
 		}else{
-			list = MainActivity.cbd.getWordFromTable(query, Order.STAMP_DESC, -1);
+			list = action.getWordFromTable(query, Order.STAMP_DESC, -1);
 		}
 		Words_Array_Adapter adapter = new Words_Array_Adapter(this,
 				android.R.layout.simple_list_item_1, list);
 		lstView.setAdapter(adapter);
 	}
 	
-	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu){
+		boolean retour = super.onCreateOptionsMenu(menu);
+		menu.findItem(R.id.editting_word).setVisible(false);
+		menu.findItem(R.id.deleting_word).setVisible(false);
+		menu.findItem(R.id.saving_word).setVisible(false);
+		return retour;
+	}
 	
 	private class Words_Array_Adapter extends ArrayAdapter<Word_Translation> {
 		private final Context context;
