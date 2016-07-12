@@ -10,18 +10,29 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.*;
 import android.support.v7.app.ActionBarActivity;
+import android.text.style.UpdateAppearance;
+
 import com.example.furry_octo_waddle.sql_manager.FeedReaderContract.FeedEntry;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Greek_alphabet;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Hangeul_alphabet;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Hiragana_alphabet;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Katakana_alphabet;
 
 /** Parts of code were found on https://developer.android.com/training/basics/data-storage/databases.html#ReadDbRow
  */
 
 public class Controleur_bd implements BD_rw{
-	private FeedReaderDbHelper mDbHelper;	
+	private FeedReaderDbHelper mDbHelper;
+	private boolean updated = true;
 
 	public Controleur_bd(ActionBarActivity ba) {
 		mDbHelper = new FeedReaderDbHelper(ba);
 		MainActivity.printDebug(1,"controleur cree");
+	}
+	
+	public void setUpdateVariable(boolean updated){
+		this.updated = updated;
 	}
 
 	/**@see writeWord(Word_Translation word)*/
@@ -132,6 +143,8 @@ public class Controleur_bd implements BD_rw{
 			case NULL : 
 				sortOrder = null;
 				break;
+			case ID_ASC:
+				sortOrder = " "+FeedEntry._ID+ " ASC ";
 			default : 
 				sortOrder = null;
 				break;
@@ -384,18 +397,21 @@ public class Controleur_bd implements BD_rw{
 	}*/
 
 	public void resetTable(Extra extra){
-		SQLiteDatabase db = mDbHelper.getReadableDatabase();
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		MainActivity.printDebug(1,"Table reset"); 
 		if(extra==Extra.NORMAL)
 			db.delete(FeedEntry.TABLE_NAME, null, null);
-		if(extra==Extra.EXTRA)
+		if(extra==Extra.EXTRA){
 			db.delete(FeedEntry.EXTENDED_TABLE_NAME, null, null);
+			update9();
+		}
+		
 	}
 
 	/** Deletes the table from the database*/
 	@SuppressWarnings("unused")
 	private void dropTable(){
-		SQLiteDatabase db = mDbHelper.getReadableDatabase();
+		SQLiteDatabase db = mDbHelper.getWritableDatabase();
 		MainActivity.printDebug(1,"Table droped"); 
 		try{
 			db.execSQL("DROP TABLE " +FeedEntry.TABLE_NAME);
@@ -464,4 +480,16 @@ public class Controleur_bd implements BD_rw{
 		}
 		return null;
 	}
+	
+	protected void update9(){
+		MainActivity.printDebug(1,"Update 9");
+		List<Word_Translation> list = getWordFromTable(new Word_Translation("%","%"), Order.ID_ASC, -1);
+		for(Word_Translation word : list){
+			writeWord(new Extra_Word_Translation(word));
+		}
+		Greek_alphabet.save_Greek_alphabet();
+		Hangeul_alphabet.save_Hangeul_alphabet();
+		Hiragana_alphabet.save_Hiragana_alphabet();
+		Katakana_alphabet.save_Katakana_alphabet();
+	} 
 }

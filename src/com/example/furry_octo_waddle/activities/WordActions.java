@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 public class WordActions implements Serializable{
 
+	public static boolean EXTRA = false;
 	protected Word_Translation word_obj =  new Word_Translation("", "");
 	protected TextView tvWord;
 	protected TextView tvWordTrans;
@@ -172,6 +173,9 @@ public class WordActions implements Serializable{
 		tvWordTrans.setVisibility(View.INVISIBLE);
 	}
 
+	protected Word_Translation query(String word, String wordTrans){
+		return new Word_Translation(word,wordTrans);
+	}
 
 
 	public void show_answer() {

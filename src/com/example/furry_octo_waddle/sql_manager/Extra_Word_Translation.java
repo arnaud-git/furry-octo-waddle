@@ -1,5 +1,7 @@
 package com.example.furry_octo_waddle.sql_manager;
 
+import com.example.furry_octo_waddle.activities.MainActivity;
+
 public class Extra_Word_Translation extends Word_Translation {
 
 	private String pronunciation ="";
@@ -19,6 +21,18 @@ public class Extra_Word_Translation extends Word_Translation {
 			setType(Extra.EXTRA);
 		}
 
+	}
+	
+	public Extra_Word_Translation(Word_Translation word){
+		super(String.valueOf(word.getId()),word.getLanguage(),word.getWord(),word.getTargeted_language(),word.getTraduction_of_word(),word.getTime());
+		if(word.getType()==Extra.NORMAL){
+			romanization="";
+			pronunciation="";
+		}else{
+			romanization = ((Extra_Word_Translation)word).getRomanization();			
+			pronunciation = ((Extra_Word_Translation)word).getPronunciation();
+		}
+		MainActivity.printDebug(1, "Debug");
 	}
 
 	public Extra_Word_Translation(String index, String[] args,String time){

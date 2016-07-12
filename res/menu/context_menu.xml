@@ -3,28 +3,35 @@
 
     <item
         android:id="@+id/saving_word"
-        app:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_save"
-        android:title="@string/string_save"/>
-    
+        android:title="@string/string_save"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/editting_word"
         android:icon="@android:drawable/ic_menu_edit"
-        app:showAsAction="ifRoom"
-        android:title="@string/string_modify"/>
-
+        android:title="@string/string_modify"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/deleting_word"
-        app:showAsAction="ifRoom"
         android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/string_delete"/>
-    
+        android:title="@string/string_delete"
+        app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/answer"
-        app:showAsAction="ifRoom"
         android:title="@string/string_answer"
-        android:visible="false" />
-    
-     
+        android:visible="false"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/settings"
+        android:title="@string/string_settings"
+        app:showAsAction="never">
+        <menu>
+            <item
+                android:id="@+id/extra_mode"
+                android:checkable="true"
+                android:title="@string/string_extra_mode"
+                app:showAsAction="ifRoom"/>
+        </menu>
+    </item>
 
 </menu>

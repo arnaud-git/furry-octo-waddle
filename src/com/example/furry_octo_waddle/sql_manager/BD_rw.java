@@ -5,11 +5,13 @@ import java.util.List;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
 /** BD_rw*/
 public interface BD_rw {
+	
+	//boolean updated = true;
 	/* Will be deprecated */
 	public List<Word_Translation> getRandomEnglishWordNotTranslated(int nombre);
 	public List<Word_Translation> getRandomFrenchWordNotTranslated(int nombre);
 	public List<Word_Translation> getRandomPairOfWords(int number);
-	
+	public void setUpdateVariable(boolean updated);
 	/**Orders*/
 	public enum Order {
 		/**Randomly arranged*/
@@ -17,7 +19,7 @@ public interface BD_rw {
 		/**Alphabetical order (using {@link Word_Translation word.word} for the order )*/
 		LANGUAGE_ASC,
 		/**Last recent entries*/
-		STAMP_DESC, NULL}
+		STAMP_DESC, NULL, ID_ASC}
 	
 	/** @return a list of {@link Word_Translation words} from the table 
 	 * @param orderby :the order of the list 

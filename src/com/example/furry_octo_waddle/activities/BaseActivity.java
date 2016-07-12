@@ -22,10 +22,11 @@ import android.widget.Toast;
 
 public class BaseActivity extends ActionBarActivity{
 
-	protected WordActions action =  new WordActions(this);
+	protected WordActions action = null;//=  new WordActions(this);
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		newWordActions();
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -40,9 +41,28 @@ public class BaseActivity extends ActionBarActivity{
 		case R.id.deleting_word:
 			confirm_deletion();
 			return true;
+		case R.id.extra_mode:
+			change_mode(item);
+			return true;
 		default:
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	protected void newWordActions() {
+		if(WordActions.EXTRA){
+			action = new ExtraWordActions(this);
+			MainActivity.printDebug(1, "Essai");
+		}
+		else
+			action = new WordActions(this);
+	}
+	
+	protected void change_mode(MenuItem item){
+		WordActions.EXTRA = !WordActions.EXTRA;
+		item.setChecked(WordActions.EXTRA);
+		newWordActions();
+		//super.recreate();
 	}
 
 	protected void setViewByLayout(){
@@ -73,7 +93,8 @@ public class BaseActivity extends ActionBarActivity{
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.context_menu, menu);		
+		getMenuInflater().inflate(R.menu.context_menu, menu);
+		menu.findItem(R.id.extra_mode).setChecked(WordActions.EXTRA);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -154,4 +175,5 @@ public class BaseActivity extends ActionBarActivity{
 	protected void display_correct_word_views_TEST(){
 		action.display_correct_word_views_TEST();
 	}
+	
 }

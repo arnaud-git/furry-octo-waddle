@@ -67,10 +67,15 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     	MainActivity.printDebug(1, "Upgrade "+oldVersion+"  ->   "+newVersion);
     	if(oldVersion<10){
     		db.execSQL(SQL_CREATE_EXTRA_ENTRIES);
+    		fillExtraTable();
     	}
         //onCreate(db);
     }
-    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    private void fillExtraTable() {
+		((Controleur_bd)MainActivity.cbd).update9();;	
+	}
+
+	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     	MainActivity.printDebug(1, "Downgrade "+oldVersion+"  ->   "+newVersion);
     	if(newVersion<10)
     		db.execSQL(SQL_DELETE_EXTRA_ENTRIES);
