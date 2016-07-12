@@ -77,7 +77,7 @@ public class TestActivity extends BaseActivity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = action.getWordFromTable(new Word_Translation("~", "~"),Order.RANDOM, -1);
+		List<Word_Translation> words = action.getWordFromTable("~", "~",Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(TestFragment.newInstance(new Word_Translation("No word in the database", null)));
@@ -166,7 +166,7 @@ public class TestActivity extends BaseActivity {
 		
 		if(pager.getCurrentItem() + 1 < pager.getAdapter().getCount()) {
 			pager.setCurrentItem(pager.getCurrentItem() + 1);
-			liveScoreTextView.setText(getLiveScore());
+			liveScoreTextView.setText(getLiveScore());	
 		}
 		
 		//TODO print results

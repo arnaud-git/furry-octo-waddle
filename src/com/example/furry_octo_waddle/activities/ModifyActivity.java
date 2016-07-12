@@ -32,9 +32,7 @@ public class ModifyActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.modify_layout);
 		setViewByLayout();
-		List<Word_Translation> list= action.getWordFromTable(action.query(getIntent().getExtras().getInt(Word_Translation.WORD_ID)),Order.NULL,1);
-		if(list.size()>0)
-			setCurrentWord(list.get(0));
+		setCurrentWord(action.getWordFromTable(getIntent().getExtras().getInt(Word_Translation.WORD_ID)));
 		writeWord();
 		
 	}

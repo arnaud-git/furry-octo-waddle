@@ -151,12 +151,14 @@ public class Controleur_bd implements BD_rw{
 			if(c.getCount()>0){
 				MainActivity.printDebug(1,"Recuperation de  " +c.getCount() +" trad.");
 				while(c.moveToNext()){
-					list.add(new Word_Translation(c.getString(1), c.getString(2)
+					list.add(new Word_Translation(
+							c.getString(0),//_ID
+							c.getString(1),//WORD
+							c.getString(2)//TRANS
 							//Si d'autres colonnes pour d'autres langues
 							,column_to_language_Correspondance(c.getColumnName(1))
 							,column_to_language_Correspondance(c.getColumnName(2))
-							,c.getString(0)
-							,c.getString(3)
+							,c.getString(3)//TIMESTAMP
 							));
 				}
 			}else{
@@ -292,7 +294,7 @@ public class Controleur_bd implements BD_rw{
 
 	@Override
 	public void deleteWordbyIndex(int index){
-		Word_Translation var = new Word_Translation(null,null,null,null,String.valueOf(index));
+		Word_Translation var = new Word_Translation(String.valueOf(index),null,null,null,null);
 		supprimerDeLaBase(var);
 	}
 
@@ -323,7 +325,7 @@ public class Controleur_bd implements BD_rw{
 		ecrireDansLaBase(new Word_Translation("Moi", "me"));
 		String[] args = {"@en","@fr","*",""};
 		MainActivity.printDebug(1,"Apres ecriture "); 
-		modifierDansLaBase(new Word_Translation("Pwahahaha","Mwahaha",Word_Translation.ENGLISH,Word_Translation.FRENCH,"336"));
+		modifierDansLaBase(new Word_Translation("336","Pwahahaha","Mwahaha",Word_Translation.ENGLISH,Word_Translation.FRENCH));
 		MainActivity.printDebug(1,"Premier "); 
 		List<Word_Translation> retour = lireDepuisLaBase(args, false, -1);
 

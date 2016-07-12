@@ -24,11 +24,7 @@ public class TestFragment extends Fragment implements Serializable, MyFragment{
 		v = inflater.inflate(R.layout.word_layout, container, false);
 		
 		if(word_obj==null){
-			List<Word_Translation> res = ((BaseActivity)getActivity()).action.getWordFromTable(new Word_Translation(getArguments().getInt(Word_Translation.WORD_ID),"%", "%"),Order.NULL,-1);
-			if(res.size()==1)
-				word_obj = res.get(0);
-			else 
-				MainActivity.printDebug(1, "Renvoie liste trop longue");
+			word_obj= ((BaseActivity)getActivity()).action.getWordFromTable(getArguments().getInt(Word_Translation.WORD_ID));
 		}
 		((BaseActivity)getActivity()).setFragment(this);
 		((BaseActivity)getActivity()).display_correct_word_views_TEST();	

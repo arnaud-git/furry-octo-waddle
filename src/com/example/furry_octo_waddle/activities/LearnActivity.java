@@ -111,7 +111,7 @@ public class LearnActivity extends BaseActivity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = action.getWordFromTable(new Word_Translation("%", "~"),Order.RANDOM, -1);
+		List<Word_Translation> words = action.getWordFromTable("%", "~",Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(LearnFragment.newInstance(new Word_Translation("No word in the database", null)));
