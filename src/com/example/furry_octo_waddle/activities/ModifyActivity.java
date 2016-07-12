@@ -24,7 +24,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class ModifyActivity extends Base_Activity{
+public class ModifyActivity extends BaseActivity{
 
 	
 	@Override
@@ -32,15 +32,21 @@ public class ModifyActivity extends Base_Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.modify_layout);
 		setViewByLayout();
-		List<Word_Translation> list= MainActivity.cbd.getWordFromTable(new Word_Translation(getIntent().getExtras().getInt(Word_Translation.WORD_ID),"%", "%"),Order.NULL,1);
+		List<Word_Translation> list= action.getWordFromTable(new Word_Translation("%", "%", getIntent().getExtras().getInt(Word_Translation.WORD_ID)),Order.NULL,1);
 		if(list.size()>0)
-			word_obj=list.get(0);
+			setCurrentWord(list.get(0));
 		writeWord();
 		
 	}
 	
 	@Override
 	protected void save_current_word(){
+		super.save_current_word();
+		finish();
+	}
+	
+	@Override
+	protected void delete_current_word(){
 		super.save_current_word();
 		finish();
 	}

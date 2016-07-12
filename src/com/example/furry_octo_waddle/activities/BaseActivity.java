@@ -8,7 +8,10 @@ import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,13 +20,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Base_Activity extends ActionBarActivity{
+public class BaseActivity extends ActionBarActivity{
 
-	protected Word_Translation word_obj =  new Word_Translation("", "");
-	protected TextView tvWord;
-	protected TextView tvWordTrans;
-	protected EditText editWord;
-	protected EditText editWordTrans;
+	protected WordActions action =  new WordActions(this);
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,49 +46,34 @@ public class Base_Activity extends ActionBarActivity{
 	}
 
 	protected void setViewByLayout(){
-		editWord = (EditText) findViewById(R.id.editWord);
-		editWordTrans = (EditText) findViewById(R.id.editWordTrans);
-		tvWord = (TextView) findViewById(R.id.tvWord);
-		tvWordTrans = (TextView) findViewById(R.id.tvWordTrans);
+		action.setViewByLayout();
 	}
 
 	protected void setViewByFragment(View v){
-			editWord = (EditText) v.findViewById(R.id.editWord);
-			editWordTrans = (EditText) v.findViewById(R.id.editWordTrans);
-			tvWord = (TextView) v.findViewById(R.id.tvWord);
-			tvWordTrans = (TextView) v.findViewById(R.id.tvWordTrans);
+		action.setViewByFragment(v);
 	}
 
 	protected void delete_current_word() {
 		//buttonDelete deletes the words of the current fragment from the database
-		Toast toast = Toast.makeText(getApplicationContext(), "Word deleted ! \n ("+word_obj.getWord()+")", Toast.LENGTH_LONG);
+		Toast toast = Toast.makeText(getApplicationContext(), "Word deleted ! \n ("+action.getCurrentWord().getWord()+")", Toast.LENGTH_LONG);
 		toast.show();
 
 		//Deletes in the db
-		MainActivity.cbd.deleteWord(word_obj);	
+		action.delete_current_word();	
 	}
 
 	protected void save_current_word(){
-		String word = editWord.getText().toString();
-		String wordTrad = editWordTrans.getText().toString();
-
-		//create the new object with the typed words
-		//save the new object in the database
-		// Will be better to put the languages in the inputs
-		word_obj = new Word_Translation(word_obj.getId(),word, wordTrad);
-
-		// TODO cbd one function for thes cases
-		if(word_obj.getId()>0)
-			MainActivity.cbd.modifyWordbyId(word_obj);
+		boolean ret = action.save_current_word();
+		if(ret)
+			Toast.makeText(BaseActivity.this, "\"" + action.getCurrentWord().getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
 		else
-			MainActivity.cbd.writeWord(word_obj);
-		Toast.makeText(Base_Activity.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+			Toast.makeText(BaseActivity.this, "\" Bad entry \"", Toast.LENGTH_SHORT).show();
+		
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.context_menu, menu);
-		
+		getMenuInflater().inflate(R.menu.context_menu, menu);		
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -115,59 +99,59 @@ public class Base_Activity extends ActionBarActivity{
 			}
 		}
 	};
-	
-	protected void modify_current_word() {
 
-		//get the current TextViews and EditTexts
+	protected void modify_current_word() {
 		showAllEditTexts();
-		//copy the words from the TextViews in the EditTexts
-		editWord.setText(word_obj.getWord());
-		editWordTrans.setText(word_obj.getTraduction_of_word());
 	}
 
 	protected void showAllEditTexts(){
-		editWord.setVisibility(View.VISIBLE);
-		editWordTrans.setVisibility(View.VISIBLE);		
-		tvWord.setVisibility(View.GONE);
-		tvWordTrans.setVisibility(View.GONE);
+		action.showAllEditTexts();
 	}
-	
+
 	protected void showAllTextViews(){
-		tvWord.setVisibility(View.VISIBLE);
-		tvWordTrans.setVisibility(View.VISIBLE);		
-		editWord.setVisibility(View.GONE);
-		editWordTrans.setVisibility(View.GONE);
+		action.showAllTextViews();
 	}
-	
-	
+
+
 	protected void setCurrentWord(Word_Translation word){
-		word_obj=word;
+		action.setCurrentWord(word);
 	}
 
 	protected void cancel_modification() {
 		showWord();
 	}
-	
+
 	private void updateWordinViews(){
-		tvWord.setText(word_obj.getWord());
-		tvWordTrans.setText(word_obj.getTraduction_of_word());
-		editWord.setText(word_obj.getWord());
-		editWordTrans.setText(word_obj.getTraduction_of_word());
+		action.updateWordinViews();
 	}
-	
+
 	protected void showWord(){
 		updateWordinViews();
 		showAllTextViews();	
-		}
+	}
 
 	protected void writeWord(){
 		updateWordinViews();
 		showAllEditTexts();
-		}
+	}
 
-	protected void setFragment(LearnFragment fragment){
+	protected void setFragment(MyFragment fragment){
 		setViewByFragment(fragment.getViewPos());
 		setCurrentWord(fragment.getCurrentWord_T());
+
+	}
+
+	protected void showFragment(LearnFragment fragment){
+		setFragment(fragment);
 		showWord();
+	}
+	
+	protected void showFragment(TestFragment fragment){
+		setFragment(fragment);
+		showWord();
+	}
+	
+	protected void display_correct_word_views_TEST(){
+		action.display_correct_word_views_TEST();
 	}
 }
