@@ -152,7 +152,7 @@ public class LearnActivity extends BaseActivity {
 	protected void save_current_word() {
 		super.save_current_word();
 		currentLF.setCurrentStatus(false);
-		showFragment(currentLF);
+		showWord();
 	}
 
 	@Override

@@ -2,8 +2,10 @@
 <resources>
     <color name="red">#ffff0000</color>
     <color name="yellow">#FFF176</color>
-    <color name="my_yellow">#7FFFFF</color>
+    <color name="my_yellow">#FFFFb3</color>
     <color name="myLearnColor">#FFFF7F</color>
 	<color name="myGoldColor">#FFD700</color>
 	<color name="mybrightgrey">#DDDDDD</color>
+	<color name="mypaleorange">#ffd9b3</color>
+	<color name="mysexyblue">#b3d9ff</color>
 </resources>

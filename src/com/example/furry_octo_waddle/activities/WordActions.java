@@ -53,18 +53,20 @@ public class WordActions {
 	protected void save_current_word(){
 		String word = editWord.getText().toString();
 		String wordTrad = editWordTrans.getText().toString();
-
-		//create the new object with the typed words
-		//save the new object in the database
-		// Will be better to put the languages in the inputs
-		word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
-
-		// TODO cbd one function for thes cases
-		if(word_obj.getId()>0)
-			MainActivity.cbd.modifyWordbyId(word_obj);
-		else
-			MainActivity.cbd.writeWord(word_obj);
-		//Toast.makeText(WordActions.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+		
+		if(word != "" || wordTrad != "") {
+			//create the new object with the typed words
+			//save the new object in the database
+			// Will be better to put the languages in the inputs
+			word_obj = new Word_Translation(word, wordTrad,word_obj.getId());
+	
+			// TODO cbd one function for thes cases
+			if(word_obj.getId()>0)
+				MainActivity.cbd.modifyWordbyId(word_obj);
+			else
+				MainActivity.cbd.writeWord(word_obj);
+			//Toast.makeText(WordActions.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	protected void modify_current_word() {

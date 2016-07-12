@@ -3,4 +3,8 @@
    <solid android:color="@color/myLearnColor" />
    <stroke android:width="2dip" android:color="@color/myGoldColor"/>
    <corners android:radius="6dp" />
+   <gradient
+       android:startColor="@color/my_yellow"
+       android:endColor="#FFFFFFFF"
+       android:angle="90"/>
 </shape>

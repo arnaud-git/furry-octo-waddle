@@ -122,7 +122,8 @@ public class TestActivity extends ActionBarActivity {
 	Runnable r = new Runnable() {
 	    @Override
 	    public void run(){
-			currentLF.displayNewTestFragment(); //call the method of TestFragment which is responsible for the view modification
+	    	 //call the method of TestFragment which is responsible for the view modification
+			currentLF.displayNewTestFragment();
 	    }
 	};
 	
