@@ -42,7 +42,7 @@ public class LearnFragment extends Fragment implements MyFragment{
 		View view = inflater.inflate(R.layout.word_layout, container, false);
 
 		if(word_obj==null){
-			List<Word_Translation> res = ((BaseActivity)getActivity()).action.getWordFromTable(new Word_Translation("%", "%", getArguments().getInt(Word_Translation.WORD_ID)),Order.NULL,-1);
+			List<Word_Translation> res = ((BaseActivity)getActivity()).action.getWordFromTable(new Word_Translation(getArguments().getInt(Word_Translation.WORD_ID),"%", "%"),Order.NULL,-1);
 			if(res.size()==1)
 				word_obj = res.get(0);
 			else 
@@ -61,7 +61,7 @@ public class LearnFragment extends Fragment implements MyFragment{
 		return word_obj;
 	}
 
-	
+
 	public void setCurrentWord_T(Word_Translation toto){
 		word_obj=toto;
 	}
@@ -78,5 +78,5 @@ public class LearnFragment extends Fragment implements MyFragment{
 	public View getViewPos(){
 		return view;
 	}
-	
+
 }

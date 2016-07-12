@@ -46,7 +46,7 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	public Word_Translation(String w,String t,int l){
+	public Word_Translation(int l,String w,String t){
 		setWord(w);
 		setTraduction(t);
 		setId(l);
