@@ -8,7 +8,10 @@ import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -47,8 +50,8 @@ public class BaseActivity extends ActionBarActivity{
 	}
 
 	protected void setViewByFragment(View v){
-		action.setViewByFragment(v);;
-		}
+		action.setViewByFragment(v);
+	}
 
 	protected void delete_current_word() {
 		//buttonDelete deletes the words of the current fragment from the database
@@ -60,8 +63,12 @@ public class BaseActivity extends ActionBarActivity{
 	}
 
 	protected void save_current_word(){
-		action.save_current_word();
-		Toast.makeText(BaseActivity.this, "\"" + action.getCurrentWord().getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+		boolean ret = action.save_current_word();
+		if(ret)
+			Toast.makeText(BaseActivity.this, "\"" + action.getCurrentWord().getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
+		else
+			Toast.makeText(BaseActivity.this, "\" Bad entry \"", Toast.LENGTH_SHORT).show();
+		
 	}
 
 	@Override
@@ -92,20 +99,20 @@ public class BaseActivity extends ActionBarActivity{
 			}
 		}
 	};
-	
+
 	protected void modify_current_word() {
 		showAllEditTexts();
 	}
 
 	protected void showAllEditTexts(){
-	action.showAllEditTexts();
+		action.showAllEditTexts();
 	}
-	
+
 	protected void showAllTextViews(){
-	action.showAllTextViews();
+		action.showAllTextViews();
 	}
-	
-	
+
+
 	protected void setCurrentWord(Word_Translation word){
 		action.setCurrentWord(word);
 	}
@@ -113,29 +120,38 @@ public class BaseActivity extends ActionBarActivity{
 	protected void cancel_modification() {
 		showWord();
 	}
-	
+
 	private void updateWordinViews(){
-	action.updateWordinViews();
+		action.updateWordinViews();
 	}
-	
+
 	protected void showWord(){
 		updateWordinViews();
 		showAllTextViews();	
-		}
+	}
 
 	protected void writeWord(){
 		updateWordinViews();
 		showAllEditTexts();
-		}
+	}
 
-	protected void setFragment(LearnFragment fragment){
+	protected void setFragment(MyFragment fragment){
 		setViewByFragment(fragment.getViewPos());
 		setCurrentWord(fragment.getCurrentWord_T());
-		
+
 	}
-	
+
 	protected void showFragment(LearnFragment fragment){
 		setFragment(fragment);
 		showWord();
+	}
+	
+	protected void showFragment(TestFragment fragment){
+		setFragment(fragment);
+		showWord();
+	}
+	
+	protected void display_correct_word_views_TEST(){
+		action.display_correct_word_views_TEST();
 	}
 }
