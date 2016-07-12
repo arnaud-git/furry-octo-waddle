@@ -46,6 +46,12 @@ public class ModifyActivity extends BaseActivity{
 	}
 	
 	@Override
+	protected void delete_current_word(){
+		super.save_current_word();
+		finish();
+	}
+	
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu){
 		boolean retour = super.onCreateOptionsMenu(menu);
 		getSupportActionBar().setHomeAsUpIndicator(R.drawable.abc_ic_clear_mtrl_alpha);
