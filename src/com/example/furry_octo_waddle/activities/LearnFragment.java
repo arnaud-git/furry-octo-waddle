@@ -18,7 +18,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
-public class LearnFragment extends Fragment {
+public class LearnFragment extends Fragment implements MyFragment{
 
 	private Word_Translation word_obj= null;
 	TextView word, wordTrans;
@@ -42,7 +42,7 @@ public class LearnFragment extends Fragment {
 		View view = inflater.inflate(R.layout.word_layout, container, false);
 
 		if(word_obj==null){
-			List<Word_Translation> res = ((LearnActivity)getActivity()).action.getWordFromTable(new Word_Translation(getArguments().getInt(Word_Translation.WORD_ID),"%", "%" ),Order.NULL,-1);
+			List<Word_Translation> res = ((BaseActivity)getActivity()).action.getWordFromTable(new Word_Translation(getArguments().getInt(Word_Translation.WORD_ID),"%", "%"),Order.NULL,-1);
 			if(res.size()==1)
 				word_obj = res.get(0);
 			else 
@@ -56,9 +56,11 @@ public class LearnFragment extends Fragment {
 	}
 
 
+	@Override
 	public Word_Translation getCurrentWord_T() {
 		return word_obj;
 	}
+
 
 	public void setCurrentWord_T(Word_Translation toto){
 		word_obj=toto;
@@ -72,9 +74,9 @@ public class LearnFragment extends Fragment {
 		this.modified=modified;
 	}
 
-	
+	@Override
 	public View getViewPos(){
 		return view;
 	}
-	
+
 }

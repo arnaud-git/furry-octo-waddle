@@ -113,7 +113,8 @@ public class Word_Translation {
 
 	}
 
-	private static final String formatString(String word){
+	/**@return String with only at most one consecutive escape character*/
+	public static final String formatString(String word){
 		String computeWord = word ; 
 		computeWord = computeWord.replaceAll("\\s{2,}", " ");
 		if(computeWord.startsWith(" ")){
@@ -126,7 +127,7 @@ public class Word_Translation {
 		return computeWord;
 	}
 
-	private static final String escapePunctuation(String word){
+	public static final String escapePunctuation(String word){
 		String[] punct11 ={";",":","\\x21","\\x3f","\\x2d"};
 		String[] punct10 = {"\\x28"};
 		String[] punct01 ={",",".","\\x29"};

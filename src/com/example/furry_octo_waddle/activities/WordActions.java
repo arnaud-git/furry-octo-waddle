@@ -1,5 +1,6 @@
 package com.example.furry_octo_waddle.activities;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
@@ -8,8 +9,11 @@ import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,7 +21,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class WordActions {
+public class WordActions implements Serializable{
 
 	protected Word_Translation word_obj =  new Word_Translation("", "");
 	protected TextView tvWord;
@@ -50,11 +54,12 @@ public class WordActions {
 		MainActivity.cbd.deleteWordbyIndex(word_obj.getId());	
 	}
 
-	protected void save_current_word(){
+	protected boolean save_current_word(){
 		String word = editWord.getText().toString();
 		String wordTrad = editWordTrans.getText().toString();
 		
-		if(word != "" || wordTrad != "") {
+		
+		if(Word_Translation.formatString(word).length()!=0 || Word_Translation.formatString(wordTrad).length()!=0) {
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
@@ -65,8 +70,8 @@ public class WordActions {
 				MainActivity.cbd.modifyWordbyId(word_obj);
 			else
 				MainActivity.cbd.writeWord(word_obj);
-			//Toast.makeText(WordActions.this, "\"" + word_obj.getWord() + "\""+ " saved", Toast.LENGTH_SHORT).show();
-		}
+			return true;
+		}return false;
 	}
 	
 	protected void modify_current_word() {
@@ -130,5 +135,50 @@ public class WordActions {
 	
 	protected List<Word_Translation> getWordFromTable(Word_Translation word,Order orderby, int nombre){
 		return MainActivity.cbd.getWordFromTable(word, orderby, nombre);
+	}
+	
+	
+	protected void display_correct_word_views_TEST (){
+		updateWordinViews();
+		editWordTrans.setText("");
+		editWordTrans.setHint("...");
+		editWord.setVisibility(View.INVISIBLE);
+		editWordTrans.setVisibility(View.VISIBLE);
+		editWordTrans.requestFocus();
+		editWordTrans.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {				
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				
+				if(Word_Translation.matches(editWordTrans.getText().toString(),word_obj.getTraduction_of_word()) && !TestActivity.getAnswerClicked()) {
+					
+					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
+					TestActivity.incrementScore();
+					((TestActivity)ba).refreshTestContent();
+				}
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {			
+			}
+			
+		});
+		tvWord.setVisibility(View.VISIBLE);
+		tvWordTrans.setVisibility(View.INVISIBLE);
+	}
+
+
+
+	public void show_answer() {
+		editWordTrans.setVisibility(View.VISIBLE);
+		editWordTrans.setText(word_obj.getTraduction_of_word());
+		editWordTrans.setTextColor(Color.parseColor("#FF0033"));
+		MainActivity.printDebug(100, R.id.editWordTrans+" vs "+ba.getCurrentFocus().getId());
 	}
 }

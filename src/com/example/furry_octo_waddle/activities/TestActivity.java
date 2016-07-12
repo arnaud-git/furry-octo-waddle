@@ -3,6 +3,7 @@ package com.example.furry_octo_waddle.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -22,7 +23,7 @@ import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 
-public class TestActivity extends ActionBarActivity {
+public class TestActivity extends BaseActivity {
 
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
@@ -30,6 +31,8 @@ public class TestActivity extends ActionBarActivity {
 	TestFragment currentLF;
 
 	EditText editTestWord;
+	private TextView liveScoreTextView;
+	private FragmentPagerAdapter adapter;
 	
 	static int numWordsFound;
 	static boolean answerClicked = false;
@@ -44,11 +47,13 @@ public class TestActivity extends ActionBarActivity {
 		fragments = getFragments();
 
 		pageAdapter = new MyPageAdapter(getSupportFragmentManager(), fragments);
-
+		
 		pager = (ViewPager)findViewById(R.id.viewpager);
 		pager.setAdapter(pageAdapter);
-		
+		adapter = (FragmentPagerAdapter)pager.getAdapter();
 		numWordsFound = 0;
+		liveScoreTextView = (TextView) findViewById(R.id.liveScore);
+		liveScoreTextView.setText("0/0");
 	}
 
 	private class MyPageAdapter extends FragmentPagerAdapter {
@@ -72,7 +77,7 @@ public class TestActivity extends ActionBarActivity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = MainActivity.cbd.getWordFromTable(new Word_Translation("~", "~"),Order.RANDOM, -1);
+		List<Word_Translation> words = action.getWordFromTable(new Word_Translation("~", "~"),Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(TestFragment.newInstance(new Word_Translation("No word in the database", null)));
@@ -96,21 +101,24 @@ public class TestActivity extends ActionBarActivity {
 	}
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    getMenuInflater().inflate(R.menu.context_menu, menu);
+	public boolean onCreateOptionsMenu(Menu menu) {	  
+	    boolean retour =  super.onCreateOptionsMenu(menu);
 	    menu.findItem(R.id.editting_word).setVisible(false);
 	    menu.findItem(R.id.deleting_word).setVisible(false);
 	    menu.findItem(R.id.saving_word).setVisible(false);
 	    menu.findItem(R.id.answer).setVisible(true);
-	    return super.onCreateOptionsMenu(menu);
+	    return retour;
 	}
 	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
+		setFragment(currentLF);
 	    // Handle item selection
 	    switch (item.getItemId()) {
 	        case R.id.answer:
-	        	show_word_and_swipe();
+	        	show_answer();
+	        	swipe();
 	            return true;
 	        default:
 	            return super.onOptionsItemSelected(item);
@@ -121,32 +129,24 @@ public class TestActivity extends ActionBarActivity {
 	    @Override
 	    public void run(){
 	    	 //call the method of TestFragment which is responsible for the display of the test content
-			currentLF.refreshTestContent();
+			refreshTestContent();
 	    }
 	};
 	
-	public void show_word_and_swipe() {
+	public void show_answer(){
 		answerClicked = true;
-		
 		MyPageAdapter adapter = (MyPageAdapter) pager.getAdapter();
 		
 		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
-		currentLF.getEditTestWord().setVisibility(View.INVISIBLE);
-		
-		displayAnswer(currentLF.getTextWordTrans());
-		
+		action.show_answer();
+	}
+	
+	public void swipe(){
 		Handler h = new Handler();
-		h.postDelayed(r, 1000); //include a delay of 1 sec before displaying a new fragment
-		
+		h.postDelayed(r, 1000); //include a delay of 1 sec before displaying a new fragment	
 		answerClicked = false;
 	}
 	
-	//displays the answer in red
-	public void displayAnswer(TextView textWordTrans) {
-		textWordTrans.setVisibility(View.VISIBLE);
-		textWordTrans.setText(currentLF.getCurrentWords()[1]);
-		textWordTrans.setTextColor(Color.parseColor("#FF0033"));
-	}
 	
 	public static void incrementScore() {
 			numWordsFound++;
@@ -155,4 +155,27 @@ public class TestActivity extends ActionBarActivity {
 	public static boolean getAnswerClicked() {
 		return answerClicked;
 	}
+	
+
+	public String getLiveScore() {
+		return String.valueOf(TestActivity.getNumWordsFound() + "/" + String.valueOf(pager.getCurrentItem()));
+	}
+	
+	
+	public void refreshTestContent(){
+		
+		if(pager.getCurrentItem() + 1 < pager.getAdapter().getCount()) {
+			pager.setCurrentItem(pager.getCurrentItem() + 1);
+			liveScoreTextView.setText(getLiveScore());
+		}
+		
+		//TODO print results
+		else {
+			Intent i = new Intent(this, TestResultsActivity.class);
+			i.putExtra("score", (100*TestActivity.getNumWordsFound())/pager.getAdapter().getCount());
+			//finish();
+			startActivity(i);
+		}
+	}	
+	
 }
