@@ -15,7 +15,6 @@ public final class FeedReaderContract {
 		public static final String EXTENDED_TABLE_NAME = "extra_translation_table";
 		public static final String COLUMN_NAME_ENGLISH_WORD = "english_word";
 		public static final String COLUMN_NAME_FRENCH_WORD = "french_word";
-		public static final String EXTENDED_TABLE_NAME = "extra_translation_table";
 		public static final String COLUMN_NAME_WORD_LANG = "word_language";
 		public static final String COLUMN_NAME_WORD = "word";
 		public static final String COLUMN_NAME_WORD_ROMANIZATION= "word_romanization";
