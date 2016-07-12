@@ -27,8 +27,6 @@ public class TestActivity extends ActionBarActivity {
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
-
-	FragmentPagerAdapter adapter;
 	TestFragment currentLF;
 
 	EditText editTestWord;
@@ -122,27 +120,32 @@ public class TestActivity extends ActionBarActivity {
 	Runnable r = new Runnable() {
 	    @Override
 	    public void run(){
-	    	 //call the method of TestFragment which is responsible for the view modification
-			currentLF.displayNewTestFragment();
+	    	 //call the method of TestFragment which is responsible for the display of the test content
+			currentLF.refreshTestContent();
 	    }
 	};
 	
 	public void show_word_and_swipe() {
 		answerClicked = true;
 		
-		adapter = (FragmentPagerAdapter)pager.getAdapter();
-		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
+		MyPageAdapter adapter = (MyPageAdapter) pager.getAdapter();
 		
+		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 		currentLF.getEditTestWord().setVisibility(View.INVISIBLE);
-		TextView textWordTrans = currentLF.getTextWordTrans();
-		textWordTrans.setVisibility(View.VISIBLE);
-		textWordTrans.setText(currentLF.getCurrentWords()[1]);
-		textWordTrans.setTextColor(Color.parseColor("#FF0033"));
+		
+		displayAnswer(currentLF.getTextWordTrans());
 		
 		Handler h = new Handler();
 		h.postDelayed(r, 1000); //include a delay of 1 sec before displaying a new fragment
 		
 		answerClicked = false;
+	}
+	
+	//displays the answer in red
+	public void displayAnswer(TextView textWordTrans) {
+		textWordTrans.setVisibility(View.VISIBLE);
+		textWordTrans.setText(currentLF.getCurrentWords()[1]);
+		textWordTrans.setTextColor(Color.parseColor("#FF0033"));
 	}
 	
 	public static void incrementScore() {

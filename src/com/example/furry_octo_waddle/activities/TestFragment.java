@@ -71,7 +71,7 @@ public class TestFragment extends Fragment implements Serializable{
 					
 					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
 					TestActivity.incrementScore();
-					displayNewTestFragment();
+					refreshTestContent();
 				}
 			}
 
@@ -109,15 +109,12 @@ public class TestFragment extends Fragment implements Serializable{
 		tvWordTrans.setVisibility(View.INVISIBLE);
 	}
 	
-	public String getLiveScore() {
-		return String.valueOf(TestActivity.getNumWordsFound() + "/" + String.valueOf(pager.getCurrentItem()));
-	}
-	
-	public void displayNewTestFragment(){
+	//displays a new fragment (or the result) and updates the score
+	public void refreshTestContent(){
 		
 		if(pager.getCurrentItem() + 1 < pager.getAdapter().getCount()) {
 			pager.setCurrentItem(pager.getCurrentItem() + 1);
-			liveScoreTextView.setText(getLiveScore());
+			updateTextLiveScore(getLiveScore());
 		}
 		
 		//TODO print results
@@ -129,6 +126,13 @@ public class TestFragment extends Fragment implements Serializable{
 		}
 	}
 	
+	public void updateTextLiveScore(String liveScore) {
+		liveScoreTextView.setText(liveScore);
+	}
+	
+	public String getLiveScore() {
+		return String.valueOf(TestActivity.getNumWordsFound() + "/" + String.valueOf(pager.getCurrentItem()));
+	}
 	public TextView getTextWordTrans(){
 		return (TextView) getView().findViewById(R.id.tvWordTrans);
 	}
