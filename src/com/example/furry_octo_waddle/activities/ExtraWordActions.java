@@ -140,7 +140,7 @@ public class ExtraWordActions extends WordActions {
 					
 					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
 					TestActivity.incrementScore();
-					((TestActivity)ba).displayNewTestFragment();
+					((TestActivity)ba).refreshTestContent();
 				}
 			}
 

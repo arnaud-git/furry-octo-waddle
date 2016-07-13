@@ -104,19 +104,11 @@ public class TranslateActivity extends BaseActivity{
 	}
 
 	private void query_bd(String s){
-		Word_Translation query;
-		s_query=s;
-		if (checkBox.isChecked()){
-			query = new Word_Translation(s+"%", "%");
-		}else{
-			query = new Word_Translation(s+"%", "");
-		}
-
 		List<Word_Translation> list = null;
 		if(s.length()>0){
-			list = action.getWordFromTable(query, Order.LANGUAGE_ASC, -1);
+			list = action.getWordFromTable(s+"%",checkBox.isChecked() ? "%" :"", Order.LANGUAGE_ASC, -1);
 		}else{
-			list = action.getWordFromTable(query, Order.STAMP_DESC, -1);
+			list = action.getWordFromTable(s+"%",checkBox.isChecked() ? "%" :"", Order.STAMP_DESC, -1);
 		}
 		Words_Array_Adapter adapter = new Words_Array_Adapter(this,
 				android.R.layout.simple_list_item_1, list);

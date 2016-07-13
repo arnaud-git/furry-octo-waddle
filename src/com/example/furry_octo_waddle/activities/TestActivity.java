@@ -28,12 +28,11 @@ public class TestActivity extends BaseActivity {
 	static ViewPager pager;
 	MyPageAdapter pageAdapter;
 	List<Fragment> fragments;
-
-	FragmentPagerAdapter adapter;
 	TestFragment currentLF;
 
 	EditText editTestWord;
 	private TextView liveScoreTextView;
+	private FragmentPagerAdapter adapter;
 	
 	static int numWordsFound;
 	static boolean answerClicked = false;
@@ -78,7 +77,7 @@ public class TestActivity extends BaseActivity {
 	private List<Fragment> getFragments(){
 		List<Fragment> fList = new ArrayList<Fragment>();
 
-		List<Word_Translation> words = action.getWordFromTable(new Word_Translation("~", "~"),Order.RANDOM, -1);
+		List<Word_Translation> words = action.getWordFromTable("~", "~",Order.RANDOM, -1);
 		if(words.isEmpty()){
 			//Database is empty
 			fList.add(TestFragment.newInstance(new Word_Translation("No word in the database", null)));
@@ -129,14 +128,15 @@ public class TestActivity extends BaseActivity {
 	Runnable r = new Runnable() {
 	    @Override
 	    public void run(){
-	    	 //call the method of TestFragment which is responsible for the view modification
-			displayNewTestFragment();
+	    	 //call the method of TestFragment which is responsible for the display of the test content
+			refreshTestContent();
 	    }
 	};
 	
 	public void show_answer(){
 		answerClicked = true;
-		adapter = (FragmentPagerAdapter)pager.getAdapter();
+		MyPageAdapter adapter = (MyPageAdapter) pager.getAdapter();
+		
 		currentLF = (TestFragment) adapter.getItem(pager.getCurrentItem());
 		action.show_answer();
 	}
@@ -162,11 +162,11 @@ public class TestActivity extends BaseActivity {
 	}
 	
 	
-	public void displayNewTestFragment(){
+	public void refreshTestContent(){
 		
 		if(pager.getCurrentItem() + 1 < pager.getAdapter().getCount()) {
 			pager.setCurrentItem(pager.getCurrentItem() + 1);
-			liveScoreTextView.setText(getLiveScore());
+			liveScoreTextView.setText(getLiveScore());	
 		}
 		
 		//TODO print results

@@ -67,12 +67,20 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
     	MainActivity.printDebug(1, "Upgrade "+oldVersion+"  ->   "+newVersion);
     	if(oldVersion<10){
     		db.execSQL(SQL_CREATE_EXTRA_ENTRIES);
-    		fillExtraTable();
+    		fillExtraTable(db);
     	}
         //onCreate(db);
     }
-    private void fillExtraTable() {
-		((Controleur_bd)MainActivity.cbd).update9();;	
+    private void fillExtraTable(SQLiteDatabase db) {
+    	db.execSQL("UPDATE "+FeedEntry.EXTENDED_TABLE_NAME+"  SET "+
+    			FeedEntry.COLUMN_NAME_WORD +" = " +FeedEntry.TABLE_NAME+"."+FeedEntry.COLUMN_NAME_WORD+
+    		    FeedEntry.COLUMN_NAME_WORD_LANG + " = " +Word_Translation.ENGLISH+
+    		    FeedEntry.COLUMN_NAME_WORD_ROMANIZATION + " = '' " +
+    		    FeedEntry.COLUMN_NAME_WORD_PRONUNCIATION +" = '' "+
+    		    FeedEntry.COLUMN_NAME_TRANS_LANG +" = " + Word_Translation.FRENCH+
+    		    FeedEntry.COLUMN_NAME_TRANSLATION + " = " +FeedEntry.TABLE_NAME+"."+FeedEntry.COLUMN_NAME_TRANSLATION+
+    		    COMMA_SEP + FeedEntry.COLUMN_NAME_TIMESTAMP + "= " +FeedEntry.TABLE_NAME+"."+
+    		    "WHERE "+FeedEntry._ID+" = "+FeedEntry.TABLE_NAME+"."+FeedEntry._ID);	
 	}
 
 	public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {

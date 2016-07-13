@@ -40,7 +40,7 @@ public class Controleur_bd implements BD_rw{
 		// Gets the data repository in write mode
 		SQLiteDatabase db = null;
 		try{
-			db = mDbHelper.getWritableDatabase();}
+			db = mDbHelper.getReadableDatabase();}
 		catch (Exception e){
 			MainActivity.printDebug(1, e.getMessage());
 		}
@@ -387,17 +387,16 @@ public class Controleur_bd implements BD_rw{
 		ecrireDansLaBase(new Word_Translation("Moi", "me"));
 		//showTable();
 		MainActivity.printDebug(1,"Apres ecriture "); 
-		String args1[] ={Word_Translation.ENGLISH,"Pwahahaha","","",Word_Translation.FRENCH,"Mwahaha"};
-		modifierDansLaBase(new Extra_Word_Translation("6",args1));
-		deleteWordbyIndex(5, Extra.EXTRA);
-		//showTable();
+		modifierDansLaBase(new Word_Translation("336","Pwahahaha","Mwahaha",Word_Translation.ENGLISH,Word_Translation.FRENCH));
+		MainActivity.printDebug(1,"Premier "); 
+		List<Word_Translation> retour = lireDepuisLaBase(args, false, -1);
 
 		//resetTable();
 		//dropTable();
 	}*/
 
 	public void resetTable(Extra extra){
-		SQLiteDatabase db = mDbHelper.getWritableDatabase();
+		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 		MainActivity.printDebug(1,"Table reset"); 
 		if(extra==Extra.NORMAL)
 			db.delete(FeedEntry.TABLE_NAME, null, null);
@@ -411,7 +410,7 @@ public class Controleur_bd implements BD_rw{
 	/** Deletes the table from the database*/
 	@SuppressWarnings("unused")
 	private void dropTable(){
-		SQLiteDatabase db = mDbHelper.getWritableDatabase();
+		SQLiteDatabase db = mDbHelper.getReadableDatabase();
 		MainActivity.printDebug(1,"Table droped"); 
 		try{
 			db.execSQL("DROP TABLE " +FeedEntry.TABLE_NAME);

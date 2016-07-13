@@ -30,6 +30,11 @@ public class WordActions implements Serializable{
 	protected EditText editWord;
 	protected EditText editWordTrans;
 	BaseActivity ba;
+	protected static String CURRENT_LANGUAGE = Word_Translation.FRENCH;
+	protected static String CURRENT_TRANS_LANGUAGE = Word_Translation.ENGLISH;
+	
+	//For now  : TODO accept multiple languages
+	protected static String CURRENT_TRANS_LANGUAGES_DISPLAY = CURRENT_TRANS_LANGUAGE;
 
 	public WordActions(BaseActivity ba){
 		this.ba = ba;
@@ -59,11 +64,12 @@ public class WordActions implements Serializable{
 		String word = editWord.getText().toString();
 		String wordTrad = editWordTrans.getText().toString();
 		
-		if(word != "" || wordTrad != "") {
+		
+		if(Word_Translation.formatString(word).length()!=0 || Word_Translation.formatString(wordTrad).length()!=0) {
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
-			word_obj = new Word_Translation(word_obj.getId(),word, wordTrad);
+			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),word, wordTrad,CURRENT_LANGUAGE,CURRENT_TRANS_LANGUAGE);
 	
 			// TODO cbd one function for thes cases
 			if(word_obj.getId()>0)
@@ -75,7 +81,6 @@ public class WordActions implements Serializable{
 	}
 	
 	protected void modify_current_word() {
-
 		//get the current TextViews and EditTexts
 		showAllEditTexts();
 		//copy the words from the TextViews in the EditTexts
@@ -133,10 +138,14 @@ public class WordActions implements Serializable{
 		showWord();
 	}
 	
-	protected List<Word_Translation> getWordFromTable(Word_Translation word,Order orderby, int nombre){
-		return MainActivity.cbd.getWordFromTable(word, orderby, nombre);
+	protected Word_Translation query(String word, String transWord){
+		return new Word_Translation(word, transWord, CURRENT_LANGUAGE, CURRENT_TRANS_LANGUAGES_DISPLAY);
 	}
 	
+
+	public Word_Translation query(int int1) {
+		return new Word_Translation(String.valueOf(int1),"%","%", CURRENT_LANGUAGE, CURRENT_TRANS_LANGUAGES_DISPLAY);
+	}	
 	
 	protected void display_correct_word_views_TEST (){
 		updateWordinViews();
@@ -145,6 +154,8 @@ public class WordActions implements Serializable{
 		editWord.setVisibility(View.INVISIBLE);
 		editWordTrans.setVisibility(View.VISIBLE);
 		editWordTrans.requestFocus();
+		final String translation = word_obj.getTraduction_of_word();
+		final EditText editWordTrans =this.editWordTrans;
 		editWordTrans.addTextChangedListener(new TextWatcher() {
 
 			@Override
@@ -155,12 +166,12 @@ public class WordActions implements Serializable{
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
-				
-				if(Word_Translation.matches(editWordTrans.getText().toString(),word_obj.getTraduction_of_word()) && !TestActivity.getAnswerClicked()) {
+				word_obj.printWord();
+				if(Word_Translation.matches(editWordTrans.getText().toString(),translation) && !TestActivity.getAnswerClicked()) {
 					
 					//MainActivity.printDebug(25, pager.getCurrentItem() +" / "+pager.getAdapter().getCount());
 					TestActivity.incrementScore();
-					((TestActivity)ba).displayNewTestFragment();
+					((TestActivity)ba).refreshTestContent();
 				}
 			}
 
@@ -173,10 +184,6 @@ public class WordActions implements Serializable{
 		tvWordTrans.setVisibility(View.INVISIBLE);
 	}
 
-	protected Word_Translation query(String word, String wordTrans){
-		return new Word_Translation(word,wordTrans);
-	}
-
 
 	public void show_answer() {
 		editWordTrans.setVisibility(View.VISIBLE);
@@ -184,4 +191,22 @@ public class WordActions implements Serializable{
 		editWordTrans.setTextColor(Color.parseColor("#FF0033"));
 		MainActivity.printDebug(100, R.id.editWordTrans+" vs "+ba.getCurrentFocus().getId());
 	}
+
+
+
+	public List<Word_Translation> getWordFromTable(String regex_word, String regex_word_trans, Order orderby, int nombre) {
+		return MainActivity.cbd.getWordFromTable(query(regex_word,regex_word_trans), orderby, nombre);
+	}
+	
+	public Word_Translation getWordFromTable(int id) {
+		List<Word_Translation> res = MainActivity.cbd.getWordFromTable(query(id), Order.NULL, -1);
+		if(res.size()==1)
+			return res.get(0);
+		else{ 
+			MainActivity.printDebug(1, "Renvoie liste trop longue");
+			return new Word_Translation("No word in the database", null,CURRENT_LANGUAGE,CURRENT_TRANS_LANGUAGE);
+		}
+	}
+
+
 }

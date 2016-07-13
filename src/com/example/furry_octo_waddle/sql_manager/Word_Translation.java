@@ -60,7 +60,7 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	public Word_Translation(String index,String l, String w,String t_l,String t ,String time){
+	public Word_Translation(String index,String w,String t,String l, String t_l,String time){
 		setWord(w);
 		setTraduction(t);
 		setLanguage(l);
@@ -118,7 +118,8 @@ public class Word_Translation {
 
 	}
 
-	protected static final String formatString(String word){
+	/**@return String with only at most one consecutive escape character*/
+	public static final String formatString(String word){
 		String computeWord = word ; 
 		computeWord = computeWord.replaceAll("\\s{2,}", " ");
 		if(computeWord.startsWith(" ")){
@@ -131,7 +132,7 @@ public class Word_Translation {
 		return computeWord;
 	}
 
-	protected static final String escapePunctuation(String word){
+	public static final String escapePunctuation(String word){
 		String[] punct11 ={";",":","\\x21","\\x3f","\\x2d"};
 		String[] punct10 = {"\\x28"};
 		String[] punct01 ={",",".","\\x29"};
