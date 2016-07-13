@@ -480,7 +480,7 @@ public class Controleur_bd implements BD_rw{
 		return null;
 	}
 	
-	protected void update9(){
+	public void update9(){
 		MainActivity.printDebug(1,"Update 9");
 		List<Word_Translation> list = getWordFromTable(new Word_Translation("%","%"), Order.ID_ASC, -1);
 		for(Word_Translation word : list){

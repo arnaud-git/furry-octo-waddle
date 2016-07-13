@@ -12,7 +12,8 @@ import android.content.Intent;
 import android.os.Bundle;
 
 public class MainActivity extends ActionBarActivity {
-
+	
+	public static boolean updated = true;
 	public static final String APPLICATION_TAG_NAME ="furry_octo_waddle"; 
 	public static final boolean DEBUG = true;
 	public static final int DEBUG_LEVEL = 2;
@@ -27,7 +28,9 @@ public class MainActivity extends ActionBarActivity {
 		setContentView(R.layout.main_layout);
 
 		cbd = new Controleur_bd(this);
-		
+		if(!updated){
+			((Controleur_bd)cbd).update9();
+		}
 		buttonLearn = (Button)findViewById(R.id.buttonLearn);
 		buttonLearn.setOnClickListener(new View.OnClickListener() {
 			

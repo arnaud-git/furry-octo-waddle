@@ -60,7 +60,7 @@ public class Word_Translation {
 		checkfornull();
 	}
 
-	public Word_Translation(String index,String w,String t,String l, String t_l,String time){
+	public Word_Translation(String index,String l,String w,String t_l,String t,String time){
 		setWord(w);
 		setTraduction(t);
 		setLanguage(l);

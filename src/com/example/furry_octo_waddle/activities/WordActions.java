@@ -139,7 +139,7 @@ public class WordActions implements Serializable{
 	}
 	
 	protected Word_Translation query(String word, String transWord){
-		return new Word_Translation(word, transWord, CURRENT_LANGUAGE, CURRENT_TRANS_LANGUAGES_DISPLAY);
+		return new Word_Translation(CURRENT_LANGUAGE,word, CURRENT_TRANS_LANGUAGES_DISPLAY,transWord );
 	}
 	
 
