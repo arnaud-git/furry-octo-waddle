@@ -21,17 +21,4 @@
         android:title="@string/string_answer"
         android:visible="false"
         app:showAsAction="ifRoom"/>
-    <item
-        android:id="@+id/settings"
-        android:title="@string/string_settings"
-        app:showAsAction="never">
-        <menu>
-            <item
-                android:id="@+id/extra_mode"
-                android:checkable="true"
-                android:title="@string/string_extra_mode"
-                app:showAsAction="ifRoom"/>
-        </menu>
-    </item>
-
 </menu>

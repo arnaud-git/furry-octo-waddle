@@ -3,6 +3,7 @@ package com.example.furry_octo_waddle.activities;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.activities.BaseActivity.ExpandableListAdapter;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
@@ -27,6 +28,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,21 @@ public class TranslateActivity extends BaseActivity{
 		checkBox = (CheckBox) findViewById(R.id.search_all);
 		lstView = (ListView)findViewById(android.R.id.list);
 		listWords();
+		try{
+			// get the listview
+	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
+	 
+	        // preparing list data
+	        prepareListData();
+	 
+	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+	 
+	        // setting list adapter
+	        expListView.setAdapter(listAdapter);
+		}catch(Exception e){
+			MainActivity.printDebug(1, e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
@@ -147,8 +164,8 @@ public class TranslateActivity extends BaseActivity{
 	}
 	
 	@Override
-	protected void change_mode(MenuItem item){
-		super.change_mode(item);
+	protected void change_mode(){
+		super.change_mode();
 		super.recreate();
 	}
 }

@@ -38,7 +38,9 @@ public class Word_Translation {
 	//The different languages 
 	public static final String ENGLISH = "@en";
 	public static final String FRENCH = "@fr";
-	
+	public static final String JAPANESE = "@ja";
+	public static final String HANGEUL = "@kr";
+	public static final String GREEk = "@gr";
 
 	/**Last modification of the word*/
 	String last_modification_time ="%";

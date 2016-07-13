@@ -95,5 +95,16 @@ public class Extra_Word_Translation extends Word_Translation {
 		} ;
 		return ret;
 	}
+	
+	public final String[] getLanguages() {
+		String args[] = super.getLanguage().split("(?<=%)");
+		return args;
+	}
+	
+	
+	public final String[] getTargeted_languages() {
+		String args[] = super.getTargeted_language().split("(?<=%)");
+		return args;
+	}
 
 }

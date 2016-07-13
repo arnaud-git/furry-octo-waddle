@@ -155,13 +155,13 @@ public class ExtraWordActions extends WordActions {
 
 	@Override
 	protected Word_Translation query(String word, String transWord){
-		String[] args={CURRENT_LANGUAGE,word, "%","%",CURRENT_TRANS_LANGUAGES_DISPLAY,transWord };
+		String[] args={LANGUAGES_DISPLAYED,word, "%","%",MY_LANGUAGE,transWord };
 		return new Extra_Word_Translation(args);
 	}
 	
 	@Override
 	public Word_Translation query(int int1) {
-		String[] args={CURRENT_LANGUAGE,"%", "%","%",CURRENT_TRANS_LANGUAGES_DISPLAY,"%"};
+		String[] args={TRANSLATED_LANGUAGE,"%", "%","%",MY_LANGUAGE,"%"};
 		return new Extra_Word_Translation(String.valueOf(int1),args);
 	}
 

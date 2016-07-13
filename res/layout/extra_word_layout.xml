@@ -51,7 +51,7 @@
             android:layout_below="@+id/editRomanizationWord"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:hint="Pronunctiation"
+            android:hint="Pronunciation"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textSize="30sp"

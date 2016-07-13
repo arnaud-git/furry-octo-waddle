@@ -16,9 +16,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.activities.BaseActivity.ExpandableListAdapter;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
@@ -54,6 +56,21 @@ public class TestActivity extends BaseActivity {
 		numWordsFound = 0;
 		liveScoreTextView = (TextView) findViewById(R.id.liveScore);
 		liveScoreTextView.setText("0/0");
+		try{
+			// get the listview
+	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
+	 
+	        // preparing list data
+	        prepareListData();
+	 
+	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+	 
+	        // setting list adapter
+	        expListView.setAdapter(listAdapter);
+		}catch(Exception e){
+			MainActivity.printDebug(1, e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	private class MyPageAdapter extends FragmentPagerAdapter {

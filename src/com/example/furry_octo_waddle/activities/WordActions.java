@@ -30,11 +30,11 @@ public class WordActions implements Serializable{
 	protected EditText editWord;
 	protected EditText editWordTrans;
 	BaseActivity ba;
-	protected static String CURRENT_LANGUAGE =  Word_Translation.FRENCH;
-	protected static String CURRENT_TRANS_LANGUAGE = Word_Translation.ENGLISH;
+	protected static String MY_LANGUAGE =  Word_Translation.FRENCH;
+	protected static String TRANSLATED_LANGUAGE = Word_Translation.ENGLISH;
 	
 	//For now  : TODO accept multiple languages
-	protected static String CURRENT_TRANS_LANGUAGES_DISPLAY = CURRENT_TRANS_LANGUAGE;
+	protected static String LANGUAGES_DISPLAYED = TRANSLATED_LANGUAGE+"%";
 
 	public WordActions(BaseActivity ba){
 		this.ba = ba;
@@ -69,7 +69,7 @@ public class WordActions implements Serializable{
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
-			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),CURRENT_LANGUAGE,word,CURRENT_TRANS_LANGUAGE, wordTrad);
+			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),TRANSLATED_LANGUAGE,word,LANGUAGES_DISPLAYED, wordTrad);
 	
 			// TODO cbd one function for thes cases
 			if(word_obj.getId()>0)
@@ -139,12 +139,12 @@ public class WordActions implements Serializable{
 	}
 	
 	protected Word_Translation query(String word, String transWord){
-		return new Word_Translation(CURRENT_LANGUAGE,word, CURRENT_TRANS_LANGUAGES_DISPLAY,transWord );
+		return new Word_Translation(LANGUAGES_DISPLAYED,word, MY_LANGUAGE,transWord );
 	}
 	
 
 	public Word_Translation query(int int1) {
-		return new Word_Translation(String.valueOf(int1),CURRENT_LANGUAGE,"%", CURRENT_TRANS_LANGUAGES_DISPLAY,"%");
+		return new Word_Translation(String.valueOf(int1),TRANSLATED_LANGUAGE,"%", MY_LANGUAGE,"%");
 	}	
 	
 	protected void display_correct_word_views_TEST (){
@@ -211,7 +211,7 @@ public class WordActions implements Serializable{
 
 
 	protected Word_Translation nowordindb() {
-		return new Word_Translation(CURRENT_LANGUAGE,"No word in the database", CURRENT_TRANS_LANGUAGE,"");
+		return new Word_Translation(TRANSLATED_LANGUAGE,"No word in the database", LANGUAGES_DISPLAYED,"");
 	}
 
 

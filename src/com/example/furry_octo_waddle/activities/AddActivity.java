@@ -1,13 +1,17 @@
 package com.example.furry_octo_waddle.activities;
 
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,13 +22,26 @@ import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 public class AddActivity extends BaseActivity{
 
 
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.add_layout);
+		setViewByLayout();
+		writeWord();
 		try{
-			setContentView(R.layout.add_layout);
-			setViewByLayout();
-			writeWord();
+			
+
+			// get the listview
+	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
+	 
+	        // preparing list data
+	        prepareListData();
+	 
+	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+	 
+	        // setting list adapter
+	        expListView.setAdapter(listAdapter);
 		}catch(Exception e){
 			MainActivity.printDebug(1, e.getMessage());
 			e.printStackTrace();
@@ -35,7 +52,7 @@ public class AddActivity extends BaseActivity{
 	protected void save_current_word(){
 		try{
 		super.save_current_word();
-		String[] args = {Word_Translation.ENGLISH,"","","",Word_Translation.FRENCH,""};
+		String[] args = {WordActions.TRANSLATED_LANGUAGE,"","","",WordActions.MY_LANGUAGE,""};
 		setCurrentWord(new Extra_Word_Translation(args));
 		writeWord();}
 		catch(Exception e){
@@ -54,8 +71,8 @@ public class AddActivity extends BaseActivity{
 	}
 
 	@Override
-	protected void change_mode(MenuItem item){
-		super.change_mode(item);
+	protected void change_mode(){
+		super.change_mode();
 		super.recreate();
 	}
 }

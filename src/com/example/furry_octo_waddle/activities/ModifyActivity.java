@@ -15,12 +15,14 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.activities.BaseActivity.ExpandableListAdapter;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
@@ -34,6 +36,21 @@ public class ModifyActivity extends BaseActivity{
 		setViewByLayout();
 		setCurrentWord(action.getWordFromTable(getIntent().getExtras().getInt(Word_Translation.WORD_ID)));
 		writeWord();
+		try{
+			// get the listview
+	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
+	 
+	        // preparing list data
+	        prepareListData();
+	 
+	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+	 
+	        // setting list adapter
+	        expListView.setAdapter(listAdapter);
+		}catch(Exception e){
+			MainActivity.printDebug(1, e.getMessage());
+			e.printStackTrace();
+		}
 		
 	}
 	
