@@ -23,14 +23,14 @@ import android.widget.Toast;
 
 public class WordActions implements Serializable{
 
-	public static boolean EXTRA = false;
+	public static boolean EXTRA = true;
 	protected Word_Translation word_obj =  new Word_Translation("", "");
 	protected TextView tvWord;
 	protected TextView tvWordTrans;
 	protected EditText editWord;
 	protected EditText editWordTrans;
 	BaseActivity ba;
-	protected static String CURRENT_LANGUAGE = Word_Translation.FRENCH;
+	protected static String CURRENT_LANGUAGE =  Word_Translation.FRENCH;
 	protected static String CURRENT_TRANS_LANGUAGE = Word_Translation.ENGLISH;
 	
 	//For now  : TODO accept multiple languages
@@ -69,7 +69,7 @@ public class WordActions implements Serializable{
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
-			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),word, wordTrad,CURRENT_LANGUAGE,CURRENT_TRANS_LANGUAGE);
+			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),CURRENT_LANGUAGE,word,CURRENT_TRANS_LANGUAGE, wordTrad);
 	
 			// TODO cbd one function for thes cases
 			if(word_obj.getId()>0)
@@ -144,7 +144,7 @@ public class WordActions implements Serializable{
 	
 
 	public Word_Translation query(int int1) {
-		return new Word_Translation(String.valueOf(int1),"%","%", CURRENT_LANGUAGE, CURRENT_TRANS_LANGUAGES_DISPLAY);
+		return new Word_Translation(String.valueOf(int1),CURRENT_LANGUAGE,"%", CURRENT_TRANS_LANGUAGES_DISPLAY,"%");
 	}	
 	
 	protected void display_correct_word_views_TEST (){
@@ -204,8 +204,14 @@ public class WordActions implements Serializable{
 			return res.get(0);
 		else{ 
 			MainActivity.printDebug(1, "Renvoie liste trop longue");
-			return new Word_Translation("No word in the database", null,CURRENT_LANGUAGE,CURRENT_TRANS_LANGUAGE);
+			return nowordindb(); 
 		}
+	}
+
+
+
+	protected Word_Translation nowordindb() {
+		return new Word_Translation(CURRENT_LANGUAGE,"No word in the database", CURRENT_TRANS_LANGUAGE,"");
 	}
 
 

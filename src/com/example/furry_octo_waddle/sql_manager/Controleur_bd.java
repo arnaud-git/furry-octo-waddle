@@ -160,7 +160,9 @@ public class Controleur_bd implements BD_rw{
 			String[] selectionArgs = (String[]) sel.toArray(new String[sel.size()]);
 
 			MainActivity.printDebug(1, "Sel :"+selection);
-			MainActivity.printDebug(1, "Args :" +selectionArgs.length);
+			for(int i = 0;i<selectionArgs.length;i++){
+				MainActivity.printDebug(1, "Args["+i+"]="+selectionArgs[i]);
+			}
 
 			//the query
 			Cursor c = db.query(
@@ -205,6 +207,7 @@ public class Controleur_bd implements BD_rw{
 		}
 		catch(Exception e){
 			MainActivity.printDebug(1,e.getMessage()); 
+			e.printStackTrace();
 		}
 		//MainActivity.printDebug(1,"Showtime");
 		for (Word_Translation toto : list){

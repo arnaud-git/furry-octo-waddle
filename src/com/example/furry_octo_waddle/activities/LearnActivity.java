@@ -191,6 +191,12 @@ public class LearnActivity extends BaseActivity {
 		}
 		return retour;
 	}
+	
+	@Override
+	protected void change_mode(MenuItem item){
+		super.change_mode(item);
+		super.recreate();
+	}
 }
 
 	

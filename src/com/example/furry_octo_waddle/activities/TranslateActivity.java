@@ -35,7 +35,7 @@ public class TranslateActivity extends BaseActivity{
 
 	Button addButton;
 	EditText editWord, editWordTrans;
-	String word, wordTrad,s_query;
+	String word, wordTrad,s_query="";
 	Word_Translation word_obj;
 	CheckBox checkBox ;
 	private ListView lstView;
@@ -45,6 +45,8 @@ public class TranslateActivity extends BaseActivity{
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.translate_layout);
+		checkBox = (CheckBox) findViewById(R.id.search_all);
+		lstView = (ListView)findViewById(android.R.id.list);
 		listWords();
 	}
 	
@@ -59,8 +61,6 @@ public class TranslateActivity extends BaseActivity{
 		findViewById(R.id.listlay).setVisibility(View.VISIBLE);
 		TextView search_text = (TextView) findViewById(R.id.search);
 		search_text.setSelectAllOnFocus(true);
-		checkBox = (CheckBox) findViewById(R.id.search_all);
-		lstView = (ListView)findViewById(android.R.id.list);
 		lstView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -113,6 +113,7 @@ public class TranslateActivity extends BaseActivity{
 		Words_Array_Adapter adapter = new Words_Array_Adapter(this,
 				android.R.layout.simple_list_item_1, list);
 		lstView.setAdapter(adapter);
+		
 	}
 	
 	@Override
@@ -143,5 +144,11 @@ public class TranslateActivity extends BaseActivity{
 			textView_t.setText(values.get(position).getTraduction_of_word());
 			return rowView;
 		}
+	}
+	
+	@Override
+	protected void change_mode(MenuItem item){
+		super.change_mode(item);
+		super.recreate();
 	}
 }

@@ -153,7 +153,17 @@ public class ExtraWordActions extends WordActions {
 		tvPronunciationWord.setVisibility(View.INVISIBLE);
 	}
 
-
+	@Override
+	protected Word_Translation query(String word, String transWord){
+		String[] args={CURRENT_LANGUAGE,word, "%","%",CURRENT_TRANS_LANGUAGES_DISPLAY,transWord };
+		return new Extra_Word_Translation(args);
+	}
+	
+	@Override
+	public Word_Translation query(int int1) {
+		String[] args={CURRENT_LANGUAGE,"%", "%","%",CURRENT_TRANS_LANGUAGES_DISPLAY,"%"};
+		return new Extra_Word_Translation(String.valueOf(int1),args);
+	}
 
 	@Override
 	public void show_answer() {
@@ -161,5 +171,10 @@ public class ExtraWordActions extends WordActions {
 		editPronunciationWord.setText(((Extra_Word_Translation)word_obj).getTraduction_of_word());
 		editPronunciationWord.setTextColor(Color.parseColor("#FF0033"));
 		MainActivity.printDebug(100, R.id.editPronunciationWord+" vs "+ba.getCurrentFocus().getId());
+	}
+	
+	@Override
+	protected Word_Translation nowordindb(){
+		return new Extra_Word_Translation(super.nowordindb());
 	}
 }

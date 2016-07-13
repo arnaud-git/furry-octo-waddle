@@ -55,8 +55,8 @@ public class Word_Translation {
 		setWord(w);
 		setTraduction(t);
 		setId(l);
-		setLanguage(FRENCH);
-		setTargeted_Language(ENGLISH);
+		setLanguage(ENGLISH);
+		setTargeted_Language(FRENCH);
 		checkfornull();
 	}
 
