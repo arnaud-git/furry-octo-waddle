@@ -108,14 +108,22 @@ public class Controleur_bd implements BD_rw{
 			String mot = word.getWord(), trad = word.getTraduction_of_word() ;
 			if(word.getId()==0){
 				String[] arguments = word.getArgs();
-				for(int index = 1;index<arguments.length-1;index++){
-					selection = selection + projection[index];
-					if (arguments[index].startsWith("~")){
-						selection = selection + " NOT ";
-						arguments[index]=arguments[index].substring(1);
+				for(int index = 1;index<arguments.length-1;index++){			
+					String[] argum = {arguments[index]};
+					if(projection[index].contains("language")){
+						argum = argum[0].split("%");
 					}
-					sel.add(arguments[index]);
-					selection = selection +" LIKE ? ";
+					for(int new_index = 0;new_index <argum.length;new_index++){
+						selection = selection + projection[index];
+						if (arguments[new_index].startsWith("~")){
+							selection = selection + " NOT ";
+							arguments[new_index]=arguments[new_index].substring(1);
+						}
+						sel.add(arguments[new_index]);
+						selection = selection +" LIKE ? ";
+						if(new_index+1<argum.length-1)
+							selection= selection +" OR ";
+					}
 					if(index+1<arguments.length-1)
 						selection= selection +" AND ";
 				}
@@ -123,7 +131,7 @@ public class Controleur_bd implements BD_rw{
 				selection = FeedEntry._ID + " LIKE ? "  ;
 				sel.add(String.valueOf(word.getId()));
 			}
-
+			MainActivity.printDebug(0, selection);
 			// How you want the results sorted in the resulting Cursor
 			String sortOrder = // language_to_column_Correspondance(word.getLanguage())+ " DESC";
 					// Mettre l'ordre alphabetique
@@ -262,14 +270,22 @@ public class Controleur_bd implements BD_rw{
 			if(word.getId()==0){
 				String[] arguments = word.getArgs();
 				String[] projection = projectionForQuery(word);
-				for(int index = 1;index<arguments.length-1;index++){
-					selection = selection + projection[index];
-					if (arguments[index].startsWith("~")){
-						selection = selection + " NOT ";
-						arguments[index]=arguments[index].substring(1);
+				for(int index = 1;index<arguments.length-1;index++){			
+					String[] argum = {arguments[index]};
+					if(projection[index].contains("language")){
+						argum = argum[0].split("%");
 					}
-					sel.add(arguments[index]);
-					selection = selection +" LIKE ? ";
+					for(int new_index = 0;new_index <argum.length;new_index++){
+						selection = selection + projection[index];
+						if (arguments[new_index].startsWith("~")){
+							selection = selection + " NOT ";
+							arguments[new_index]=arguments[new_index].substring(1);
+						}
+						sel.add(arguments[new_index]);
+						selection = selection +" LIKE ? ";
+						if(new_index+1<argum.length-1)
+							selection= selection +" OR ";
+					}
 					if(index+1<arguments.length-1)
 						selection= selection +" AND ";
 				}
@@ -490,7 +506,7 @@ public class Controleur_bd implements BD_rw{
 				FeedEntry._ID,
 				FeedEntry.COLUMN_NAME_LANGUAGE_CODE,
 				FeedEntry.COLUMN_NAME_LANGUAGE_NAME
-			};
+		};
 		return res;
 	}
 
