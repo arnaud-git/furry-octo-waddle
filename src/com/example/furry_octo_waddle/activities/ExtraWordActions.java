@@ -6,6 +6,7 @@ import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
 import com.example.furry_octo_waddle.sql_manager.Extra_Word_Translation;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 
 import android.graphics.Color;
 import android.text.Editable;
@@ -23,7 +24,7 @@ public class ExtraWordActions extends WordActions {
 	
 	public ExtraWordActions(BaseActivity ba) {
 		super(ba);
-		String[] args = {Word_Translation.ENGLISH,"","","",Word_Translation.FRENCH,""};
+		String[] args = {Languages_ISO.ENGLISH,"","","",Languages_ISO.FRENCH,""};
 		word_obj=new Extra_Word_Translation(args);
 		MainActivity.printDebug(1,word_obj.getType().name());
 	}
@@ -69,7 +70,12 @@ public class ExtraWordActions extends WordActions {
 	protected void showAllTextViews(){
 		super.showAllTextViews();
 		tvRomanizationWord.setVisibility(View.VISIBLE);
-		tvPronunciationWord.setVisibility(View.VISIBLE);		
+		tvPronunciationWord.setVisibility(View.VISIBLE);
+		MainActivity.printDebug(1, "Visible " +tvWordTrans.getText());
+		MainActivity.printDebug(1, "Visible " +tvRomanizationWord.getText());
+		MainActivity.printDebug(1, "Visible " +tvPronunciationWord.getText());
+		MainActivity.printDebug(1, "Visible " +tvWord.getText());
+		MainActivity.printDebug(1, "Visible " +tvWordTrans.getVisibility());
 		editRomanizationWord.setVisibility(View.GONE);
 		editPronunciationWord.setVisibility(View.GONE);
 	}
@@ -85,7 +91,7 @@ public class ExtraWordActions extends WordActions {
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
-			String[] args = {Word_Translation.ENGLISH,word,Romword,Pronword,Word_Translation.FRENCH,wordTrad};
+			String[] args = {Languages_ISO.ENGLISH,word,Romword,Pronword,Languages_ISO.FRENCH,wordTrad};
 			word_obj=new Extra_Word_Translation(args);
 			
 			// TODO cbd one function for thes cases

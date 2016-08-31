@@ -13,6 +13,9 @@ public final class FeedReaderContract {
 	public static abstract class FeedEntry implements BaseColumns {
 		public static final String TABLE_NAME = "translation_table";
 		public static final String EXTENDED_TABLE_NAME = "extra_translation_table";
+		public static final String LANG_TABLE_NAME = "languages_table";
+		public static final String COLUMN_NAME_LANGUAGE_CODE = "language_code";
+		public static final String COLUMN_NAME_LANGUAGE_NAME = "language_name";
 		public static final String COLUMN_NAME_ENGLISH_WORD = "english_word";
 		public static final String COLUMN_NAME_FRENCH_WORD = "french_word";
 		public static final String COLUMN_NAME_WORD_LANG = "word_language";

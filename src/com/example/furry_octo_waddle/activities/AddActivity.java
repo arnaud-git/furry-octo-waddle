@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Extra_Word_Translation;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 
 public class AddActivity extends BaseActivity{
@@ -28,6 +29,8 @@ public class AddActivity extends BaseActivity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.add_layout);
 		setViewByLayout();
+		String[] args = {Languages_ISO.ENGLISH,"","","",Languages_ISO.FRENCH,""};
+		setCurrentWord(new Extra_Word_Translation(args));
 		writeWord();
 		try{
 			

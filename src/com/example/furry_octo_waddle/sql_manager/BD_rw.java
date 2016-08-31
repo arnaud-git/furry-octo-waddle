@@ -72,5 +72,13 @@ public interface BD_rw {
 	 * (the table still exists after the call)*/
 	public void resetTable(Extra type);
 	
+	public void writeLanguage(Language Language);
+	
+	public List<Language> getLanguage(Language Language,int nombre);
+	
+	public void modifyLanguage(Language Language);
+	
+	public void deleteLanguage(Language Language);
+	
 	public void showTable();
 }

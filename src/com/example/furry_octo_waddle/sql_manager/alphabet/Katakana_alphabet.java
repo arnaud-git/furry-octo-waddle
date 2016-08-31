@@ -12,388 +12,388 @@ public class Katakana_alphabet{
 
 	public static void save_Katakana_alphabet(){
 
-		String[] args0= {Extra_Word_Translation.KATAKANA_ALPHA,"カ","ka"," [ka]", Extra_Word_Translation.FRENCH,"ka" };
+		String[] args0= {Languages_ISO.KATAKANA_ALPHA,"カ","ka"," [ka]", Languages_ISO.FRENCH,"ka" };
 		list.add(new Extra_Word_Translation(args0));
 
-		String[] args1= {Extra_Word_Translation.KATAKANA_ALPHA,"キ","ki"," [ki]", Extra_Word_Translation.FRENCH,"ki" };
+		String[] args1= {Languages_ISO.KATAKANA_ALPHA,"キ","ki"," [ki]", Languages_ISO.FRENCH,"ki" };
 		list.add(new Extra_Word_Translation(args1));
 
-		String[] args2= {Extra_Word_Translation.KATAKANA_ALPHA,"ク","ku"," [kɯ]", Extra_Word_Translation.FRENCH,"ku" };
+		String[] args2= {Languages_ISO.KATAKANA_ALPHA,"ク","ku"," [kɯ]", Languages_ISO.FRENCH,"ku" };
 		list.add(new Extra_Word_Translation(args2));
 
-		String[] args3= {Extra_Word_Translation.KATAKANA_ALPHA,"ケ","ke"," [ke]", Extra_Word_Translation.FRENCH,"ke" };
+		String[] args3= {Languages_ISO.KATAKANA_ALPHA,"ケ","ke"," [ke]", Languages_ISO.FRENCH,"ke" };
 		list.add(new Extra_Word_Translation(args3));
 
-		String[] args4= {Extra_Word_Translation.KATAKANA_ALPHA,"コ","ko"," [ko]", Extra_Word_Translation.FRENCH,"ko" };
+		String[] args4= {Languages_ISO.KATAKANA_ALPHA,"コ","ko"," [ko]", Languages_ISO.FRENCH,"ko" };
 		list.add(new Extra_Word_Translation(args4));
 
-		String[] args5= {Extra_Word_Translation.KATAKANA_ALPHA,"サ","sa"," [sa]", Extra_Word_Translation.FRENCH,"sa" };
+		String[] args5= {Languages_ISO.KATAKANA_ALPHA,"サ","sa"," [sa]", Languages_ISO.FRENCH,"sa" };
 		list.add(new Extra_Word_Translation(args5));
 
-		String[] args6= {Extra_Word_Translation.KATAKANA_ALPHA,"シ","shi"," [ɕi]", Extra_Word_Translation.FRENCH,"shi" };
+		String[] args6= {Languages_ISO.KATAKANA_ALPHA,"シ","shi"," [ɕi]", Languages_ISO.FRENCH,"shi" };
 		list.add(new Extra_Word_Translation(args6));
 
-		String[] args7= {Extra_Word_Translation.KATAKANA_ALPHA,"ス","su"," [sɯ]", Extra_Word_Translation.FRENCH,"su" };
+		String[] args7= {Languages_ISO.KATAKANA_ALPHA,"ス","su"," [sɯ]", Languages_ISO.FRENCH,"su" };
 		list.add(new Extra_Word_Translation(args7));
 
-		String[] args8= {Extra_Word_Translation.KATAKANA_ALPHA,"セ","se"," [se]", Extra_Word_Translation.FRENCH,"se" };
+		String[] args8= {Languages_ISO.KATAKANA_ALPHA,"セ","se"," [se]", Languages_ISO.FRENCH,"se" };
 		list.add(new Extra_Word_Translation(args8));
 
-		String[] args9= {Extra_Word_Translation.KATAKANA_ALPHA,"ソ","so"," [so]", Extra_Word_Translation.FRENCH,"so" };
+		String[] args9= {Languages_ISO.KATAKANA_ALPHA,"ソ","so"," [so]", Languages_ISO.FRENCH,"so" };
 		list.add(new Extra_Word_Translation(args9));
 
-		String[] args10= {Extra_Word_Translation.KATAKANA_ALPHA,"タ","ta"," [ta]", Extra_Word_Translation.FRENCH,"ta" };
+		String[] args10= {Languages_ISO.KATAKANA_ALPHA,"タ","ta"," [ta]", Languages_ISO.FRENCH,"ta" };
 		list.add(new Extra_Word_Translation(args10));
 
-		String[] args11= {Extra_Word_Translation.KATAKANA_ALPHA,"チ","chi"," [cɕi]", Extra_Word_Translation.FRENCH,"chi" };
+		String[] args11= {Languages_ISO.KATAKANA_ALPHA,"チ","chi"," [cɕi]", Languages_ISO.FRENCH,"chi" };
 		list.add(new Extra_Word_Translation(args11));
 
-		String[] args12= {Extra_Word_Translation.KATAKANA_ALPHA,"ツ","tsu"," [tsɯ]", Extra_Word_Translation.FRENCH,"tsu" };
+		String[] args12= {Languages_ISO.KATAKANA_ALPHA,"ツ","tsu"," [tsɯ]", Languages_ISO.FRENCH,"tsu" };
 		list.add(new Extra_Word_Translation(args12));
 
-		String[] args13= {Extra_Word_Translation.KATAKANA_ALPHA,"テ","te"," [te]", Extra_Word_Translation.FRENCH,"te" };
+		String[] args13= {Languages_ISO.KATAKANA_ALPHA,"テ","te"," [te]", Languages_ISO.FRENCH,"te" };
 		list.add(new Extra_Word_Translation(args13));
 
-		String[] args14= {Extra_Word_Translation.KATAKANA_ALPHA,"ト","to"," [to]", Extra_Word_Translation.FRENCH,"to" };
+		String[] args14= {Languages_ISO.KATAKANA_ALPHA,"ト","to"," [to]", Languages_ISO.FRENCH,"to" };
 		list.add(new Extra_Word_Translation(args14));
 
-		String[] args15= {Extra_Word_Translation.KATAKANA_ALPHA,"ナ","na"," [na]", Extra_Word_Translation.FRENCH,"na" };
+		String[] args15= {Languages_ISO.KATAKANA_ALPHA,"ナ","na"," [na]", Languages_ISO.FRENCH,"na" };
 		list.add(new Extra_Word_Translation(args15));
 
-		String[] args16= {Extra_Word_Translation.KATAKANA_ALPHA,"ニ","ni"," [ni]", Extra_Word_Translation.FRENCH,"ni" };
+		String[] args16= {Languages_ISO.KATAKANA_ALPHA,"ニ","ni"," [ni]", Languages_ISO.FRENCH,"ni" };
 		list.add(new Extra_Word_Translation(args16));
 
-		String[] args17= {Extra_Word_Translation.KATAKANA_ALPHA,"ヌ","nu"," [nɯ]", Extra_Word_Translation.FRENCH,"nu" };
+		String[] args17= {Languages_ISO.KATAKANA_ALPHA,"ヌ","nu"," [nɯ]", Languages_ISO.FRENCH,"nu" };
 		list.add(new Extra_Word_Translation(args17));
 
-		String[] args18= {Extra_Word_Translation.KATAKANA_ALPHA,"ネ","ne"," [ne]", Extra_Word_Translation.FRENCH,"ne" };
+		String[] args18= {Languages_ISO.KATAKANA_ALPHA,"ネ","ne"," [ne]", Languages_ISO.FRENCH,"ne" };
 		list.add(new Extra_Word_Translation(args18));
 
-		String[] args19= {Extra_Word_Translation.KATAKANA_ALPHA,"ノ","no"," [no]", Extra_Word_Translation.FRENCH,"no" };
+		String[] args19= {Languages_ISO.KATAKANA_ALPHA,"ノ","no"," [no]", Languages_ISO.FRENCH,"no" };
 		list.add(new Extra_Word_Translation(args19));
 
-		String[] args20= {Extra_Word_Translation.KATAKANA_ALPHA,"ハ","ha"," [ha]", Extra_Word_Translation.FRENCH,"ha" };
+		String[] args20= {Languages_ISO.KATAKANA_ALPHA,"ハ","ha"," [ha]", Languages_ISO.FRENCH,"ha" };
 		list.add(new Extra_Word_Translation(args20));
 
-		String[] args21= {Extra_Word_Translation.KATAKANA_ALPHA,"ヒ","hi"," [hi]", Extra_Word_Translation.FRENCH,"hi" };
+		String[] args21= {Languages_ISO.KATAKANA_ALPHA,"ヒ","hi"," [hi]", Languages_ISO.FRENCH,"hi" };
 		list.add(new Extra_Word_Translation(args21));
 
-		String[] args22= {Extra_Word_Translation.KATAKANA_ALPHA,"フ","fu"," [ɸɯ]", Extra_Word_Translation.FRENCH,"fu" };
+		String[] args22= {Languages_ISO.KATAKANA_ALPHA,"フ","fu"," [ɸɯ]", Languages_ISO.FRENCH,"fu" };
 		list.add(new Extra_Word_Translation(args22));
 
-		String[] args23= {Extra_Word_Translation.KATAKANA_ALPHA,"ヘ","he"," [he]", Extra_Word_Translation.FRENCH,"he" };
+		String[] args23= {Languages_ISO.KATAKANA_ALPHA,"ヘ","he"," [he]", Languages_ISO.FRENCH,"he" };
 		list.add(new Extra_Word_Translation(args23));
 
-		String[] args24= {Extra_Word_Translation.KATAKANA_ALPHA,"ホ","ho"," [ho]", Extra_Word_Translation.FRENCH,"ho" };
+		String[] args24= {Languages_ISO.KATAKANA_ALPHA,"ホ","ho"," [ho]", Languages_ISO.FRENCH,"ho" };
 		list.add(new Extra_Word_Translation(args24));
 
-		String[] args25= {Extra_Word_Translation.KATAKANA_ALPHA,"マ","ma"," [ma]", Extra_Word_Translation.FRENCH,"ma" };
+		String[] args25= {Languages_ISO.KATAKANA_ALPHA,"マ","ma"," [ma]", Languages_ISO.FRENCH,"ma" };
 		list.add(new Extra_Word_Translation(args25));
 
-		String[] args26= {Extra_Word_Translation.KATAKANA_ALPHA,"ミ","mi"," [mi]", Extra_Word_Translation.FRENCH,"mi" };
+		String[] args26= {Languages_ISO.KATAKANA_ALPHA,"ミ","mi"," [mi]", Languages_ISO.FRENCH,"mi" };
 		list.add(new Extra_Word_Translation(args26));
 
-		String[] args27= {Extra_Word_Translation.KATAKANA_ALPHA,"ム","mu"," [mɯ]", Extra_Word_Translation.FRENCH,"mu" };
+		String[] args27= {Languages_ISO.KATAKANA_ALPHA,"ム","mu"," [mɯ]", Languages_ISO.FRENCH,"mu" };
 		list.add(new Extra_Word_Translation(args27));
 
-		String[] args28= {Extra_Word_Translation.KATAKANA_ALPHA,"メ","me"," [me]", Extra_Word_Translation.FRENCH,"me" };
+		String[] args28= {Languages_ISO.KATAKANA_ALPHA,"メ","me"," [me]", Languages_ISO.FRENCH,"me" };
 		list.add(new Extra_Word_Translation(args28));
 
-		String[] args29= {Extra_Word_Translation.KATAKANA_ALPHA,"モ","mo"," [mo]", Extra_Word_Translation.FRENCH,"mo" };
+		String[] args29= {Languages_ISO.KATAKANA_ALPHA,"モ","mo"," [mo]", Languages_ISO.FRENCH,"mo" };
 		list.add(new Extra_Word_Translation(args29));
 
-		String[] args30= {Extra_Word_Translation.KATAKANA_ALPHA,"ヤ","ya"," [ja]", Extra_Word_Translation.FRENCH,"ya" };
+		String[] args30= {Languages_ISO.KATAKANA_ALPHA,"ヤ","ya"," [ja]", Languages_ISO.FRENCH,"ya" };
 		list.add(new Extra_Word_Translation(args30));
 
-		String[] args31= {Extra_Word_Translation.KATAKANA_ALPHA,"ユ","yu"," [jɯ]", Extra_Word_Translation.FRENCH,"yu" };
+		String[] args31= {Languages_ISO.KATAKANA_ALPHA,"ユ","yu"," [jɯ]", Languages_ISO.FRENCH,"yu" };
 		list.add(new Extra_Word_Translation(args31));
 
-		String[] args32= {Extra_Word_Translation.KATAKANA_ALPHA,"ヨ","yo"," [jo]", Extra_Word_Translation.FRENCH,"yo" };
+		String[] args32= {Languages_ISO.KATAKANA_ALPHA,"ヨ","yo"," [jo]", Languages_ISO.FRENCH,"yo" };
 		list.add(new Extra_Word_Translation(args32));
 
-		String[] args33= {Extra_Word_Translation.KATAKANA_ALPHA,"ラ","ra"," [ɺa]", Extra_Word_Translation.FRENCH,"ra" };
+		String[] args33= {Languages_ISO.KATAKANA_ALPHA,"ラ","ra"," [ɺa]", Languages_ISO.FRENCH,"ra" };
 		list.add(new Extra_Word_Translation(args33));
 
-		String[] args34= {Extra_Word_Translation.KATAKANA_ALPHA,"リ","ri"," [ɺi]", Extra_Word_Translation.FRENCH,"ri" };
+		String[] args34= {Languages_ISO.KATAKANA_ALPHA,"リ","ri"," [ɺi]", Languages_ISO.FRENCH,"ri" };
 		list.add(new Extra_Word_Translation(args34));
 
-		String[] args35= {Extra_Word_Translation.KATAKANA_ALPHA,"ル","ru"," [ɺɯ]", Extra_Word_Translation.FRENCH,"ru" };
+		String[] args35= {Languages_ISO.KATAKANA_ALPHA,"ル","ru"," [ɺɯ]", Languages_ISO.FRENCH,"ru" };
 		list.add(new Extra_Word_Translation(args35));
 
-		String[] args36= {Extra_Word_Translation.KATAKANA_ALPHA,"レ","re"," [ɺe]", Extra_Word_Translation.FRENCH,"re" };
+		String[] args36= {Languages_ISO.KATAKANA_ALPHA,"レ","re"," [ɺe]", Languages_ISO.FRENCH,"re" };
 		list.add(new Extra_Word_Translation(args36));
 
-		String[] args37= {Extra_Word_Translation.KATAKANA_ALPHA,"ロ","ro"," [ɺo]", Extra_Word_Translation.FRENCH,"ro" };
+		String[] args37= {Languages_ISO.KATAKANA_ALPHA,"ロ","ro"," [ɺo]", Languages_ISO.FRENCH,"ro" };
 		list.add(new Extra_Word_Translation(args37));
 
-		String[] args38= {Extra_Word_Translation.KATAKANA_ALPHA,"ワ","wa"," [ɰa]", Extra_Word_Translation.FRENCH,"wa" };
+		String[] args38= {Languages_ISO.KATAKANA_ALPHA,"ワ","wa"," [ɰa]", Languages_ISO.FRENCH,"wa" };
 		list.add(new Extra_Word_Translation(args38));
 
-		String[] args39= {Extra_Word_Translation.KATAKANA_ALPHA,"ヰ","wi"," [ɰi]", Extra_Word_Translation.FRENCH,"wi" };
+		String[] args39= {Languages_ISO.KATAKANA_ALPHA,"ヰ","wi"," [ɰi]", Languages_ISO.FRENCH,"wi" };
 		list.add(new Extra_Word_Translation(args39));
 
-		String[] args40= {Extra_Word_Translation.KATAKANA_ALPHA,"ヱ","we"," [ɰe]", Extra_Word_Translation.FRENCH,"we" };
+		String[] args40= {Languages_ISO.KATAKANA_ALPHA,"ヱ","we"," [ɰe]", Languages_ISO.FRENCH,"we" };
 		list.add(new Extra_Word_Translation(args40));
 
-		String[] args41= {Extra_Word_Translation.KATAKANA_ALPHA,"ヲ","wo"," [ɰo] ; [o]", Extra_Word_Translation.FRENCH,"wo" };
+		String[] args41= {Languages_ISO.KATAKANA_ALPHA,"ヲ","wo"," [ɰo] ; [o]", Languages_ISO.FRENCH,"wo" };
 		list.add(new Extra_Word_Translation(args41));
 
-		String[] args42= {Extra_Word_Translation.KATAKANA_ALPHA,"ン","n"," ", Extra_Word_Translation.FRENCH,"n" };
+		String[] args42= {Languages_ISO.KATAKANA_ALPHA,"ン","n"," ", Languages_ISO.FRENCH,"n" };
 		list.add(new Extra_Word_Translation(args42));
 
-		String[] args43= {Extra_Word_Translation.KATAKANA_ALPHA,"ガ","ga"," [ga]", Extra_Word_Translation.FRENCH,"ga" };
+		String[] args43= {Languages_ISO.KATAKANA_ALPHA,"ガ","ga"," [ga]", Languages_ISO.FRENCH,"ga" };
 		list.add(new Extra_Word_Translation(args43));
 
-		String[] args44= {Extra_Word_Translation.KATAKANA_ALPHA,"ギ","gi"," [gi]", Extra_Word_Translation.FRENCH,"gi" };
+		String[] args44= {Languages_ISO.KATAKANA_ALPHA,"ギ","gi"," [gi]", Languages_ISO.FRENCH,"gi" };
 		list.add(new Extra_Word_Translation(args44));
 
-		String[] args45= {Extra_Word_Translation.KATAKANA_ALPHA,"グ","gu"," [gɯ]", Extra_Word_Translation.FRENCH,"gu" };
+		String[] args45= {Languages_ISO.KATAKANA_ALPHA,"グ","gu"," [gɯ]", Languages_ISO.FRENCH,"gu" };
 		list.add(new Extra_Word_Translation(args45));
 
-		String[] args46= {Extra_Word_Translation.KATAKANA_ALPHA,"ゲ","ge"," [ge]", Extra_Word_Translation.FRENCH,"ge" };
+		String[] args46= {Languages_ISO.KATAKANA_ALPHA,"ゲ","ge"," [ge]", Languages_ISO.FRENCH,"ge" };
 		list.add(new Extra_Word_Translation(args46));
 
-		String[] args47= {Extra_Word_Translation.KATAKANA_ALPHA,"ゴ","go"," [go]", Extra_Word_Translation.FRENCH,"go" };
+		String[] args47= {Languages_ISO.KATAKANA_ALPHA,"ゴ","go"," [go]", Languages_ISO.FRENCH,"go" };
 		list.add(new Extra_Word_Translation(args47));
 
-		String[] args48= {Extra_Word_Translation.KATAKANA_ALPHA,"ザ","za"," [za]", Extra_Word_Translation.FRENCH,"za" };
+		String[] args48= {Languages_ISO.KATAKANA_ALPHA,"ザ","za"," [za]", Languages_ISO.FRENCH,"za" };
 		list.add(new Extra_Word_Translation(args48));
 
-		String[] args49= {Extra_Word_Translation.KATAKANA_ALPHA,"ジ","ji"," [ɟʑi] ; [ʑi]", Extra_Word_Translation.FRENCH,"ji" };
+		String[] args49= {Languages_ISO.KATAKANA_ALPHA,"ジ","ji"," [ɟʑi] ; [ʑi]", Languages_ISO.FRENCH,"ji" };
 		list.add(new Extra_Word_Translation(args49));
 
-		String[] args50= {Extra_Word_Translation.KATAKANA_ALPHA,"ズ","zu"," [zɯ]", Extra_Word_Translation.FRENCH,"zu" };
+		String[] args50= {Languages_ISO.KATAKANA_ALPHA,"ズ","zu"," [zɯ]", Languages_ISO.FRENCH,"zu" };
 		list.add(new Extra_Word_Translation(args50));
 
-		String[] args51= {Extra_Word_Translation.KATAKANA_ALPHA,"ゼ","ze"," [ze]", Extra_Word_Translation.FRENCH,"ze" };
+		String[] args51= {Languages_ISO.KATAKANA_ALPHA,"ゼ","ze"," [ze]", Languages_ISO.FRENCH,"ze" };
 		list.add(new Extra_Word_Translation(args51));
 
-		String[] args52= {Extra_Word_Translation.KATAKANA_ALPHA,"ゾ","zo"," [zo]", Extra_Word_Translation.FRENCH,"zo" };
+		String[] args52= {Languages_ISO.KATAKANA_ALPHA,"ゾ","zo"," [zo]", Languages_ISO.FRENCH,"zo" };
 		list.add(new Extra_Word_Translation(args52));
 
-		String[] args53= {Extra_Word_Translation.KATAKANA_ALPHA,"ダ","da"," [da]", Extra_Word_Translation.FRENCH,"da" };
+		String[] args53= {Languages_ISO.KATAKANA_ALPHA,"ダ","da"," [da]", Languages_ISO.FRENCH,"da" };
 		list.add(new Extra_Word_Translation(args53));
 
-		String[] args54= {Extra_Word_Translation.KATAKANA_ALPHA,"ヂ","ji"," [ɟʑi] ; [ʑi]", Extra_Word_Translation.FRENCH,"ji" };
+		String[] args54= {Languages_ISO.KATAKANA_ALPHA,"ヂ","ji"," [ɟʑi] ; [ʑi]", Languages_ISO.FRENCH,"ji" };
 		list.add(new Extra_Word_Translation(args54));
 
-		String[] args55= {Extra_Word_Translation.KATAKANA_ALPHA,"ヅ","zu"," [zɯ] ; [dzɯ]", Extra_Word_Translation.FRENCH,"zu" };
+		String[] args55= {Languages_ISO.KATAKANA_ALPHA,"ヅ","zu"," [zɯ] ; [dzɯ]", Languages_ISO.FRENCH,"zu" };
 		list.add(new Extra_Word_Translation(args55));
 
-		String[] args56= {Extra_Word_Translation.KATAKANA_ALPHA,"デ","de"," [de]", Extra_Word_Translation.FRENCH,"de" };
+		String[] args56= {Languages_ISO.KATAKANA_ALPHA,"デ","de"," [de]", Languages_ISO.FRENCH,"de" };
 		list.add(new Extra_Word_Translation(args56));
 
-		String[] args57= {Extra_Word_Translation.KATAKANA_ALPHA,"ド","do"," [do]", Extra_Word_Translation.FRENCH,"do" };
+		String[] args57= {Languages_ISO.KATAKANA_ALPHA,"ド","do"," [do]", Languages_ISO.FRENCH,"do" };
 		list.add(new Extra_Word_Translation(args57));
 
-		String[] args58= {Extra_Word_Translation.KATAKANA_ALPHA,"バ","ba"," [ba]", Extra_Word_Translation.FRENCH,"ba" };
+		String[] args58= {Languages_ISO.KATAKANA_ALPHA,"バ","ba"," [ba]", Languages_ISO.FRENCH,"ba" };
 		list.add(new Extra_Word_Translation(args58));
 
-		String[] args59= {Extra_Word_Translation.KATAKANA_ALPHA,"ビ","bi"," [bi]", Extra_Word_Translation.FRENCH,"bi" };
+		String[] args59= {Languages_ISO.KATAKANA_ALPHA,"ビ","bi"," [bi]", Languages_ISO.FRENCH,"bi" };
 		list.add(new Extra_Word_Translation(args59));
 
-		String[] args60= {Extra_Word_Translation.KATAKANA_ALPHA,"ブ","bu"," [bɯ]", Extra_Word_Translation.FRENCH,"bu" };
+		String[] args60= {Languages_ISO.KATAKANA_ALPHA,"ブ","bu"," [bɯ]", Languages_ISO.FRENCH,"bu" };
 		list.add(new Extra_Word_Translation(args60));
 
-		String[] args61= {Extra_Word_Translation.KATAKANA_ALPHA,"ベ","be"," [be]", Extra_Word_Translation.FRENCH,"be" };
+		String[] args61= {Languages_ISO.KATAKANA_ALPHA,"ベ","be"," [be]", Languages_ISO.FRENCH,"be" };
 		list.add(new Extra_Word_Translation(args61));
 
-		String[] args62= {Extra_Word_Translation.KATAKANA_ALPHA,"ボ","bo"," [bo]", Extra_Word_Translation.FRENCH,"bo" };
+		String[] args62= {Languages_ISO.KATAKANA_ALPHA,"ボ","bo"," [bo]", Languages_ISO.FRENCH,"bo" };
 		list.add(new Extra_Word_Translation(args62));
 
-		String[] args63= {Extra_Word_Translation.KATAKANA_ALPHA,"パ","pa"," [pa]", Extra_Word_Translation.FRENCH,"pa" };
+		String[] args63= {Languages_ISO.KATAKANA_ALPHA,"パ","pa"," [pa]", Languages_ISO.FRENCH,"pa" };
 		list.add(new Extra_Word_Translation(args63));
 
-		String[] args64= {Extra_Word_Translation.KATAKANA_ALPHA,"ピ","pi"," [pi]", Extra_Word_Translation.FRENCH,"pi" };
+		String[] args64= {Languages_ISO.KATAKANA_ALPHA,"ピ","pi"," [pi]", Languages_ISO.FRENCH,"pi" };
 		list.add(new Extra_Word_Translation(args64));
 
-		String[] args65= {Extra_Word_Translation.KATAKANA_ALPHA,"プ","pu"," [pɯ]", Extra_Word_Translation.FRENCH,"pu" };
+		String[] args65= {Languages_ISO.KATAKANA_ALPHA,"プ","pu"," [pɯ]", Languages_ISO.FRENCH,"pu" };
 		list.add(new Extra_Word_Translation(args65));
 
-		String[] args66= {Extra_Word_Translation.KATAKANA_ALPHA,"ペ","pe"," [pe]", Extra_Word_Translation.FRENCH,"pe" };
+		String[] args66= {Languages_ISO.KATAKANA_ALPHA,"ペ","pe"," [pe]", Languages_ISO.FRENCH,"pe" };
 		list.add(new Extra_Word_Translation(args66));
 
-		String[] args67= {Extra_Word_Translation.KATAKANA_ALPHA,"ポ","po"," [po]", Extra_Word_Translation.FRENCH,"po" };
+		String[] args67= {Languages_ISO.KATAKANA_ALPHA,"ポ","po"," [po]", Languages_ISO.FRENCH,"po" };
 		list.add(new Extra_Word_Translation(args67));
 
-		String[] args68= {Extra_Word_Translation.KATAKANA_ALPHA,"キャ","kya"," [kʲa]", Extra_Word_Translation.FRENCH,"kya" };
+		String[] args68= {Languages_ISO.KATAKANA_ALPHA,"キャ","kya"," [kʲa]", Languages_ISO.FRENCH,"kya" };
 		list.add(new Extra_Word_Translation(args68));
 
-		String[] args69= {Extra_Word_Translation.KATAKANA_ALPHA,"キュ","kyu"," [kʲɯ]", Extra_Word_Translation.FRENCH,"kyu" };
+		String[] args69= {Languages_ISO.KATAKANA_ALPHA,"キュ","kyu"," [kʲɯ]", Languages_ISO.FRENCH,"kyu" };
 		list.add(new Extra_Word_Translation(args69));
 
-		String[] args70= {Extra_Word_Translation.KATAKANA_ALPHA,"キョ","kyo"," [kʲo]", Extra_Word_Translation.FRENCH,"kyo" };
+		String[] args70= {Languages_ISO.KATAKANA_ALPHA,"キョ","kyo"," [kʲo]", Languages_ISO.FRENCH,"kyo" };
 		list.add(new Extra_Word_Translation(args70));
 
-		String[] args71= {Extra_Word_Translation.KATAKANA_ALPHA,"ギャ","gya"," [ɡʲa]", Extra_Word_Translation.FRENCH,"gya" };
+		String[] args71= {Languages_ISO.KATAKANA_ALPHA,"ギャ","gya"," [ɡʲa]", Languages_ISO.FRENCH,"gya" };
 		list.add(new Extra_Word_Translation(args71));
 
-		String[] args72= {Extra_Word_Translation.KATAKANA_ALPHA,"ギュ","gyu"," [ɡʲɯ]", Extra_Word_Translation.FRENCH,"gyu" };
+		String[] args72= {Languages_ISO.KATAKANA_ALPHA,"ギュ","gyu"," [ɡʲɯ]", Languages_ISO.FRENCH,"gyu" };
 		list.add(new Extra_Word_Translation(args72));
 
-		String[] args73= {Extra_Word_Translation.KATAKANA_ALPHA,"ギョ","gyo"," [ɡʲo]", Extra_Word_Translation.FRENCH,"gyo" };
+		String[] args73= {Languages_ISO.KATAKANA_ALPHA,"ギョ","gyo"," [ɡʲo]", Languages_ISO.FRENCH,"gyo" };
 		list.add(new Extra_Word_Translation(args73));
 
-		String[] args74= {Extra_Word_Translation.KATAKANA_ALPHA,"シャ","sha"," [ɕa]", Extra_Word_Translation.FRENCH,"sha" };
+		String[] args74= {Languages_ISO.KATAKANA_ALPHA,"シャ","sha"," [ɕa]", Languages_ISO.FRENCH,"sha" };
 		list.add(new Extra_Word_Translation(args74));
 
-		String[] args75= {Extra_Word_Translation.KATAKANA_ALPHA,"シュ","shu"," [ɕɯ]", Extra_Word_Translation.FRENCH,"shu" };
+		String[] args75= {Languages_ISO.KATAKANA_ALPHA,"シュ","shu"," [ɕɯ]", Languages_ISO.FRENCH,"shu" };
 		list.add(new Extra_Word_Translation(args75));
 
-		String[] args76= {Extra_Word_Translation.KATAKANA_ALPHA,"ショ","sho"," [ɕo]", Extra_Word_Translation.FRENCH,"sho" };
+		String[] args76= {Languages_ISO.KATAKANA_ALPHA,"ショ","sho"," [ɕo]", Languages_ISO.FRENCH,"sho" };
 		list.add(new Extra_Word_Translation(args76));
 
-		String[] args77= {Extra_Word_Translation.KATAKANA_ALPHA,"ジャ","ja"," [ɟʑa]", Extra_Word_Translation.FRENCH,"ja" };
+		String[] args77= {Languages_ISO.KATAKANA_ALPHA,"ジャ","ja"," [ɟʑa]", Languages_ISO.FRENCH,"ja" };
 		list.add(new Extra_Word_Translation(args77));
 
-		String[] args78= {Extra_Word_Translation.KATAKANA_ALPHA,"ジュ","ju"," [ɟʑɯ]", Extra_Word_Translation.FRENCH,"ju" };
+		String[] args78= {Languages_ISO.KATAKANA_ALPHA,"ジュ","ju"," [ɟʑɯ]", Languages_ISO.FRENCH,"ju" };
 		list.add(new Extra_Word_Translation(args78));
 
-		String[] args79= {Extra_Word_Translation.KATAKANA_ALPHA,"ジョ","jo"," [ɟʑo]", Extra_Word_Translation.FRENCH,"jo" };
+		String[] args79= {Languages_ISO.KATAKANA_ALPHA,"ジョ","jo"," [ɟʑo]", Languages_ISO.FRENCH,"jo" };
 		list.add(new Extra_Word_Translation(args79));
 
-		String[] args80= {Extra_Word_Translation.KATAKANA_ALPHA,"チャ","cha"," [cɕa]", Extra_Word_Translation.FRENCH,"cha" };
+		String[] args80= {Languages_ISO.KATAKANA_ALPHA,"チャ","cha"," [cɕa]", Languages_ISO.FRENCH,"cha" };
 		list.add(new Extra_Word_Translation(args80));
 
-		String[] args81= {Extra_Word_Translation.KATAKANA_ALPHA,"チュ","chu"," [cɕɯ]", Extra_Word_Translation.FRENCH,"chu" };
+		String[] args81= {Languages_ISO.KATAKANA_ALPHA,"チュ","chu"," [cɕɯ]", Languages_ISO.FRENCH,"chu" };
 		list.add(new Extra_Word_Translation(args81));
 
-		String[] args82= {Extra_Word_Translation.KATAKANA_ALPHA,"チョ","cho"," [cɕo]", Extra_Word_Translation.FRENCH,"cho" };
+		String[] args82= {Languages_ISO.KATAKANA_ALPHA,"チョ","cho"," [cɕo]", Languages_ISO.FRENCH,"cho" };
 		list.add(new Extra_Word_Translation(args82));
 
-		String[] args83= {Extra_Word_Translation.KATAKANA_ALPHA,"ニャ","nya"," [ȵa]", Extra_Word_Translation.FRENCH,"nya" };
+		String[] args83= {Languages_ISO.KATAKANA_ALPHA,"ニャ","nya"," [ȵa]", Languages_ISO.FRENCH,"nya" };
 		list.add(new Extra_Word_Translation(args83));
 
-		String[] args84= {Extra_Word_Translation.KATAKANA_ALPHA,"ニュ","nyu"," [ȵɯ]", Extra_Word_Translation.FRENCH,"nyu" };
+		String[] args84= {Languages_ISO.KATAKANA_ALPHA,"ニュ","nyu"," [ȵɯ]", Languages_ISO.FRENCH,"nyu" };
 		list.add(new Extra_Word_Translation(args84));
 
-		String[] args85= {Extra_Word_Translation.KATAKANA_ALPHA,"ニョ","nyo"," [ȵo]", Extra_Word_Translation.FRENCH,"nyo" };
+		String[] args85= {Languages_ISO.KATAKANA_ALPHA,"ニョ","nyo"," [ȵo]", Languages_ISO.FRENCH,"nyo" };
 		list.add(new Extra_Word_Translation(args85));
 
-		String[] args86= {Extra_Word_Translation.KATAKANA_ALPHA,"ヒャ","hya"," [ça]", Extra_Word_Translation.FRENCH,"hya" };
+		String[] args86= {Languages_ISO.KATAKANA_ALPHA,"ヒャ","hya"," [ça]", Languages_ISO.FRENCH,"hya" };
 		list.add(new Extra_Word_Translation(args86));
 
-		String[] args87= {Extra_Word_Translation.KATAKANA_ALPHA,"ヒュ","hyu"," [çɯ]", Extra_Word_Translation.FRENCH,"hyu" };
+		String[] args87= {Languages_ISO.KATAKANA_ALPHA,"ヒュ","hyu"," [çɯ]", Languages_ISO.FRENCH,"hyu" };
 		list.add(new Extra_Word_Translation(args87));
 
-		String[] args88= {Extra_Word_Translation.KATAKANA_ALPHA,"ヒョ","hyo"," [ço]", Extra_Word_Translation.FRENCH,"hyo" };
+		String[] args88= {Languages_ISO.KATAKANA_ALPHA,"ヒョ","hyo"," [ço]", Languages_ISO.FRENCH,"hyo" };
 		list.add(new Extra_Word_Translation(args88));
 
-		String[] args89= {Extra_Word_Translation.KATAKANA_ALPHA,"ビャ","bya"," [bʲa]", Extra_Word_Translation.FRENCH,"bya" };
+		String[] args89= {Languages_ISO.KATAKANA_ALPHA,"ビャ","bya"," [bʲa]", Languages_ISO.FRENCH,"bya" };
 		list.add(new Extra_Word_Translation(args89));
 
-		String[] args90= {Extra_Word_Translation.KATAKANA_ALPHA,"ビュ","byu"," [bʲɯ]", Extra_Word_Translation.FRENCH,"byu" };
+		String[] args90= {Languages_ISO.KATAKANA_ALPHA,"ビュ","byu"," [bʲɯ]", Languages_ISO.FRENCH,"byu" };
 		list.add(new Extra_Word_Translation(args90));
 
-		String[] args91= {Extra_Word_Translation.KATAKANA_ALPHA,"ビョ","byo"," [bʲo]", Extra_Word_Translation.FRENCH,"byo" };
+		String[] args91= {Languages_ISO.KATAKANA_ALPHA,"ビョ","byo"," [bʲo]", Languages_ISO.FRENCH,"byo" };
 		list.add(new Extra_Word_Translation(args91));
 
-		String[] args92= {Extra_Word_Translation.KATAKANA_ALPHA,"ピャ","pya"," [pʲa]", Extra_Word_Translation.FRENCH,"pya" };
+		String[] args92= {Languages_ISO.KATAKANA_ALPHA,"ピャ","pya"," [pʲa]", Languages_ISO.FRENCH,"pya" };
 		list.add(new Extra_Word_Translation(args92));
 
-		String[] args93= {Extra_Word_Translation.KATAKANA_ALPHA,"ピュ","pyu"," [pʲɯ]", Extra_Word_Translation.FRENCH,"pyu" };
+		String[] args93= {Languages_ISO.KATAKANA_ALPHA,"ピュ","pyu"," [pʲɯ]", Languages_ISO.FRENCH,"pyu" };
 		list.add(new Extra_Word_Translation(args93));
 
-		String[] args94= {Extra_Word_Translation.KATAKANA_ALPHA,"ピョ","pyo"," [pʲo]", Extra_Word_Translation.FRENCH,"pyo" };
+		String[] args94= {Languages_ISO.KATAKANA_ALPHA,"ピョ","pyo"," [pʲo]", Languages_ISO.FRENCH,"pyo" };
 		list.add(new Extra_Word_Translation(args94));
 
-		String[] args95= {Extra_Word_Translation.KATAKANA_ALPHA,"ミャ","mya"," [mʲa]", Extra_Word_Translation.FRENCH,"mya" };
+		String[] args95= {Languages_ISO.KATAKANA_ALPHA,"ミャ","mya"," [mʲa]", Languages_ISO.FRENCH,"mya" };
 		list.add(new Extra_Word_Translation(args95));
 
-		String[] args96= {Extra_Word_Translation.KATAKANA_ALPHA,"ミュ","myu"," [mʲɯ]", Extra_Word_Translation.FRENCH,"myu" };
+		String[] args96= {Languages_ISO.KATAKANA_ALPHA,"ミュ","myu"," [mʲɯ]", Languages_ISO.FRENCH,"myu" };
 		list.add(new Extra_Word_Translation(args96));
 
-		String[] args97= {Extra_Word_Translation.KATAKANA_ALPHA,"ミョ","myo"," [mʲo]", Extra_Word_Translation.FRENCH,"myo" };
+		String[] args97= {Languages_ISO.KATAKANA_ALPHA,"ミョ","myo"," [mʲo]", Languages_ISO.FRENCH,"myo" };
 		list.add(new Extra_Word_Translation(args97));
 
-		String[] args98= {Extra_Word_Translation.KATAKANA_ALPHA,"リャ","rya"," [ɺʲa]", Extra_Word_Translation.FRENCH,"rya" };
+		String[] args98= {Languages_ISO.KATAKANA_ALPHA,"リャ","rya"," [ɺʲa]", Languages_ISO.FRENCH,"rya" };
 		list.add(new Extra_Word_Translation(args98));
 
-		String[] args99= {Extra_Word_Translation.KATAKANA_ALPHA,"リュ","ryu"," [ɺʲɯ]", Extra_Word_Translation.FRENCH,"ryu" };
+		String[] args99= {Languages_ISO.KATAKANA_ALPHA,"リュ","ryu"," [ɺʲɯ]", Languages_ISO.FRENCH,"ryu" };
 		list.add(new Extra_Word_Translation(args99));
 
-		String[] args100= {Extra_Word_Translation.KATAKANA_ALPHA,"リョ","ryo"," [ɺʲo]", Extra_Word_Translation.FRENCH,"ryo" };
+		String[] args100= {Languages_ISO.KATAKANA_ALPHA,"リョ","ryo"," [ɺʲo]", Languages_ISO.FRENCH,"ryo" };
 		list.add(new Extra_Word_Translation(args100));
 
-		String[] args101= {Extra_Word_Translation.KATAKANA_ALPHA,"ウィ","wi"," [ɰi]", Extra_Word_Translation.FRENCH,"wi" };
+		String[] args101= {Languages_ISO.KATAKANA_ALPHA,"ウィ","wi"," [ɰi]", Languages_ISO.FRENCH,"wi" };
 		list.add(new Extra_Word_Translation(args101));
 
-		String[] args102= {Extra_Word_Translation.KATAKANA_ALPHA,"ウェ","we"," [ɰe]", Extra_Word_Translation.FRENCH,"we" };
+		String[] args102= {Languages_ISO.KATAKANA_ALPHA,"ウェ","we"," [ɰe]", Languages_ISO.FRENCH,"we" };
 		list.add(new Extra_Word_Translation(args102));
 
-		String[] args103= {Extra_Word_Translation.KATAKANA_ALPHA,"ウォ","wo"," [ɰo]", Extra_Word_Translation.FRENCH,"wo" };
+		String[] args103= {Languages_ISO.KATAKANA_ALPHA,"ウォ","wo"," [ɰo]", Languages_ISO.FRENCH,"wo" };
 		list.add(new Extra_Word_Translation(args103));
 
-		String[] args104= {Extra_Word_Translation.KATAKANA_ALPHA,"ヴァ","va"," [va]", Extra_Word_Translation.FRENCH,"va" };
+		String[] args104= {Languages_ISO.KATAKANA_ALPHA,"ヴァ","va"," [va]", Languages_ISO.FRENCH,"va" };
 		list.add(new Extra_Word_Translation(args104));
 
-		String[] args105= {Extra_Word_Translation.KATAKANA_ALPHA,"ヴィ","vi"," [vi]", Extra_Word_Translation.FRENCH,"vi" };
+		String[] args105= {Languages_ISO.KATAKANA_ALPHA,"ヴィ","vi"," [vi]", Languages_ISO.FRENCH,"vi" };
 		list.add(new Extra_Word_Translation(args105));
 
-		String[] args106= {Extra_Word_Translation.KATAKANA_ALPHA,"ヴ","vu"," [vɯ]", Extra_Word_Translation.FRENCH,"vu" };
+		String[] args106= {Languages_ISO.KATAKANA_ALPHA,"ヴ","vu"," [vɯ]", Languages_ISO.FRENCH,"vu" };
 		list.add(new Extra_Word_Translation(args106));
 
-		String[] args107= {Extra_Word_Translation.KATAKANA_ALPHA,"ヴェ","ve"," [ve]", Extra_Word_Translation.FRENCH,"ve" };
+		String[] args107= {Languages_ISO.KATAKANA_ALPHA,"ヴェ","ve"," [ve]", Languages_ISO.FRENCH,"ve" };
 		list.add(new Extra_Word_Translation(args107));
 
-		String[] args108= {Extra_Word_Translation.KATAKANA_ALPHA,"ヴォ","vo"," [vo]", Extra_Word_Translation.FRENCH,"vo" };
+		String[] args108= {Languages_ISO.KATAKANA_ALPHA,"ヴォ","vo"," [vo]", Languages_ISO.FRENCH,"vo" };
 		list.add(new Extra_Word_Translation(args108));
 
-		String[] args109= {Extra_Word_Translation.KATAKANA_ALPHA,"シェ","she"," [ɕe]", Extra_Word_Translation.FRENCH,"she" };
+		String[] args109= {Languages_ISO.KATAKANA_ALPHA,"シェ","she"," [ɕe]", Languages_ISO.FRENCH,"she" };
 		list.add(new Extra_Word_Translation(args109));
 
-		String[] args110= {Extra_Word_Translation.KATAKANA_ALPHA,"ジェ","je"," [ɟʑe]", Extra_Word_Translation.FRENCH,"je" };
+		String[] args110= {Languages_ISO.KATAKANA_ALPHA,"ジェ","je"," [ɟʑe]", Languages_ISO.FRENCH,"je" };
 		list.add(new Extra_Word_Translation(args110));
 
-		String[] args111= {Extra_Word_Translation.KATAKANA_ALPHA,"チェ","che"," [cɕe]", Extra_Word_Translation.FRENCH,"che" };
+		String[] args111= {Languages_ISO.KATAKANA_ALPHA,"チェ","che"," [cɕe]", Languages_ISO.FRENCH,"che" };
 		list.add(new Extra_Word_Translation(args111));
 
-		String[] args112= {Extra_Word_Translation.KATAKANA_ALPHA,"ツァ","tsa"," [tsa]", Extra_Word_Translation.FRENCH,"tsa" };
+		String[] args112= {Languages_ISO.KATAKANA_ALPHA,"ツァ","tsa"," [tsa]", Languages_ISO.FRENCH,"tsa" };
 		list.add(new Extra_Word_Translation(args112));
 
-		String[] args113= {Extra_Word_Translation.KATAKANA_ALPHA,"ツィ","tsi"," [tsi]", Extra_Word_Translation.FRENCH,"tsi" };
+		String[] args113= {Languages_ISO.KATAKANA_ALPHA,"ツィ","tsi"," [tsi]", Languages_ISO.FRENCH,"tsi" };
 		list.add(new Extra_Word_Translation(args113));
 
-		String[] args114= {Extra_Word_Translation.KATAKANA_ALPHA,"ツェ","tse"," [tse]", Extra_Word_Translation.FRENCH,"tse" };
+		String[] args114= {Languages_ISO.KATAKANA_ALPHA,"ツェ","tse"," [tse]", Languages_ISO.FRENCH,"tse" };
 		list.add(new Extra_Word_Translation(args114));
 
-		String[] args115= {Extra_Word_Translation.KATAKANA_ALPHA,"ツォ","tso"," [tso]", Extra_Word_Translation.FRENCH,"tso" };
+		String[] args115= {Languages_ISO.KATAKANA_ALPHA,"ツォ","tso"," [tso]", Languages_ISO.FRENCH,"tso" };
 		list.add(new Extra_Word_Translation(args115));
 
-		String[] args116= {Extra_Word_Translation.KATAKANA_ALPHA,"デュ","dyu"," [dʲɯ]", Extra_Word_Translation.FRENCH,"dyu" };
+		String[] args116= {Languages_ISO.KATAKANA_ALPHA,"デュ","dyu"," [dʲɯ]", Languages_ISO.FRENCH,"dyu" };
 		list.add(new Extra_Word_Translation(args116));
 
-		String[] args117= {Extra_Word_Translation.KATAKANA_ALPHA,"ティ","ti"," [ti]", Extra_Word_Translation.FRENCH,"ti" };
+		String[] args117= {Languages_ISO.KATAKANA_ALPHA,"ティ","ti"," [ti]", Languages_ISO.FRENCH,"ti" };
 		list.add(new Extra_Word_Translation(args117));
 
-		String[] args118= {Extra_Word_Translation.KATAKANA_ALPHA,"トゥ","tu"," [tɯ]", Extra_Word_Translation.FRENCH,"tu" };
+		String[] args118= {Languages_ISO.KATAKANA_ALPHA,"トゥ","tu"," [tɯ]", Languages_ISO.FRENCH,"tu" };
 		list.add(new Extra_Word_Translation(args118));
 
-		String[] args119= {Extra_Word_Translation.KATAKANA_ALPHA,"テュ","tyu"," [tʲɯ]", Extra_Word_Translation.FRENCH,"tyu" };
+		String[] args119= {Languages_ISO.KATAKANA_ALPHA,"テュ","tyu"," [tʲɯ]", Languages_ISO.FRENCH,"tyu" };
 		list.add(new Extra_Word_Translation(args119));
 
-		String[] args120= {Extra_Word_Translation.KATAKANA_ALPHA,"ディ","di"," [di]", Extra_Word_Translation.FRENCH,"di" };
+		String[] args120= {Languages_ISO.KATAKANA_ALPHA,"ディ","di"," [di]", Languages_ISO.FRENCH,"di" };
 		list.add(new Extra_Word_Translation(args120));
 
-		String[] args121= {Extra_Word_Translation.KATAKANA_ALPHA,"ドゥ","du"," [dɯ]", Extra_Word_Translation.FRENCH,"du" };
+		String[] args121= {Languages_ISO.KATAKANA_ALPHA,"ドゥ","du"," [dɯ]", Languages_ISO.FRENCH,"du" };
 		list.add(new Extra_Word_Translation(args121));
 
-		String[] args122= {Extra_Word_Translation.KATAKANA_ALPHA,"ファ","fa"," [ɸa]", Extra_Word_Translation.FRENCH,"fa" };
+		String[] args122= {Languages_ISO.KATAKANA_ALPHA,"ファ","fa"," [ɸa]", Languages_ISO.FRENCH,"fa" };
 		list.add(new Extra_Word_Translation(args122));
 
-		String[] args123= {Extra_Word_Translation.KATAKANA_ALPHA,"フィ","fi"," [ɸi]", Extra_Word_Translation.FRENCH,"fi" };
+		String[] args123= {Languages_ISO.KATAKANA_ALPHA,"フィ","fi"," [ɸi]", Languages_ISO.FRENCH,"fi" };
 		list.add(new Extra_Word_Translation(args123));
 
-		String[] args124= {Extra_Word_Translation.KATAKANA_ALPHA,"フェ","fe"," [ɸe]", Extra_Word_Translation.FRENCH,"fe" };
+		String[] args124= {Languages_ISO.KATAKANA_ALPHA,"フェ","fe"," [ɸe]", Languages_ISO.FRENCH,"fe" };
 		list.add(new Extra_Word_Translation(args124));
 
-		String[] args125= {Extra_Word_Translation.KATAKANA_ALPHA,"フォ","fo"," [ɸo]", Extra_Word_Translation.FRENCH,"fo" };
+		String[] args125= {Languages_ISO.KATAKANA_ALPHA,"フォ","fo"," [ɸo]", Languages_ISO.FRENCH,"fo" };
 		list.add(new Extra_Word_Translation(args125));
 
-		String[] args126= {Extra_Word_Translation.KATAKANA_ALPHA,"フュ","fyu"," [ɸʲɯ]", Extra_Word_Translation.FRENCH,"fyu" };
+		String[] args126= {Languages_ISO.KATAKANA_ALPHA,"フュ","fyu"," [ɸʲɯ]", Languages_ISO.FRENCH,"fyu" };
 		list.add(new Extra_Word_Translation(args126));
 
-		String[] args127= {Extra_Word_Translation.KATAKANA_ALPHA,"ズィ","zi"," [zi]", Extra_Word_Translation.FRENCH,"zi" };
+		String[] args127= {Languages_ISO.KATAKANA_ALPHA,"ズィ","zi"," [zi]", Languages_ISO.FRENCH,"zi" };
 		list.add(new Extra_Word_Translation(args127));
 
 		for(Word_Translation word : list){

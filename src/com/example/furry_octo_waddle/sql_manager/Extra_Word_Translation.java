@@ -6,10 +6,7 @@ public class Extra_Word_Translation extends Word_Translation {
 
 	private String pronunciation ="";
 	private String romanization ="";
-	public static final String HANGEUL_ALPHA = "@kr&";
-	public static final String HIRAGANA_ALPHA = "@ja_hi&";
-	public static final String KATAKANA_ALPHA = "@ja_ka&";
-	public static final String ANCIENT_GREEK_ALPHA = "@gr&";
+
 
 	public Extra_Word_Translation(String index, String[] args){
 		super(index,args[0],args[1], args[4],args[5]);

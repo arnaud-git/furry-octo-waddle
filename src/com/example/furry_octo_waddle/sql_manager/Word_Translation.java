@@ -2,6 +2,7 @@ package com.example.furry_octo_waddle.sql_manager;
 
 import com.example.furry_octo_waddle.activities.MainActivity;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation.Extra;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 
 import android.util.Log;
 
@@ -31,16 +32,11 @@ public class Word_Translation {
 
 	private Extra type = Extra.NORMAL; 
 
-	/**Language of traduction of the word*/
+	/**Language of traduction of the word
+	 * ie Your Language !!*/
 	private String targeted_language;
 	
-	//TODO Peut-etre les changer en int ou avec un enum
-	//The different languages 
-	public static final String ENGLISH = "@en";
-	public static final String FRENCH = "@fr";
-	public static final String JAPANESE = "@ja";
-	public static final String HANGEUL = "@kr";
-	public static final String GREEk = "@gr";
+
 
 	/**Last modification of the word*/
 	String last_modification_time ="%";
@@ -57,8 +53,8 @@ public class Word_Translation {
 		setWord(w);
 		setTraduction(t);
 		setId(l);
-		setLanguage(ENGLISH);
-		setTargeted_Language(FRENCH);
+		setLanguage(Languages_ISO.ENGLISH);
+		setTargeted_Language(Languages_ISO.FRENCH);
 		checkfornull();
 	}
 
@@ -85,8 +81,8 @@ public class Word_Translation {
 	public Word_Translation(String frenchWord,String englishWord){
 		setWord(frenchWord);
 		setTraduction(englishWord);
-		setLanguage(FRENCH);
-		setTargeted_Language(ENGLISH);
+		setLanguage(Languages_ISO.FRENCH);
+		setTargeted_Language(Languages_ISO.ENGLISH);
 		checkfornull();
 	}
 
@@ -220,7 +216,7 @@ public class Word_Translation {
 		return type;
 	}
 	
-	protected String forQuery(String param){
+	protected static String forQuery(String param){
 		if(param.length()==0)
 			return "%";
 		else

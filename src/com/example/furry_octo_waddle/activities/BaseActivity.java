@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
-import com.example.furry_octo_waddle.activities.BaseActivity.ExpandableListAdapter;
 import com.example.furry_octo_waddle.sql_manager.Extra_Word_Translation;
+import com.example.furry_octo_waddle.sql_manager.Language;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
-
+import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -215,15 +215,7 @@ public class BaseActivity extends ActionBarActivity{
 
 		// Adding child data
 		List<Language> languages = new ArrayList<Language>();
-		languages.add(new Language(Extra_Word_Translation.ENGLISH));
-		languages.add(new Language(Extra_Word_Translation.FRENCH));
-		languages.add(new Language(Extra_Word_Translation.HANGEUL));
-		languages.add(new Language(Extra_Word_Translation.HANGEUL_ALPHA));
-		languages.add(new Language(Extra_Word_Translation.GREEk));
-		languages.add(new Language(Extra_Word_Translation.ANCIENT_GREEK_ALPHA));
-		languages.add(new Language(Extra_Word_Translation.JAPANESE));
-		languages.add(new Language(Extra_Word_Translation.KATAKANA_ALPHA));
-		languages.add(new Language(Extra_Word_Translation.HIRAGANA_ALPHA));
+		languages = MainActivity.cbd.getLanguage(new Language("%"), -1);
 
 		
 		List<Language> extra = new ArrayList<Language>();
@@ -430,31 +422,4 @@ public class BaseActivity extends ActionBarActivity{
 		}
 	}
 
-	protected class Language{
-		protected String name;
-		protected String code;
-
-		public Language(String  name){
-			this.code=name;
-			this.name=name;
-		}
-
-		public Language(String code,String name){
-			this.code=code;
-			this.name=name;
-		}
-
-		public String getCodeLanguage(){
-			return code;
-		}
-
-		public String getLanguage(){
-			return name;
-		}
-
-		@Override
-		public boolean equals(Object language){
-			return code.equalsIgnoreCase(((Language) language).getCodeLanguage());
-		}
-	}
 }

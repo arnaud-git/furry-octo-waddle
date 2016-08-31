@@ -6,6 +6,7 @@ import java.util.List;
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
+import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -30,8 +31,8 @@ public class WordActions implements Serializable{
 	protected EditText editWord;
 	protected EditText editWordTrans;
 	BaseActivity ba;
-	protected static String MY_LANGUAGE =  Word_Translation.FRENCH;
-	protected static String TRANSLATED_LANGUAGE = Word_Translation.ENGLISH;
+	protected static String MY_LANGUAGE =  Languages_ISO.FRENCH;
+	protected static String TRANSLATED_LANGUAGE = Languages_ISO.ENGLISH;
 	
 	//For now  : TODO accept multiple languages
 	protected static String LANGUAGES_DISPLAYED = TRANSLATED_LANGUAGE+"%";
