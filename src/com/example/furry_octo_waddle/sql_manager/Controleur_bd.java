@@ -50,7 +50,7 @@ public class Controleur_bd implements BD_rw{
 		// Create a new map of values, where column names are the keys
 		ContentValues values = new ContentValues();
 		String[] args = projectionForQuery(word);
-		String[] args_word = word.getArgs();
+		String[] args_word = word.getArgsDB();
 		for(int index = 1; index < args.length-1;index ++)
 			values.put(args[index], args_word[index]);
 
@@ -104,25 +104,38 @@ public class Controleur_bd implements BD_rw{
 			// Define 'where' part of query.
 			String selection = "";
 			//String sel =null;
+
 			List<String> sel = new ArrayList<String>();
 			String mot = word.getWord(), trad = word.getTraduction_of_word() ;
 			if(word.getId()==0){
-				String[] arguments = word.getArgs();
+				String[] arguments = word.getArgsDB();
 				for(int index = 1;index<arguments.length-1;index++){			
 					String[] argum = {arguments[index]};
+
+					MainActivity.printDebug(32,argum[0] );
+					MainActivity.printDebug(32,projection[index] );
 					if(projection[index].contains("language")){
-						argum = argum[0].split("%");
+						MainActivity.printDebug(32,argum[0] );
+						argum = argum[0].split("(?<=%)");
+						MainActivity.printDebug(32,argum[0] );
+					}
+					if(argum.length>1){
+						selection = selection + " ( ";
 					}
 					for(int new_index = 0;new_index <argum.length;new_index++){
+
 						selection = selection + projection[index];
-						if (arguments[new_index].startsWith("~")){
+						if (argum[new_index].startsWith("~")){
 							selection = selection + " NOT ";
-							arguments[new_index]=arguments[new_index].substring(1);
+							argum[new_index]=argum[new_index].substring(1);
 						}
-						sel.add(arguments[new_index]);
+						sel.add(argum[new_index]);
 						selection = selection +" LIKE ? ";
-						if(new_index+1<argum.length-1)
+						if(new_index<argum.length-1)
 							selection= selection +" OR ";
+
+					}if(argum.length>1){
+						selection = selection + " ) ";
 					}
 					if(index+1<arguments.length-1)
 						selection= selection +" AND ";
@@ -239,7 +252,7 @@ public class Controleur_bd implements BD_rw{
 		// New value for one column
 		ContentValues values = new ContentValues();
 		String[] args = projectionForQuery(word);
-		String[] args_word = word.getArgs();
+		String[] args_word = word.getArgsDB();
 		for(int index = 1; index < args.length-1;index ++)
 			values.put(args[index], args_word[index]);
 		values.put(FeedEntry.COLUMN_NAME_TIMESTAMP, FeedEntry.COLUMN_TIMESTAMP_DEFAULT);
@@ -257,6 +270,7 @@ public class Controleur_bd implements BD_rw{
 		}catch(Exception e){
 			MainActivity.printDebug(1, e.getMessage());
 		}
+		
 	}
 
 	/** @see deleteWord(Word_Translation word)*/
@@ -268,7 +282,7 @@ public class Controleur_bd implements BD_rw{
 			String selection = null;
 			List<String> sel =new ArrayList<String>();
 			if(word.getId()==0){
-				String[] arguments = word.getArgs();
+				String[] arguments = word.getArgsDB();
 				String[] projection = projectionForQuery(word);
 				for(int index = 1;index<arguments.length-1;index++){			
 					String[] argum = {arguments[index]};
@@ -537,10 +551,11 @@ public class Controleur_bd implements BD_rw{
 		// Create a new map of values, where column names are the keys
 		ContentValues values = new ContentValues();
 		String[] args = projectionForQuery(language);
-		String[] args_word = language.getArgs();
-		for(int index = 1; index < args.length-1;index ++)
+		String[] args_word = language.getArgsDB();
+		for(int index = 1; index < args.length;index ++)
 			values.put(args[index], args_word[index]);
-
+		for (String hi : args_word)
+			MainActivity.printDebug(20, hi);
 		String table = FeedEntry.LANG_TABLE_NAME;
 
 		// Insert the new row, returning the primary key value of the new row
@@ -564,7 +579,7 @@ public class Controleur_bd implements BD_rw{
 	@Override
 	public List<Language> getLanguage(Language language, int nombre) {
 		List<Language> list = new ArrayList<Language>();
-		MainActivity.printDebug(1,"GET");
+		MainActivity.printDebug(20,"GET");
 		try{
 			SQLiteDatabase db = mDbHelper.getReadableDatabase();
 
@@ -581,12 +596,12 @@ public class Controleur_bd implements BD_rw{
 			String selection = "";
 			//String sel =null;
 			List<String> sel = new ArrayList<String>();
-			if(language.getId()==0){
+			if(language.getId()!=0){
 				selection = FeedEntry._ID + " LIKE ? "  ;
 				sel.add(String.valueOf(language.getId()));
 			}else{
 				selection = FeedEntry.COLUMN_NAME_LANGUAGE_CODE + " LIKE ? "  ;
-				sel.add(String.valueOf(language.getCodeLanguage()));
+				sel.add(String.valueOf(language.getCode()));
 			}
 
 			// How you want the results sorted in the resulting Cursor
@@ -621,8 +636,13 @@ public class Controleur_bd implements BD_rw{
 					);
 
 			if(c.getCount()>0){
-				MainActivity.printDebug(1,"Recuperation de  " +c.getCount() +" trad.");
+				int co =0;
+				MainActivity.printDebug(20,"Recuperation de  " +c.getCount() +" lang.");
 				while(c.moveToNext()){
+					/*MainActivity.printDebug(20,"yoy" +c.getString(0)+"   "+
+							c.getString(1)+"   "+
+							c.getString(2));*/
+
 					list.add(new Language(c.getString(0),
 							c.getString(1),
 							c.getString(2)
@@ -636,10 +656,10 @@ public class Controleur_bd implements BD_rw{
 			MainActivity.printDebug(1,e.getMessage()); 
 			e.printStackTrace();
 		}
-		//MainActivity.printDebug(1,"Showtime");
-		/*for (Language toto : list){
-			MainActivity.printDebug(1,"Id = "+toto.getId()+" 1-"+toto.getWord()+" 2-"+toto.getTraduction_of_word());
-		}*/
+		MainActivity.printDebug(1,"Showtime");
+		for (Language toto : list){
+			toto.print();
+		}
 		return list;
 	}
 
@@ -653,7 +673,7 @@ public class Controleur_bd implements BD_rw{
 		// New value for one column
 		ContentValues values = new ContentValues();
 		String[] args = projectionForQuery(language);
-		String[] args_word = language.getArgs();
+		String[] args_word = language.getArgsDB();
 		for(int index = 1; index < args.length-1;index ++)
 			values.put(args[index], args_word[index]);
 

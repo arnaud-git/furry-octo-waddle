@@ -47,6 +47,9 @@ public class LearnFragment extends Fragment implements MyFragment{
 		MainActivity.printDebug(63,"Salut "+word_obj.getWord() );
 
 		this.view=view;
+		if(view == null){
+			MainActivity.printDebug(65, "LF_Nlull");
+		}
 		((LearnActivity)getActivity()).showFragment(this);		
 		return view;
 	}
@@ -72,6 +75,7 @@ public class LearnFragment extends Fragment implements MyFragment{
 
 	@Override
 	public View getViewPos(){
+		
 		return view;
 	}
 

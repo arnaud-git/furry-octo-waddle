@@ -5,8 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
+import com.example.furry_octo_waddle.sql_manager.Controleur_bd;
 import com.example.furry_octo_waddle.sql_manager.Extra_Word_Translation;
 import com.example.furry_octo_waddle.sql_manager.Language;
+import com.example.furry_octo_waddle.sql_manager.Language.Languages_List;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 import android.app.AlertDialog;
@@ -35,16 +37,20 @@ import android.widget.Toast;
 
 public class BaseActivity extends ActionBarActivity{
 
-	protected String current_language="FRancais";
-	protected String current_trans_language="FRancais";
 	protected ExpandableListView expListView;
 	protected ExpandableListAdapter listAdapter;
 
-	protected WordActions action = null;//=  new WordActions(this);
+	protected ExtraWordActionsBase action = null;//=  new ExtraWordActionsBase(this);
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		newWordActions();
+		try{
+		prepareListData();
+		newExtraWordActionsBase();
+		}catch(Exception e){
+			MainActivity.printDebug(32, "Creation base");
+			e.printStackTrace();
+		}
 
 	}
 
@@ -65,18 +71,18 @@ public class BaseActivity extends ActionBarActivity{
 		}
 	}
 
-	protected void newWordActions() {
-		if(WordActions.EXTRA){
+	protected void newExtraWordActionsBase() {
+		if(ExtraWordActionsBase.EXTRA){
 			action = new ExtraWordActions(this);
-			MainActivity.printDebug(1, "Essai");
+			MainActivity.printDebug(10, "Essai");
 		}
 		else
-			action = new WordActions(this);
+			action = new ExtraWordActionsBase(this);
 	}
 
 	protected void change_mode(){
-		WordActions.EXTRA = !WordActions.EXTRA;
-		newWordActions();
+		ExtraWordActionsBase.EXTRA = !ExtraWordActionsBase.EXTRA;
+		newExtraWordActionsBase();
 		//super.recreate();
 	}
 
@@ -109,7 +115,7 @@ public class BaseActivity extends ActionBarActivity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.context_menu, menu);
-		//menu.findItem(R.id.extra_mode).setChecked(WordActions.EXTRA);
+		//menu.findItem(R.id.extra_mode).setChecked(ExtraWordActionsBase.EXTRA);
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -208,16 +214,37 @@ public class BaseActivity extends ActionBarActivity{
 		listDataChild = new HashMap<String, List<Language>>();
 
 		// Adding child data
-		listDataHeader.add("Mode Extra");
-		listDataHeader.add("My Language");
-		listDataHeader.add("Translation Language");
-		listDataHeader.add("Languages Displayed..");
+		listDataHeader.add(getString(R.string.string_extra_mode));
+		listDataHeader.add(getString(R.string.string_mylanguage));
+		listDataHeader.add(getString(R.string.string_wordlanguage));
+		listDataHeader.add(getString(R.string.string_languages_displayed));
 
 		// Adding child data
+		//Languages_ISO.save_Languages();
 		List<Language> languages = new ArrayList<Language>();
-		languages = MainActivity.cbd.getLanguage(new Language("%"), -1);
-
-		
+		languages = MainActivity.cbd.getLanguage(new Language("%%"), -1);
+		/*MainActivity.printDebug(20, "Salut "+languages.size());
+		for (Language l : languages)
+			l.print();*/
+		try{
+			if(languages.size()==0){
+				((Controleur_bd) MainActivity.cbd).update9();
+				languages = MainActivity.cbd.getLanguage(new Language("%%"), -1);
+			}
+			if(ExtraWordActionsBase.TRANSLATED_LANGUAGE == null)
+				ExtraWordActionsBase.changeLanguage(languages.get(0));
+			
+			if(ExtraWordActionsBase.MY_LANGUAGE == null)
+				ExtraWordActionsBase.changeMyLanguage(languages.get(1));
+			
+			if(!ExtraWordActionsBase.isLanguageDisplayed(ExtraWordActionsBase.TRANSLATED_LANGUAGE) ){
+				ExtraWordActionsBase.displayAnotherLanguage(ExtraWordActionsBase.TRANSLATED_LANGUAGE );
+			}
+			
+		}catch(Exception e){
+			MainActivity.printDebug(24, "Erreur");
+			e.printStackTrace();
+		}
 		List<Language> extra = new ArrayList<Language>();
 		listDataChild.put(listDataHeader.get(0), extra);// Header, Child data
 		listDataChild.put(listDataHeader.get(1), languages); 
@@ -264,8 +291,8 @@ public class BaseActivity extends ActionBarActivity{
 			}
 			CompoundButton r;
 			r = (CompoundButton)convertView.findViewById(R.id.toto);
-			r.setText(childText.getLanguage());
-			r.setTag(childText.getCodeLanguage());
+			r.setText(childText.getName());
+			r.setTag(childText);
 			setChecked(parenttexttt,r);
 			//setChecked(parenttexttt,r,childposition);
 			//String toto = ;
@@ -321,10 +348,10 @@ public class BaseActivity extends ActionBarActivity{
 			TextView autrelblListHeader = (TextView) convertView
 					.findViewById(R.id.label_parent_item_value);
 			autrelblListHeader.setTypeface(null, Typeface.BOLD);
-			if(headerTitle.equalsIgnoreCase("Mode Extra")){
+			if(headerTitle.equalsIgnoreCase(getString(R.string.string_extra_mode))){
 				CheckBox chkbox = (CheckBox) convertView.findViewById(R.id.mode_extra);
 				chkbox.setVisibility(View.VISIBLE);
-					chkbox.setChecked(WordActions.EXTRA);
+				chkbox.setChecked(ExtraWordActionsBase.EXTRA);
 				chkbox.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -336,11 +363,11 @@ public class BaseActivity extends ActionBarActivity{
 			else{
 				convertView.findViewById(R.id.mode_extra).setVisibility(View.GONE);
 			}
-			if(headerTitle.equalsIgnoreCase("My Language"))
-				autrelblListHeader .setText(WordActions.MY_LANGUAGE);
-			if(headerTitle.equalsIgnoreCase("Translation Language"))
-				autrelblListHeader .setText(WordActions.TRANSLATED_LANGUAGE);
-			if(headerTitle.equalsIgnoreCase("Languages Displayed..")){
+			if(headerTitle.equalsIgnoreCase(getString(R.string.string_mylanguage)))
+				autrelblListHeader .setText(ExtraWordActionsBase.MY_LANGUAGE.getName());
+			if(headerTitle.equalsIgnoreCase(getString(R.string.string_wordlanguage)))
+				autrelblListHeader .setText(ExtraWordActionsBase.TRANSLATED_LANGUAGE.getName());
+			if(headerTitle.equalsIgnoreCase(getString(R.string.string_languages_displayed))){
 				autrelblListHeader .setText("");
 			}
 
@@ -358,16 +385,18 @@ public class BaseActivity extends ActionBarActivity{
 			return true;
 		}
 	}
+	
+	
 	protected int MyLanguageselectedposition = 0;
 	protected int TranslationLanguageselectedposition = 0;
 	public void setChecked(String parenttexttt, CompoundButton r, int childPosition) {
-		if(parenttexttt.compareToIgnoreCase("My Language")==0){
+		if(parenttexttt.compareToIgnoreCase(getString(R.string.string_mylanguage))==0){
 			r.setChecked(childPosition==MyLanguageselectedposition);
 		}else{
-			if(parenttexttt.compareToIgnoreCase("Translation Language")==0){
+			if(parenttexttt.compareToIgnoreCase(getString(R.string.string_wordlanguage))==0){
 				r.setChecked(childPosition==TranslationLanguageselectedposition);
 			}else{
-				if(parenttexttt.compareToIgnoreCase("Languages Displayed..")==0){
+				if(parenttexttt.compareToIgnoreCase(getString(R.string.string_languages_displayed))==0){
 					r.setChecked(!r.isChecked());
 				}else{
 
@@ -376,14 +405,14 @@ public class BaseActivity extends ActionBarActivity{
 		}
 	}
 	public void setChecked(String parenttexttt, CompoundButton r) {
-		if(parenttexttt.equalsIgnoreCase("My Language")){
-			r.setChecked(((String) r.getTag()).compareToIgnoreCase(WordActions.MY_LANGUAGE)==0);
+		if(parenttexttt.equalsIgnoreCase(getString(R.string.string_mylanguage))){
+			r.setChecked(ExtraWordActionsBase.isMyLanguage((Language) r.getTag()));
 		}else{
-			if(parenttexttt.equalsIgnoreCase("Translation Language")){
-				r.setChecked(((String) r.getTag()).compareToIgnoreCase(WordActions.TRANSLATED_LANGUAGE)==0);
+			if(parenttexttt.equalsIgnoreCase(getString(R.string.string_wordlanguage))){
+				r.setChecked(ExtraWordActionsBase.isTLanguage(((Language) r.getTag())));
 			}else{
-				if(parenttexttt.equalsIgnoreCase("Languages Displayed..")){
-					r.setChecked(WordActions.LANGUAGES_DISPLAYED.contains(((String) r.getTag())+"%"));
+				if(parenttexttt.equalsIgnoreCase(getString(R.string.string_languages_displayed))){
+					r.setChecked(ExtraWordActionsBase.isLanguageDisplayed(((Language) r.getTag())));
 				}else{
 
 				}
@@ -391,28 +420,28 @@ public class BaseActivity extends ActionBarActivity{
 		}
 	}
 	protected void setLanguagesbyCheck(CompoundButton r, String parenttexttt) {
-		if(parenttexttt.equalsIgnoreCase("My Language")){
-			WordActions.MY_LANGUAGE=(String)r.getTag();
+		if(parenttexttt.equalsIgnoreCase(getString(R.string.string_mylanguage))){
+			ExtraWordActionsBase.changeMyLanguage((Language)r.getTag());
 		}else{
-			if(parenttexttt.equalsIgnoreCase("Translation Language")){
-				WordActions.TRANSLATED_LANGUAGE=(String)r.getTag();
-				setLanguagesbyCheck(r, "Languages Displayed..");
+			if(parenttexttt.equalsIgnoreCase(getString(R.string.string_wordlanguage))){
+				ExtraWordActionsBase.changeLanguage((Language)r.getTag());
+				setLanguagesbyCheck(r, getString(R.string.string_languages_displayed));
 			}else{
-				if(parenttexttt.equals("Languages Displayed..")){
-					if(!WordActions.TRANSLATED_LANGUAGE.equalsIgnoreCase( ((String) r.getTag() ))){
-						if(WordActions.LANGUAGES_DISPLAYED.contains(((String) r.getTag())+"%")){
-							WordActions.LANGUAGES_DISPLAYED = WordActions.LANGUAGES_DISPLAYED.replace((String)r.getTag()+"%", "");
-							Toast.makeText(BaseActivity.this, "\" PAADDSS " + WordActions.LANGUAGES_DISPLAYED+ "\""+ " saved", Toast.LENGTH_SHORT).show();						
+				if(parenttexttt.equals(getString(R.string.string_languages_displayed))){
+					if(!ExtraWordActionsBase.isTLanguage( ((Language)r.getTag() ))){
+						if(ExtraWordActionsBase.containsLanguage(((Language) r.getTag()))){
+							ExtraWordActionsBase.removeLanguage((Language)r.getTag());
+							Toast.makeText(BaseActivity.this, "\" PAADDSS " + ExtraWordActionsBase.LANGUAGES_DISPLAYED.getCode()+ "\""+ " saved", Toast.LENGTH_SHORT).show();						
 						}else{
-							WordActions.LANGUAGES_DISPLAYED= WordActions.LANGUAGES_DISPLAYED.concat((String)r.getTag()+"%");
-							Toast.makeText(BaseActivity.this, "\"" + WordActions.LANGUAGES_DISPLAYED+ "\""+ " saved", Toast.LENGTH_SHORT).show();			
+							ExtraWordActionsBase.displayAnotherLanguage((Language)r.getTag());
+							Toast.makeText(BaseActivity.this, "\"" + ExtraWordActionsBase.LANGUAGES_DISPLAYED.getCode()+ "\""+ " saved", Toast.LENGTH_SHORT).show();			
 						}
 					}else{
-						if(!WordActions.LANGUAGES_DISPLAYED.contains(((String) r.getTag())+"%")){
-							WordActions.LANGUAGES_DISPLAYED= WordActions.LANGUAGES_DISPLAYED.concat((String)r.getTag()+"%");
-							Toast.makeText(BaseActivity.this, "\"" + WordActions.LANGUAGES_DISPLAYED+ "\""+ " saved", Toast.LENGTH_SHORT).show();			
+						if(!ExtraWordActionsBase.containsLanguage(((Language) r.getTag()))){
+							ExtraWordActionsBase.displayAnotherLanguage((Language)r.getTag());
+							Toast.makeText(BaseActivity.this, "\"" + ExtraWordActionsBase.LANGUAGES_DISPLAYED.getCode()+ "\""+ " saved", Toast.LENGTH_SHORT).show();			
 						}else{
-							
+
 						}
 					}
 				}else{

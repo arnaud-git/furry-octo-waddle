@@ -80,7 +80,7 @@ public class Extra_Word_Translation extends Word_Translation {
 	}
 
 	@Override
-	public String[] getArgs(){
+	public String[] getArgsDB(){
 		String[] ret =  {forQuery(getId()),
 				getLanguage(),
 				getWord(),
@@ -89,6 +89,18 @@ public class Extra_Word_Translation extends Word_Translation {
 				getTargeted_language(),
 				getTraduction_of_word(),
 				forQuery(getTime())
+		} ;
+		return ret;
+	}
+	
+	public String[] getArgs(){
+		String[] ret =  {
+				getLanguage(),
+				getWord(),
+				romanization,
+				pronunciation,
+				getTargeted_language(),
+				getTraduction_of_word(),
 		} ;
 		return ret;
 	}

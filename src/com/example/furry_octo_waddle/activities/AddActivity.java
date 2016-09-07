@@ -39,7 +39,7 @@ public class AddActivity extends BaseActivity{
 	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
 	 
 	        // preparing list data
-	        prepareListData();
+	        //prepareListData();
 	 
 	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 	 
@@ -55,7 +55,7 @@ public class AddActivity extends BaseActivity{
 	protected void save_current_word(){
 		try{
 		super.save_current_word();
-		String[] args = {WordActions.TRANSLATED_LANGUAGE,"","","",WordActions.MY_LANGUAGE,""};
+		String[] args = {ExtraWordActionsBase.TRANSLATED_LANGUAGE.getCode(), "","","",ExtraWordActionsBase.MY_LANGUAGE.getCode(),""};
 		setCurrentWord(new Extra_Word_Translation(args));
 		writeWord();}
 		catch(Exception e){

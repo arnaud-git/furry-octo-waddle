@@ -203,7 +203,7 @@ public class Word_Translation {
 		return word1.equalsIgnoreCase(word2);
 	}
 	
-	public String[] getArgs(){
+	public String[] getArgsDB(){
 		String[] ret =  {
 				forQuery(id),
 				word,

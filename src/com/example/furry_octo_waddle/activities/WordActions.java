@@ -1,11 +1,15 @@
 package com.example.furry_octo_waddle.activities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.furry_octo_waddle.R;
 import com.example.furry_octo_waddle.sql_manager.Word_Translation;
 import com.example.furry_octo_waddle.sql_manager.BD_rw.Order;
+
+import com.example.furry_octo_waddle.sql_manager.Language;
+import com.example.furry_octo_waddle.sql_manager.Language.Languages_List;
 import com.example.furry_octo_waddle.sql_manager.alphabet.Languages_ISO;
 
 import android.app.AlertDialog;
@@ -35,7 +39,7 @@ public class WordActions implements Serializable{
 	protected static String TRANSLATED_LANGUAGE = Languages_ISO.ENGLISH;
 	
 	//For now  : TODO accept multiple languages
-	protected static String LANGUAGES_DISPLAYED = TRANSLATED_LANGUAGE+"%";
+	//protected static Languages_List LANGUAGES_DISPLAYED = new Languages_List();
 
 	public WordActions(BaseActivity ba){
 		this.ba = ba;
@@ -70,7 +74,7 @@ public class WordActions implements Serializable{
 			//create the new object with the typed words
 			//save the new object in the database
 			// Will be better to put the languages in the inputs
-			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),TRANSLATED_LANGUAGE,word,LANGUAGES_DISPLAYED, wordTrad);
+			word_obj = new Word_Translation(String.valueOf(word_obj.getId()),TRANSLATED_LANGUAGE,word,MY_LANGUAGE, wordTrad);
 	
 			// TODO cbd one function for thes cases
 			if(word_obj.getId()>0)
@@ -139,8 +143,9 @@ public class WordActions implements Serializable{
 		showWord();
 	}
 	
+
 	protected Word_Translation query(String word, String transWord){
-		return new Word_Translation(LANGUAGES_DISPLAYED,word, MY_LANGUAGE,transWord );
+		return new Word_Translation(TRANSLATED_LANGUAGE,word, MY_LANGUAGE,transWord );
 	}
 	
 
@@ -212,7 +217,7 @@ public class WordActions implements Serializable{
 
 
 	protected Word_Translation nowordindb() {
-		return new Word_Translation(TRANSLATED_LANGUAGE,"No word in the database", LANGUAGES_DISPLAYED,"");
+		return new Word_Translation(TRANSLATED_LANGUAGE,"No word in the database", MY_LANGUAGE,"");
 	}
 
 

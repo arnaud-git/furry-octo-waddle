@@ -54,9 +54,6 @@ public class TranslateActivity extends BaseActivity{
 			// get the listview
 	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
 	 
-	        // preparing list data
-	        prepareListData();
-	 
 	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 	 
 	        // setting list adapter

@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class ExtraWordActions extends WordActions {
+public class ExtraWordActions extends ExtraWordActionsBase {
 	
 	protected TextView tvRomanizationWord;
 	protected TextView tvPronunciationWord;
@@ -24,9 +24,9 @@ public class ExtraWordActions extends WordActions {
 	
 	public ExtraWordActions(BaseActivity ba) {
 		super(ba);
-		String[] args = {Languages_ISO.ENGLISH,"","","",Languages_ISO.FRENCH,""};
+		/*String[] args = {Languages_ISO.ENGLISH,"","","",Languages_ISO.FRENCH,""};
 		word_obj=new Extra_Word_Translation(args);
-		MainActivity.printDebug(1,word_obj.getType().name());
+		MainActivity.printDebug(1,word_obj.getType().name());*/
 	}
 	
 	@Override
@@ -80,7 +80,7 @@ public class ExtraWordActions extends WordActions {
 		editPronunciationWord.setVisibility(View.GONE);
 	}
 	
-	@Override
+	/*@Override
 	protected boolean save_current_word(){
 		String word = editWord.getText().toString();
 		String wordTrad = editWordTrans.getText().toString();
@@ -102,9 +102,9 @@ public class ExtraWordActions extends WordActions {
 			return true;
 		}return false;
 	}
+	*/
 	
-	
-	@Override
+	/*@Override
 	protected void setCurrentWord(Word_Translation word){
 		word_obj=(Extra_Word_Translation)word;
 	}
@@ -112,7 +112,7 @@ public class ExtraWordActions extends WordActions {
 	@Override
 	protected Word_Translation getCurrentWord(){
 		return ((Extra_Word_Translation)word_obj);
-	}
+	}*/
 	
 	@Override
 	protected void updateWordinViews(){
@@ -159,17 +159,7 @@ public class ExtraWordActions extends WordActions {
 		tvPronunciationWord.setVisibility(View.INVISIBLE);
 	}
 
-	@Override
-	protected Word_Translation query(String word, String transWord){
-		String[] args={LANGUAGES_DISPLAYED,word, "%","%",MY_LANGUAGE,transWord };
-		return new Extra_Word_Translation(args);
-	}
-	
-	@Override
-	public Word_Translation query(int int1) {
-		String[] args={TRANSLATED_LANGUAGE,"%", "%","%",MY_LANGUAGE,"%"};
-		return new Extra_Word_Translation(String.valueOf(int1),args);
-	}
+
 
 	@Override
 	public void show_answer() {
@@ -179,8 +169,4 @@ public class ExtraWordActions extends WordActions {
 		MainActivity.printDebug(100, R.id.editPronunciationWord+" vs "+ba.getCurrentFocus().getId());
 	}
 	
-	@Override
-	protected Word_Translation nowordindb(){
-		return new Extra_Word_Translation(super.nowordindb());
-	}
 }

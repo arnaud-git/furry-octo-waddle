@@ -69,6 +69,7 @@ public class FeedReaderDbHelper extends SQLiteOpenHelper {
 		try{
 			db.execSQL(SQL_CREATE_EXTRA_ENTRIES);
 			db.execSQL(SQL_CREATE_LANG_ENTRIES);
+			//MainActivity.updated =false;
 		}catch(Exception e){
 			MainActivity.printDebug(1, e.getMessage());
 		}

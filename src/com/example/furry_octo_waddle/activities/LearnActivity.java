@@ -45,9 +45,6 @@ public class LearnActivity extends BaseActivity {
 			// get the listview
 	        expListView = (ExpandableListView) findViewById(R.id.left_drawer);
 	 
-	        // preparing list data
-	        prepareListData();
-	 
 	        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
 	 
 	        // setting list adapter
@@ -83,10 +80,15 @@ public class LearnActivity extends BaseActivity {
 		@Override
 		/**Called when the user changes the view, reinitializes the views (TextView,EditText,Button) of "scrolled Activity"*/
 		public void onPageScrollStateChanged(int arg0) {
+			MainActivity.printDebug(65, "SCroll");
 			currentLF.setCurrentStatus(false);
 			currentLF = (LearnFragment) pageAdapter.getItem(pager.getCurrentItem());
+			if(currentLF.getViewPos() == null){
+				MainActivity.printDebug(65, "LF_Nlull");
+			}
 			showFragment(currentLF);
 			invalidateOptionsMenu();
+			MainActivity.printDebug(65, "SCroll Fin");
 		}
 
 		@Override
@@ -212,10 +214,20 @@ public class LearnActivity extends BaseActivity {
 		return retour;
 	}
 	
+	
+	@Override
+	protected void showFragment(LearnFragment frag){
+		super.showFragment(frag);
+		super.setCurrentWord(currentLF.getCurrentWord_T());
+		listAdapter.notifyDataSetChanged();
+	}
+	
+	
 	@Override
 	protected void change_mode(){
 		super.change_mode();
-		super.recreate();
+		pageAdapter.notifyDataSetChanged();
+		//super.recreate();
 	}
 }
 
