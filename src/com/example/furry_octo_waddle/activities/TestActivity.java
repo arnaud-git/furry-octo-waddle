@@ -38,12 +38,14 @@ public class TestActivity extends BaseActivity {
 	
 	static int numWordsFound;
 	static boolean answerClicked = false;
+	
 
 
 	public void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-
+		
+		modification_enable = false;
 		setContentView(R.layout.test_layout);
 
 		fragments = getFragments();

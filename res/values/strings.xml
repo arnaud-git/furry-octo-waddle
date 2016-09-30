@@ -20,7 +20,8 @@
     <string name="string_settings">Settings</string>
     <string name="string_extra_mode">Extra</string>
     <string name="string_languages_displayed">The Languages</string>
-    <string name="string_mylanguage">My Language</string>
+    <string name="string_mylanguage">Language Of This Word</string>
+    <string name="string_mylanguages_displayed">My Language</string>
     <string name="string_wordlanguage">Language Of This Word</string>
     <string name="red">French</string>
     <string name="blue">English</string>
